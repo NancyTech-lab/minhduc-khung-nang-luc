@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khung Năng Lực & Đánh Giá Cán Bộ — Phòng Pháp Chế | Tập Đoàn Xây Dựng Minh Đức</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary-navy: #0F2756;
+      --navy-light: #1E3A8A;
+      --accent-red: #A7302B;
+      --accent-hover: #8C2621;
+    }
+    .tab-btn-active {
+      border-bottom: 3px solid #0F2756;
+      color: #0F2756;
+      font-weight: 700;
+      background-color: #EFF6FF;
+    }
+    .role-pill-active {
+      background-color: #0F2756 !important;
+      color: #FFFFFF !important;
+      font-weight: 700;
+      box-shadow: 0 4px 6px -1px rgba(15, 39, 86, 0.3);
+    }
+    input[type=range] {
+      accent-color: #0F2756;
+    }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printModalContent, #printModalContent * {
+        visibility: visible;
+      }
+      #printModalContent {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-800 antialiased p-3 md:p-6 font-sans">
+
+  <!-- TOP HEADER / BRANDING -->
+  <header class="max-w-7xl mx-auto mb-6 bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-4">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0F2756] to-[#1E3A8A] flex flex-col items-center justify-center text-white font-black shadow-lg shadow-blue-900/20 border-2 border-blue-400">
+          <span class="text-xl leading-none">MDG</span>
+          <span class="text-[9px] tracking-widest uppercase opacity-90 mt-0.5">LEGAL</span>
+        </div>
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-900 border border-blue-200">TẬP ĐOÀN XÂY DỰNG MINH ĐỨC</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">Ban / Phòng Pháp Chế Tập Đoàn</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-purple-100 text-purple-900 border border-purple-200">Chuẩn SHRM BASK™ & BARS</span>
+          </div>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mt-1">
+            HỆ THỐNG KHUNG NĂNG LỰC & ĐÁNH GIÁ CÁN BỘ PHÒNG PHÁP CHẾ
+          </h1>
+          <p class="text-sm text-slate-500 font-medium">
+            Bám sát 5 Nhiệm vụ cốt lõi Trưởng phòng Pháp chế • Thẩm định Hợp đồng Xây dựng • Quản trị Rủi ro & Tố tụng VIAC • Đánh giá Nhân sự Pháp chế
+          </p>
+        </div>
+      </div>
+
+      <!-- Executive Controls & Export -->
+      <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-start lg:justify-end">
+        <div class="text-xs text-slate-500 bg-slate-50 p-2.5 rounded-xl border border-slate-200 leading-relaxed">
+          <div><span class="font-bold text-slate-700">Chủ trì:</span> Ban Nhân sự MDG (<span class="text-red-700 font-semibold">Nancy Thúy</span>)</div>
+          <div><span class="font-bold text-slate-700">Chuyên môn:</span> Ban Pháp chế Tập đoàn (<span class="text-blue-900 font-semibold">Mai Diệu Hương</span>)</div>
+        </div>
+        <button onclick="openPrintCurrent()" class="px-4 py-2.5 bg-[#0F2756] hover:bg-[#1E3A8A] text-white rounded-xl text-sm font-semibold shadow-md shadow-blue-900/20 transition flex items-center gap-2">
+          <span>🖨️</span> In Phiếu Đánh Giá A4
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Quick Stats Bar -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-slate-100">
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+        <div class="text-xs text-slate-400 font-semibold uppercase">Nhân Sự Ban Pháp Chế</div>
+        <div class="text-2xl font-black text-[#0F2756] mt-0.5">6 Cán Bộ</div>
+        <div class="text-[11px] text-slate-500">100% Khối Văn phòng Trụ sở (Làn B)</div>
+      </div>
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+        <div class="text-xs text-slate-400 font-semibold uppercase">Vị Trí Chức Danh</div>
+        <div class="text-2xl font-black text-slate-800 mt-0.5">5 Vị Trí</div>
+        <div class="text-[11px] text-slate-500">JD & Barem Chuyên Biệt Theo Mảng</div>
+      </div>
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+        <div class="text-xs text-slate-400 font-semibold uppercase">Chuẩn Năng Lực</div>
+        <div class="text-2xl font-black text-purple-800 mt-0.5">SHRM BASK™</div>
+        <div class="text-[11px] text-slate-500">Ethical Practice • Business • Legal Advisory</div>
+      </div>
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+        <div class="text-xs text-slate-400 font-semibold uppercase">Tỷ Lệ Đạt Chuẩn (≥80%)</div>
+        <div class="text-2xl font-black text-emerald-700 mt-0.5">100%</div>
+        <div class="text-[11px] text-slate-500">6/6 Cán bộ vững chuyên môn nghiệp vụ</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="max-w-7xl mx-auto mb-6 bg-white rounded-2xl p-2 shadow-sm border border-slate-200">
+    <div class="flex flex-wrap gap-2">
+      <button onclick="switchTab('jd-dict')" id="tab-btn-jd-dict" class="px-4 py-2.5 rounded-xl text-sm font-semibold transition tab-btn-active">
+        📋 1. JD & Khung Năng Lực 5 Vị Trí (SHRM)
+      </button>
+      <button onclick="switchTab('eval')" id="tab-btn-eval" class="px-4 py-2.5 rounded-xl text-sm font-semibold transition text-slate-600 hover:bg-slate-50">
+        ⚡ 2. Chấm Điểm & Radar Chart Realtime
+      </button>
+      <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="px-4 py-2.5 rounded-xl text-sm font-semibold transition text-slate-600 hover:bg-slate-50">
+        📊 3. Ma Trận Xếp Hạng Nhân Sự Pháp Chế
+      </button>
+      <button onclick="switchTab('compensation')" id="tab-btn-compensation" class="px-4 py-2.5 rounded-xl text-sm font-semibold transition text-slate-600 hover:bg-slate-50">
+        💰 4. Chính Sách Lương 3P & Lộ Trình Thăng Tiến
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN TAB CONTENT AREA -->
+  <main class="max-w-7xl mx-auto">
+    
+    <!-- ========================================== -->
+    <!-- TAB 1: BẢN MÔ TẢ CÔNG VIỆC (JD) & KHUNG NĂNG LỰC PHÁP CHẾ -->
+    <!-- ========================================== -->
+    <section id="tab-jd-dict" class="space-y-6">
+      
+      <!-- Role Selection Pills -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+          Chọn Vị Trí Chức Danh Để Xem Bản Mô Tả Công Việc (JD) & Khung Năng Lực Pháp Chế Chuẩn SHRM:
+        </label>
+        <div class="flex flex-wrap gap-2" id="rolePillsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Role JD & Competency Detail View -->
+      <div id="roleDetailContent" class="space-y-6">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: CHẤM ĐIỂM & ĐÁNH GIÁ TƯƠNG TÁC REALTIME -->
+    <!-- ========================================== -->
+    <section id="tab-eval" class="space-y-6 hidden">
+      
+      <!-- Employee Selector Bar -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div class="w-full md:w-1/2">
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+              Chọn Cán Bộ Đánh Giá (Nhân Sự Ban Pháp Chế Tập Đoàn Minh Đức):
+            </label>
+            <select id="empSelect" onchange="onEmployeeSelect(this.value)" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800 focus:ring-2 focus:ring-blue-600 focus:outline-none text-sm">
+              <!-- Options populated by JS -->
+            </select>
+          </div>
+
+          <!-- Quick Presets -->
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs font-bold text-slate-400">Thiết lập nhanh:</span>
+            <button onclick="applyPreset('benchmark')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition border border-slate-200">
+              🎯 Đạt Chuẩn (100%)
+            </button>
+            <button onclick="applyPreset('high')" class="px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg text-xs font-semibold transition border border-emerald-200">
+              ⭐ Xuất Sắc (+10%)
+            </button>
+            <button onclick="applyPreset('low')" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-lg text-xs font-semibold transition border border-amber-200">
+              ⚠️ Cần Kèm Cặp (-15%)
+            </button>
+            <button onclick="resetCurrentScores()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition">
+              🔄 Khôi Phục Ban Đầu
+            </button>
+          </div>
+        </div>
+
+        <!-- Real-time Candidate Banner Info -->
+        <div id="evalCandidateHeader" class="mt-4 pt-4 border-t border-slate-100 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 text-xs">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Realtime Scoring & Live Radar Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left: Interactive Scoring Form (Role-specific criteria) (7 Cols) -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+            <div class="flex items-center justify-between border-b pb-4 mb-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900" id="scoringSectionTitle">
+                  Bảng Chấm Điểm Năng Lực Chuẩn Hóa Theo JD Chức Danh
+                </h3>
+                <p class="text-xs text-slate-500">Tiêu chí hành vi BARS được tích hợp chuẩn xác theo 5 nhiệm vụ cốt lõi & SHRM</p>
+              </div>
+              <span id="roleBadgeInScoring" class="px-3 py-1 bg-blue-100 text-blue-900 text-xs font-bold rounded-lg border border-blue-200">
+                <!-- Role title -->
+              </span>
+            </div>
+
+            <!-- Dynamic Criteria Form Container -->
+            <div id="dynamicCriteriaContainer" class="space-y-6">
+              <!-- Populated by JS based on current employee's role -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Realtime Analytics, SVG Radar Chart & Gap Analysis (5 Cols) -->
+        <div class="lg:col-span-5 space-y-6 sticky top-6">
+          
+          <!-- Overall Fit Score Card -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center relative overflow-hidden">
+            <div class="absolute top-0 right-0 left-0 h-1.5 bg-gradient-to-r from-blue-900 via-indigo-600 to-emerald-600"></div>
+            
+            <div class="flex justify-between items-center text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">
+              <span>Độ Tương Thích Năng Lực (Fit Score)</span>
+              <span id="ratingBadge" class="px-2.5 py-0.5 rounded-full text-white bg-slate-600 font-bold text-[11px]">Chờ Đánh Giá</span>
+            </div>
+
+            <!-- Big Gauge Number -->
+            <div class="flex items-baseline justify-center gap-1 my-2">
+              <span id="fitScoreDisplay" class="text-5xl font-black text-slate-900 tracking-tight">--</span>
+              <span class="text-xl font-bold text-slate-400">%</span>
+            </div>
+
+            <p class="text-xs text-slate-500 font-medium" id="fitScoreSummaryText">
+              Điểm trung bình có trọng số so với chuẩn Benchmark của vị trí
+            </p>
+
+            <!-- Salary P2 Recommendation -->
+            <div class="mt-4 p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-left text-xs">
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500 font-bold">Khuyến nghị Bậc Lương Năng Lực P2:</span>
+                <span id="salaryP2Display" class="font-black text-[#0F2756] text-sm">--</span>
+              </div>
+              <div class="flex justify-between items-center mt-1 text-[11px] text-slate-500">
+                <span>Điểm trung bình (1-5): <strong id="avgScoreDisplay" class="text-slate-800">--</strong></span>
+                <span>Thang lương: <strong>15 Bậc Minh Đức (Làn B Trụ Sở)</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic SVG Radar Chart Card -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+            <div class="flex justify-between items-center mb-3">
+              <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                Đa Giác Năng Lực Pháp Lý (SVG Radar Chart)
+              </h4>
+              <div class="flex items-center gap-3 text-[10px]">
+                <div class="flex items-center gap-1"><span class="w-3 h-3 bg-blue-900 rounded-sm"></span> Thực Tế</div>
+                <div class="flex items-center gap-1"><span class="w-3 h-0.5 bg-slate-400 border border-dashed"></span> Chuẩn BM</div>
+              </div>
+            </div>
+
+            <!-- SVG Radar Canvas -->
+            <div class="flex justify-center items-center py-2" id="radarChartContainer">
+              <svg id="radarSvg" width="340" height="320" viewBox="0 0 340 320" class="overflow-visible">
+                <!-- Drawn by JS -->
+              </svg>
+            </div>
+          </div>
+
+          <!-- Competency Gap Analysis & Action IDP -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-xs">
+            <h4 class="font-bold text-slate-800 uppercase tracking-wider mb-3">
+              Phân Tích Khoảng Cách (Gap Analysis) & Kế Hoạch IDP:
+            </h4>
+            
+            <div id="gapAnalysisList" class="space-y-2 mb-4">
+              <!-- Populated by JS -->
+            </div>
+
+            <div class="p-3 bg-blue-50 rounded-xl border border-blue-200 text-[11px] text-blue-900 leading-relaxed" id="idpRecommendationText">
+              <!-- Recommended training actions -->
+            </div>
+
+            <button onclick="openPrintCurrent()" class="w-full mt-4 py-2.5 bg-[#0F2756] hover:bg-[#1E3A8A] text-white rounded-xl font-bold transition flex items-center justify-center gap-2">
+              <span>🖨️</span> Xuất Phiếu Đánh Giá A4 (Bản In)
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: MA TRẬN XẾP HẠNG NHÂN SỰ PHÁP CHẾ -->
+    <!-- ========================================== -->
+    <section id="tab-ranking" class="space-y-6 hidden">
+      
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">Bảng Ma Trận Năng Lực & Xếp Hạng Nhân Sự Ban Pháp Chế Tập Đoàn</h2>
+            <p class="text-xs text-slate-500">Dữ liệu phân tích mức độ đáp ứng chuẩn Benchmark và tương thích bậc lương P2 của từng cán bộ</p>
+          </div>
+          
+          <!-- Filters -->
+          <div class="flex flex-wrap items-center gap-3">
+            <input type="text" id="rankingSearchInput" onkeyup="filterRankingTable()" placeholder="🔍 Tìm theo tên hoặc mã NV..." class="px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-blue-600">
+            <select id="rankingRoleFilter" onchange="filterRankingTable()" class="px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:outline-none">
+              <option value="ALL">Tất cả chức danh (5 vị trí)</option>
+              <option value="TP_PC">Trưởng phòng Pháp chế (1)</option>
+              <option value="PP_PC">Phó Trưởng phòng Pháp chế (1)</option>
+              <option value="CV_HD">Chuyên viên Pháp chế Hợp đồng (1)</option>
+              <option value="CV_TT">Chuyên viên Tranh chấp & Nợ (1)</option>
+              <option value="CV_TTNB">Chuyên viên Tuân thủ & Nội bộ (1)</option>
+              <option value="TL_PC">Trợ lý / Thực tập sinh (1)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50 text-slate-700 font-bold uppercase tracking-wider text-[11px] border-b">
+              <tr>
+                <th class="p-3">STT</th>
+                <th class="p-3">Mã NV</th>
+                <th class="p-3">Họ và Tên</th>
+                <th class="p-3">Chức Danh Hiện Tại</th>
+                <th class="p-3">Ngạch</th>
+                <th class="p-3">Làn BHXH</th>
+                <th class="p-3 text-center">Điểm TB</th>
+                <th class="p-3 text-center">Fit Score</th>
+                <th class="p-3 text-center">Xếp Loại</th>
+                <th class="p-3">Lương P2</th>
+                <th class="p-3 text-center">Thao Tác</th>
+              </tr>
+            </thead>
+            <tbody id="rankingTableBody" class="divide-y divide-slate-100">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: LƯƠNG 3P & LỘ TRÌNH THĂNG TIẾN PHÁP CHẾ -->
+    <!-- ========================================== -->
+    <section id="tab-compensation" class="space-y-6 hidden">
+      
+      <!-- Thang Bang Luong 15 Bac Minh Duc (Lan B Van phong) -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+        <div class="flex items-center gap-3 border-b pb-4 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-[#0F2756] text-white flex items-center justify-center font-bold text-lg">⚖️</div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">Chính Sách Lương 3P & Thang Bảng Lương Khối Pháp Chế (Làn B Trụ Sở)</h2>
+            <p class="text-xs text-slate-500">Cơ chế xác định mức Lương Năng lực P2 dựa trên điểm Fit Score chuẩn SHRM và bảo vệ quyền lợi hợp pháp của Tập đoàn</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs mb-6">
+          <div class="p-3 rounded-xl bg-slate-50 border">
+            <div class="font-bold text-slate-500">BẬC 1 — BẬC 3</div>
+            <div class="text-base font-black text-slate-800 my-0.5">7.5 — 9.5 tr</div>
+            <div class="text-[11px] text-slate-500">Tập sự, Trợ lý Pháp chế (Fit &lt; 70%)</div>
+          </div>
+          <div class="p-3 rounded-xl bg-blue-50 border border-blue-200">
+            <div class="font-bold text-blue-700">BẬC 4 — BẬC 6</div>
+            <div class="text-base font-black text-blue-900 my-0.5">11.5 — 16.0 tr</div>
+            <div class="text-[11px] text-blue-700">Chuyên viên Pháp chế G5-VB (Fit 70-85%)</div>
+          </div>
+          <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+            <div class="font-bold text-emerald-700">BẬC 7 — BẬC 8</div>
+            <div class="text-base font-black text-emerald-900 my-0.5">19.5 — 22.0 tr</div>
+            <div class="text-[11px] text-emerald-700">Chuyên viên chính / Phó phòng (Fit 85-89%)</div>
+          </div>
+          <div class="p-3 rounded-xl bg-purple-50 border border-purple-200">
+            <div class="font-bold text-purple-700">BẬC 9 — BẬC 10</div>
+            <div class="text-base font-black text-purple-900 my-0.5">28.5 — 31.5 tr</div>
+            <div class="text-[11px] text-purple-700">Trưởng phòng G4-VB (Fit 90-93%)</div>
+          </div>
+          <div class="p-3 rounded-xl bg-red-50 border-2 border-[#0F2756]">
+            <div class="font-bold text-[#0F2756]">BẬC 11 — BẬC 15</div>
+            <div class="text-base font-black text-red-900 my-0.5">38.0 — 60.0 tr</div>
+            <div class="text-[11px] text-slate-600">Trưởng ban / Giám đốc Pháp chế L5 (Fit ≥ 94%)</div>
+          </div>
+        </div>
+
+        <!-- 3P Structure & Legal Career Path -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-3">
+            <div class="font-bold text-slate-900 text-sm">Cơ Cấu Thu Nhập 3P Khối Pháp Chế Trụ Sở:</div>
+            
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-slate-800">P1 — LƯƠNG THEO VỊ TRÍ & ĐÓNG BHXH (LÀN B)</div>
+              <p class="text-slate-600 mt-1">Đóng BHXH theo mức thỏa thuận văn phòng trụ sở (10 - 25 triệu đồng), bảo đảm tuyệt đối chế độ thai sản, ốm đau và hưu trí dài hạn.</p>
+            </div>
+
+            <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+              <div class="font-bold text-blue-900">P2 — LƯƠNG THEO NĂNG LỰC & FIT SCORE (60-70% THU NHẬP)</div>
+              <p class="text-slate-600 mt-1">Chi trả dựa trên kết quả đánh giá Khung Năng Lực định kỳ 6 tháng. Cán bộ đạt chuẩn Benchmark (Fit &ge; 80%) duy trì bậc lương; đạt Xuất sắc (Fit &ge; 94%) được xét nâng bậc.</p>
+            </div>
+
+            <div class="p-3 bg-emerald-50 rounded-lg border border-emerald-200">
+              <div class="font-bold text-emerald-900">P3 — THƯỞNG HIỆU QUẢ SỰ VỤ & BẢO VỆ GIÁ TRỊ TẬP ĐOÀN</div>
+              <p class="text-slate-600 mt-1">Thưởng nóng theo tỷ lệ % giá trị công nợ khó đòi thu hồi thành công, giá trị thiệt hại loại trừ được khi đàm phán hợp đồng hoặc khi thắng kiện tại VIAC/Tòa án.</p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+            <div class="font-bold text-slate-900 text-sm mb-3">Lộ Trình Thăng Tiến 6 Nấc Thang Nghề Nghiệp Pháp Chế (Legal Career Path):</div>
+            <div class="space-y-2 border-l-2 border-blue-400 pl-3">
+              <div><strong class="text-slate-900">Nấc 1:</strong> Thực tập sinh / Trợ lý Pháp chế (G8-VB/G6-VB) &rarr; Fit &ge; 70%</div>
+              <div><strong class="text-slate-900">Nấc 2:</strong> Chuyên viên Pháp chế Hợp đồng / Tuân thủ (G5-VB) &rarr; Fit &ge; 80%</div>
+              <div><strong class="text-slate-900">Nấc 3:</strong> Chuyên viên chính / Trưởng nhóm Pháp chế (G4-VB) &rarr; Fit &ge; 85%</div>
+              <div><strong class="text-blue-900">Nấc 4:</strong> Phó Trưởng phòng Pháp chế Tập đoàn (G4-VB) &rarr; Fit &ge; 90%</div>
+              <div><strong class="text-purple-700">Nấc 5:</strong> Trưởng phòng Pháp chế Tập đoàn (General Counsel - G4/G3) &rarr; Fit &ge; 94%</div>
+              <div><strong class="text-red-700">Nấc 6:</strong> Giám đốc Khối Pháp chế & Tuân thủ / Thành viên Ban Cố vấn HĐQT &rarr; Cấp Lãnh đạo Chiến lược</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PRINT ASSESSMENT MODAL (A4 CORPORATE PRINTOUT) -->
+  <div id="printModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden no-print">
+    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-8 shadow-2xl relative">
+      <button onclick="closePrintModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-black text-xl">✕</button>
+
+      <div id="printModalContent" class="space-y-6 text-slate-900 font-sans p-4">
+        
+        <!-- Corporate Header for Print -->
+        <div class="flex justify-between items-start border-b-2 border-blue-900 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-[#0F2756] text-white font-black flex flex-col items-center justify-center rounded-lg">
+              <span class="text-xs">MDG</span>
+              <span class="text-[8px]">LEGAL</span>
+            </div>
+            <div>
+              <div class="text-[11px] font-bold text-slate-600 uppercase">Tập Đoàn Xây Dựng Minh Đức — Ban Pháp Chế</div>
+              <div class="text-base font-black text-slate-900">PHIẾU ĐÁNH GIÁ NĂNG LỰC CÁN BỘ PHÁP CHẾ & TUÂN THỦ</div>
+              <div class="text-xs text-slate-500">Chuẩn SHRM BASK™ & Thang Đo BARS 5 Cấp Độ • Năm 2026</div>
+            </div>
+          </div>
+          <div class="text-right text-xs text-slate-500">
+            <div>Mẫu số: <span class="font-bold text-slate-700">MDG-HR-LEGAL-01</span></div>
+            <div>Kỳ đánh giá: <span class="font-bold text-slate-700">Năm 2026</span></div>
+          </div>
+        </div>
+
+        <!-- Candidate Info Matrix -->
+        <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <div><strong>Họ và tên cán bộ:</strong> <span id="printName" class="font-bold text-slate-900">--</span></div>
+          <div><strong>Mã cán bộ nhân viên:</strong> <span id="printEmpCode" class="font-bold text-slate-900">--</span></div>
+          <div><strong>Chức danh đánh giá:</strong> <span id="printTitle" class="font-bold text-blue-900">--</span></div>
+          <div><strong>Ngạch lương & Làn:</strong> <span id="printGrade" class="font-bold text-slate-900">--</span></div>
+          <div><strong>Đơn vị công tác:</strong> <span id="printDept" class="font-bold text-slate-900">--</span></div>
+          <div><strong>Ngày vào làm / HĐLĐ:</strong> <span id="printJoinDate" class="font-bold text-slate-900">--</span></div>
+        </div>
+
+        <!-- Role-Specific Criteria Table for Print -->
+        <div class="border rounded-xl overflow-hidden">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-100 text-slate-800 font-bold border-b">
+              <tr>
+                <th class="p-2.5">Tiêu Chí Năng Lực & Trọng Số</th>
+                <th class="p-2.5 text-center">Trọng Số (%)</th>
+                <th class="p-2.5 text-center">Điểm Tự Chấm (1-5)</th>
+                <th class="p-2.5 text-center">Điểm Chuẩn (1-5)</th>
+                <th class="p-2.5 text-center">Tỷ Lệ Đạt (%)</th>
+              </tr>
+            </thead>
+            <tbody id="printCriteriaTableBody" class="divide-y divide-slate-100">
+              <!-- Populated by JS based on current employee's specific criteria -->
+            </tbody>
+            <tfoot>
+              <tr class="bg-slate-50 font-black text-sm border-t-2 border-slate-300">
+                <td class="p-3 text-slate-900">TỔNG ĐIỂM FIT SCORE TOÀN DIỆN</td>
+                <td class="p-3 text-center">100%</td>
+                <td class="p-3 text-center text-blue-900" id="printOverallScore">--</td>
+                <td class="p-3 text-center" id="printOverallBench">--</td>
+                <td class="p-3 text-center text-blue-900 text-base" id="printFitScore">--%</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- Evaluation Conclusion & Recommendation -->
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-2">
+          <div><strong>Xếp loại năng lực:</strong> <span class="font-black text-blue-900 text-sm" id="printClass">--</span></div>
+          <div><strong>Khuyến nghị mức lương P2:</strong> <span class="font-bold text-slate-900" id="printSalaryP2">--</span></div>
+          <div><strong>Nhận xét & Kế hoạch phát triển IDP:</strong> <span class="italic text-slate-600" id="printNote">--</span></div>
+        </div>
+
+        <!-- 4 Signature Blocks -->
+        <div class="grid grid-cols-4 gap-4 text-center text-xs pt-8">
+          <div>
+            <div class="font-bold text-slate-800">CÁN BỘ ĐÁNH GIÁ</div>
+            <div class="text-[10px] text-slate-400 italic mb-12">(Ký và ghi rõ họ tên)</div>
+            <div class="font-bold text-slate-900" id="signEmpName">--</div>
+          </div>
+          <div>
+            <div class="font-bold text-slate-800">TRƯỞNG PHÒNG PHÁP CHẾ</div>
+            <div class="text-[10px] text-slate-400 italic mb-12">(Ký và duyệt)</div>
+            <div class="font-bold text-slate-900">Mai Diệu Hương</div>
+          </div>
+          <div>
+            <div class="font-bold text-slate-800">GIÁM ĐỐC NHÂN SỰ</div>
+            <div class="text-[10px] text-slate-400 italic mb-12">(Thẩm định & xếp lương)</div>
+            <div class="font-bold text-slate-900">Nancy (Trần Thị Thu Thủy)</div>
+          </div>
+          <div>
+            <div class="font-bold text-slate-800">BAN TỔNG GIÁM ĐỐC</div>
+            <div class="text-[10px] text-slate-400 italic mb-12">(Phê duyệt chính thức)</div>
+            <div class="font-bold text-slate-900">Trần Đại Nghĩa</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="mt-6 pt-4 border-t flex justify-end gap-3 no-print">
+        <button onclick="closePrintModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold">Đóng</button>
+        <button onclick="window.print()" class="px-5 py-2 bg-[#0F2756] hover:bg-[#1E3A8A] text-white rounded-xl text-xs font-bold shadow-md flex items-center gap-1.5">
+          <span>🖨️</span> Xác Nhận In Phiếu (A4)
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EMBEDDED MASTER DATA & INTERACTIVE JAVASCRIPT ENGINE -->
+  <script>
+    const MASTER_DATA = {"roles": {"TP_PC": {"title": "Trưởng phòng Pháp chế Tập đoàn (General Counsel)", "code": "TP_PC", "grade": "G4-VB / G3", "level": "L5 - Quản lý Cấp cao / Giám đốc Pháp chế", "bhxh": "Làn B (Văn phòng Trụ sở)", "reporting": "Báo cáo trực tiếp: Ban Tổng Giám đốc & Hội đồng Quản trị | Quản lý: Toàn bộ cán bộ nhân sự Phòng Pháp chế Tập đoàn", "purpose": "Đứng đầu bộ phận pháp lý của Tập đoàn; bảo đảm mọi hoạt động sản xuất kinh doanh, đầu tư, hợp đồng và quản trị nội bộ của Minh Đức Group và các công ty thành viên luôn thượng tôn pháp luật; chủ động nhận diện, ngăn ngừa và kiểm soát rủi ro pháp lý; trực tiếp bảo vệ quyền lợi hợp pháp và uy tín của Tập đoàn.", "responsibilities": ["1. Quản trị rủi ro pháp lý toàn Tập đoàn: Nhận diện, đánh giá, cảnh báo và đề xuất biện pháp kiểm soát rủi ro pháp lý đối với các hoạt động của Tập đoàn.", "2. Kiểm soát tính pháp lý của giao dịch và hợp đồng: Thẩm định, đàm phán, rà soát hợp đồng; xây dựng mẫu hợp đồng chuẩn; kiểm soát điều khoản rủi ro; bảo vệ quyền và lợi ích của Tập đoàn.", "3. Tổ chức công tác tuân thủ và quản trị nội bộ: Xây dựng quy chế, quy trình, phân quyền; giám sát việc tuân thủ pháp luật và quy định nội bộ tại các công ty thành viên.", "4. Giải quyết tranh chấp và xử lý sự vụ pháp lý: Đại diện hoặc phối hợp xử lý tranh chấp, khiếu nại, tố tụng, thanh tra, kiểm tra; hạn chế tổn thất và bảo vệ uy tín Tập đoàn.", "5. Tư vấn pháp lý và đồng hành cùng Ban Lãnh đạo: Tư vấn pháp lý cho Ban Tổng Giám đốc/HĐQT; hỗ trợ các dự án đầu tư, góp vốn, liên doanh, mua bán doanh nghiệp và các quyết định kinh doanh trọng yếu."], "authorities": "Phê duyệt tính pháp lý cuối cùng của hợp đồng kinh tế trọng yếu trước khi TGĐ ký kết; Đình chỉ các giao dịch có dấu hiệu vi phạm pháp luật hoặc rủi ro pháp lý nghiêm trọng; Được quyền tiếp cận toàn bộ hồ sơ dự án của các công ty thành viên; Đại diện theo ủy quyền của Người đại diện theo pháp luật tham gia tố tụng tại Tòa án/Trọng tài VIAC.", "kpis": [{"name": "An toàn pháp lý giao dịch", "target": "100% hợp đồng trọng yếu được thẩm định rà soát rủi ro", "weight": "25%"}, {"name": "Thắng kiện & Thu hồi nợ tranh chấp", "target": "≥ 85% giá trị tranh chấp được bảo vệ/thu hồi thành công", "weight": "25%"}, {"name": "Chuẩn hóa thể chế & Tuân thủ", "target": "100% quy chế nội bộ và phân cấp ủy quyền được cập nhật chuẩn luật", "weight": "25%"}, {"name": "Tư vấn chiến lược M&A & Đầu tư", "target": "100% dự án đầu tư/M&A có báo cáo thẩm định pháp lý (DD) chuẩn xác", "weight": "25%"}], "qualifications": "Cử nhân Luật (Đại học Luật Hà Nội / Khoa Luật ĐHQG chính quy trở lên), ưu tiên Thạc sĩ Luật; Có Chứng chỉ Hành nghề Luật sư và thẻ Luật sư; Tối thiểu 10 năm kinh nghiệm pháp lý, trong đó ít nhất 5 năm làm Trưởng phòng Pháp chế/Giám đốc Pháp chế tại các Tập đoàn Xây dựng, Bất động sản, Hạ tầng quy mô từ 500 nhân sự trở lên; am hiểu sâu sắc Luật Đấu thầu, Luật Xây dựng, Luật Đất đai, Luật Doanh nghiệp và hợp đồng FIDIC; có kiến thức về quản trị nhân sự và quản trị tài chính.", "pillars": [{"name": "Đạo Đức Nghề Nghiệp & Thượng Tôn Pháp Luật (SHRM Ethical Practice)", "weight": 25, "color": "text-purple-700 bg-purple-50 border-purple-200"}, {"name": "Tư Duy Kinh Doanh & Quản Trị Rủi Ro Hợp Đồng (SHRM Business Acumen)", "weight": 30, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Tham Vấn Chiến Lược & Quản Trị Tranh Chấp (SHRM Consultation)", "weight": 25, "color": "text-blue-700 bg-blue-50 border-blue-200"}, {"name": "Thể Chế Nội Bộ & Dẫn Dắt Tuân Thủ (Technical Governance)", "weight": 20, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}], "criteria": [{"id": "TP_PC_E1", "pillar": "Đạo Đức Nghề Nghiệp (SHRM Ethics)", "name": "Liêm Chính, Bảo Mật Bí Mật Kinh Doanh & Thượng Tôn Pháp Luật (Ethical Practice)", "weight": 15, "benchmark": 5.0, "desc": "Thiết lập chuẩn mực liêm chính cao nhất cho bộ máy pháp chế; bảo mật tuyệt đối bí mật công nghệ, chiến lược đấu thầu và hồ sơ tài chính; kiên định bảo vệ Tập đoàn đúng pháp luật.", "bars": {"1": "Để lộ thông tin nội bộ hoặc có dấu hiệu tư lợi cá nhân trong đàm phán hợp đồng.", "2": "Biết quy định bảo mật nhưng chưa có quy trình kiểm soát rò rỉ thông tin pháp lý dự án.", "3": "Tuyệt đối liêm chính, tuân thủ nghiêm ngặt quy tắc đạo đức nghề luật sư và bảo mật thông tin kinh doanh.", "4": "Xây dựng cơ chế kiểm soát liêm chính và bảo mật dữ liệu hợp đồng chặt chẽ trong toàn bộ phận.", "5": "Hình mẫu đạo đức và uy tín pháp lý cao nhất; tạo dựng niềm tin tuyệt đối từ HĐQT và các đối tác lớn."}, "method": "Đánh giá 360 độ từ HĐQT, Biên bản bảo mật và kiểm toán tuân thủ"}, {"id": "TP_PC_B1", "pillar": "Quản Trị Rủi Ro Toàn Tập Đoàn (SHRM Business)", "name": "Nhận Diện, Dự Báo & Kiểm Soát Rủi Ro Pháp Lý Vĩ Mô Toàn Tập Đoàn (Legal Risk Governance)", "weight": 15, "benchmark": 5.0, "desc": "Xây dựng bản đồ rủi ro pháp lý (Legal Risk Map); cập nhật đón đầu thay đổi chính sách pháp luật mới; thiết lập hàng rào phòng vệ pháp lý cho 11 công ty thành viên.", "bars": {"1": "Bị động xử lý rủi ro khi sự cố đã phát sinh, không có hệ thống cảnh báo sớm.", "2": "Nhận diện được các rủi ro cơ bản nhưng chưa đưa ra được giải pháp kiểm soát hiệu quả.", "3": "Xây dựng bản đồ rủi ro pháp lý định kỳ, cảnh báo kịp thời các rủi ro phát sinh trong hoạt động thi công và kinh doanh.", "4": "Dự báo chính xác tác động của các luật mới (Luật Đất đai, Nhà ở, Xây dựng); chủ động tái cấu trúc điều khoản giao dịch.", "5": "Kiến trúc sư trưởng về an toàn pháp lý doanh nghiệp; hóa giải triệt để các nguy cơ rủi ro pháp lý mang tính sống còn."}, "method": "Bản đồ rủi ro pháp lý Tập đoàn (Legal Risk Register), Báo cáo cảnh báo rủi ro định kỳ"}, {"id": "TP_PC_B2", "pillar": "Kiểm Soát Hợp Đồng & Giao Dịch (SHRM Business)", "name": "Kiểm Soát Tính Pháp Lý Của Giao Dịch, Hợp Đồng Xây Dựng & Hợp Đồng FIDIC (Contract Mastery)", "weight": 15, "benchmark": 5.0, "desc": "Thẩm định chuyên sâu hợp đồng tổng thầu EPC, hợp đồng thi công DUL, liên danh thầu quốc tế; đàm phán bảo vệ điều khoản thanh toán, tạm ứng, bồi thường thiệt hại và bất khả kháng.", "bars": {"1": "Soát xét hợp đồng sơ sài, bỏ sót các điều khoản bất lợi dẫn đến thiệt hại kinh tế khi có tranh chấp.", "2": "Chỉ kiểm tra hình thức pháp lý, chưa đánh giá sâu các rủi ro kỹ thuật và tài chính lồng ghép trong hợp đồng.", "3": "Thẩm định chặt chẽ, phát hiện và chỉnh sửa toàn bộ các điều khoản rủi ro trong hợp đồng thầu và thầu phụ.", "4": "Trực tiếp đàm phán hợp đồng lớn với các Chủ đầu tư hàng đầu (Vingroup, Masterise); bảo vệ quyền lợi tối đa cho Tập đoàn.", "5": "Chuyên gia hàng đầu về hợp đồng xây dựng và FIDIC; chuẩn hóa bộ mẫu hợp đồng thông minh bảo vệ biên lợi nhuận công ty."}, "method": "Tỷ lệ hợp đồng được thẩm định đúng hạn, Giá trị điều khoản rủi ro được loại trừ"}, {"id": "TP_PC_C1", "pillar": "Tổ Chức Công Tác Tuân Thủ & Quản Trị Nội Bộ (Governance)", "name": "Xây Dựng Quy Chế, Quy Trình & Giám Sát Tuân Thủ Các Công Ty Thành Viên (Corporate Governance)", "weight": 15, "benchmark": 5.0, "desc": "Thiết lập hệ thống văn bản quy chế, điều lệ, ma trận phân quyền (Delegation of Authority); tổ chức kiểm tra chéo tính tuân thủ pháp luật tại các đơn vị thành viên.", "bars": {"1": "Hệ thống quy chế lạc hậu, mâu thuẫn giữa các văn bản; không giám sát các công ty con.", "2": "Có ban hành quy chế nhưng tính thực thi yếu, các đơn vị thành viên chưa tuân thủ triệt để.", "3": "Chuẩn hóa đồng bộ Điều lệ và Quy chế phân cấp ủy quyền; kiểm tra tuân thủ định kỳ các đơn vị thành viên.", "4": "Thiết lập cơ chế giám sát tuân thủ 2 tầng hiệu quả; phát hiện và chấn chỉnh kịp thời các sai phạm phân quyền.", "5": "Xây dựng hệ thống quản trị thể chế chuẩn mực tiệm cận chuẩn niêm yết; văn hóa tuân thủ thấm sâu toàn Tập đoàn."}, "method": "Bộ Quy chế phân cấp ủy quyền ban hành, Báo cáo audit tuân thủ định kỳ"}, {"id": "TP_PC_D1", "pillar": "Giải Quyết Tranh Chấp & Xử Lý Sự Vụ (SHRM Consultation)", "name": "Đại Diện Tố Tụng, Tranh Chấp Trọng Tài VIAC, Tòa Án & Thu Hồi Nợ Khó Đòi (Litigation & Claims)", "weight": 15, "benchmark": 5.0, "desc": "Chủ trì xây dựng chiến lược pháp lý giải quyết tranh chấp xây dựng, khiếu nại phát sinh, đại diện tham gia trọng tài VIAC/Tòa án; bảo vệ danh tiếng và thu hồi dòng tiền.", "bars": {"1": "Để thua kiện do thiếu chứng cứ hoặc bỏ lỡ thời hiệu khởi kiện; gây thất thoát lớn cho công ty.", "2": "Lúng túng khi xử lý tranh chấp lớn, phụ thuộc hoàn toàn vào luật sư thuê ngoài mà không kiểm soát được chi phí.", "3": "Xây dựng hồ sơ chứng cứ chặt chẽ; đại diện đàm phán và tranh tụng bảo vệ thành công quyền lợi Tập đoàn.", "4": "Thắng kiện hoặc hòa giải thành công các vụ tranh chấp hợp đồng xây dựng phức tạp; thu hồi hàng chục tỷ nợ đọng.", "5": "Bậc thầy chiến lược tranh tụng và đàm phán trọng tài; bảo vệ tuyệt đối danh dự và tài sản của Tập đoàn."}, "method": "Tỷ lệ thắng kiện / hòa giải thành, Tổng số tiền công nợ tranh chấp thu hồi thành công"}, {"id": "TP_PC_A1", "pillar": "Tư Vấn Ban Lãnh Đạo & Đồng Hành Chiến Lược (SHRM Consultation)", "name": "Tư Vấn Pháp Lý Chiến Lược Cho Ban TGĐ/HĐQT, Thẩm Định Đầu Tư & M&A (Strategic Legal Advisory)", "weight": 10, "benchmark": 5.0, "desc": "Đóng vai trò cố vấn pháp lý chiến lược tin cậy của Ban Lãnh đạo; thực hiện thẩm định pháp lý (Due Diligence) dự án đầu tư, góp vốn, mua bán sáp nhập và tái cấu trúc.", "bars": {"1": "Chỉ tư vấn sự vụ hành chính, không có chính kiến pháp lý trước các quyết định kinh doanh lớn.", "2": "Tư vấn còn mang tính lý thuyết sách vở, giải pháp thiếu tính khả thi trong thực tế kinh doanh xây dựng.", "3": "Tham mưu giải pháp pháp lý sắc bén, khả thi; thẩm định chính xác tính pháp lý các dự án đầu tư mới.", "4": "Cố vấn xuất sắc trong các thương vụ M&A, liên doanh quốc tế; hóa giải các rào cản pháp lý hóc búa.", "5": "Đối tác chiến lược không thể thiếu của Ban Lãnh đạo; định hình cấu trúc pháp lý tối ưu cho chiến lược phát triển Tập đoàn."}, "method": "Báo cáo thẩm định pháp lý (Legal Due Diligence), Đánh giá 360 từ Ban TGĐ"}, {"id": "TP_PC_P1", "pillar": "Lãnh Đạo Đội Ngũ & Kèm Cặp Chuyên Môn (SHRM Leadership)", "name": "Quy Hoạch Đội Ngũ, Đào Tạo Pháp Lý Nội Bộ & Kèm Cặp Kế Thừa (People Leadership & EDAC)", "weight": 8, "benchmark": 4.5, "desc": "Xây dựng đội ngũ chuyên viên pháp chế chuyên nghiệp, tinh nhuệ; đào tạo phổ biến kiến thức pháp luật hợp đồng cho các Giám đốc Dự án, CHT và phòng ban.", "bars": {"1": "Không đào tạo cấp dưới, chuyên viên pháp chế làm việc lúng túng thiếu định hướng.", "2": "Chỉ giao việc kiểm tra giấy tờ, chưa truyền đạt kỹ năng đàm phán và tư duy pháp lý kinh doanh.", "3": "Kèm cặp chuyên viên theo mô hình EDAC; tổ chức các buổi hội thảo phổ biến pháp luật xây dựng cho công trường.", "4": "Đào tạo thành công đội ngũ chuyên viên pháp chế độc lập tác nghiệp vững vàng; có nhân sự kế thừa sẵn sàng.", "5": "Kiến tạo môi trường học thuật pháp lý chuyên nghiệp; truyền cảm hứng mạnh mẽ về tinh thần thượng tôn pháp luật."}, "method": "Đánh giá mức độ trưởng thành của chuyên viên, Số lượng chuyên đề đào tạo pháp lý nội bộ"}, {"id": "TP_PC_I1", "pillar": "Giao Tiếp Thuyết Phục & Quản Trị Khủng Hoảng (SHRM Interpersonal)", "name": "Kỹ Năng Đàm Phán Thuyết Phục & Quản Trị Khủng Hoảng Pháp Lý Đối Ngoại (Crisis & Negotiation)", "weight": 7, "benchmark": 4.5, "desc": "Xử lý khủng hoảng truyền thông pháp lý, làm việc với đoàn thanh tra liên ngành, công an, cơ quan quản lý nhà nước; đàm phán hài hòa lợi ích các bên.", "bars": {"1": "Ứng xử đối đầu căng thẳng với cơ quan nhà nước hoặc lúng túng khi xảy ra khủng hoảng.", "2": "Thụ động chờ chỉ đạo, chậm đưa ra thông cáo hoặc văn bản phản hồi pháp lý chuẩn mực.", "3": "Làm việc bình tĩnh, đúng luật với các đoàn thanh tra, giải trình chứng cứ pháp lý thuyết phục.", "4": "Hóa giải nhanh chóng các tình huống khủng hoảng pháp lý, bảo vệ an toàn thương hiệu Minh Đức.", "5": "Bậc thầy đối ngoại pháp lý; biến nguy cơ khủng hoảng thành cơ hội củng cố vị thế và uy tín Tập đoàn."}, "method": "Biên bản làm việc với cơ quan chức năng, Kết quả xử lý sự vụ khủng hoảng"}]}, "PP_PC": {"title": "Phó Trưởng phòng Pháp chế (Deputy Head of Legal)", "code": "PP_PC", "grade": "G4-VB", "level": "L4 - Quản lý Cấp trung Trụ sở", "bhxh": "Làn B (Văn phòng Trụ sở)", "reporting": "Báo cáo: Trưởng phòng Pháp chế Tập đoàn | Quản lý: Các Chuyên viên Pháp chế Hợp đồng, Tuân thủ và Tranh chấp", "purpose": "Hỗ trợ Trưởng phòng quản trị mảng Thẩm định Hợp đồng thi công, Quản trị Tranh chấp và Trực tiếp tham gia giải quyết khiếu nại tố tụng; phụ trách thẩm định tính pháp lý các dự án xây dựng trọng điểm.", "responsibilities": ["Trực tiếp soát xét và cho ý kiến pháp lý các hợp đồng thầu thi công, hợp đồng liên danh phức tạp.", "Chủ trì xây dựng hồ sơ khởi kiện, khiếu nại và đại diện tham gia các phiên hòa giải, trọng tài, tòa án.", "Hướng dẫn, kèm cặp chuyên viên pháp chế hợp đồng và chuyên viên xử lý nợ trong công việc hàng ngày.", "Phối hợp với Ban Nhân sự (HR) giải quyết các vụ việc quan hệ lao động, kỷ luật sa thải đúng pháp luật.", "Thay mặt Trưởng phòng điều hành công việc khi được ủy quyền."], "authorities": "Ký phiếu kiểm soát pháp lý hợp đồng trong phạm vi phân công; Phê duyệt tờ trình phương án giải quyết tranh chấp trình Trưởng phòng; Trực tiếp làm việc với luật sư bên ngoài và cơ quan tố tụng.", "kpis": [{"name": "Tiến độ thẩm định hợp đồng", "target": "100% hợp đồng xử lý đúng hạn cam kết SLA", "weight": "30%"}, {"name": "Hồ sơ tranh tụng & Tố tụng", "target": "100% hồ sơ khởi kiện/bảo vệ chuẩn bị đầy đủ chứng cứ", "weight": "30%"}, {"name": "Xử lý tranh chấp lao động", "target": "0 vụ việc bị xử thua kiện hoặc bồi thường sai luật", "weight": "20%"}, {"name": "Kèm cặp chuyên viên trẻ", "target": "Nâng cấp năng lực ít nhất 1 chuyên viên sau 6 tháng", "weight": "20%"}], "qualifications": "Cử nhân Luật chính quy; Có Chứng chỉ Luật sư; Tối thiểu 7 năm kinh nghiệm pháp chế doanh nghiệp, trong đó 3 năm ở cấp quản lý nhóm pháp chế tại doanh nghiệp xây dựng/BĐS.", "pillars": [{"name": "Kỹ Năng Thẩm Định Hợp Đồng Xây Dựng (Contract Law)", "weight": 35, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Kỹ Năng Tranh Tụng & Xử Lý Tranh Chấp (Litigation)", "weight": 30, "color": "text-blue-700 bg-blue-50 border-blue-200"}, {"name": "Kèm Cặp & Quản Lý Đội Ngũ (SHRM People Leadership)", "weight": 20, "color": "text-purple-700 bg-purple-50 border-purple-200"}, {"name": "Liêm Chính & Tuân Thủ (Ethics)", "weight": 15, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}], "criteria": [{"id": "PP_PC_T1", "pillar": "Kỹ Năng Thẩm Định Hợp Đồng Xây Dựng (Contract Law)", "name": "Thẩm Định & Đàm Phán Hợp Đồng Kinh Tế, Hợp Đồng Thầu Xây Dựng (Contract Review)", "weight": 20, "benchmark": 4.5, "desc": "Soát xét chi tiết các điều khoản hợp đồng thầu phụ, mua bán vật tư, bảo lãnh; phát hiện bẫy pháp lý và đề xuất sửa đổi bảo vệ quyền lợi công ty.", "bars": {"1": "Bỏ sót điều khoản bất lợi trong hợp đồng, thẩm định chậm trễ ảnh hưởng tiến độ ký thầu.", "2": "Chỉ phát hiện được lỗi câu từ ngữ pháp, chưa nhìn ra rủi ro thanh toán và trách nhiệm bồi thường.", "3": "Thẩm định hợp đồng chuyên nghiệp, phát hiện và sửa đổi đầy đủ các điều khoản rủi ro tiềm ẩn.", "4": "Đàm phán khéo léo với đối tác, bảo vệ thành công các điều khoản thanh toán có lợi cho Tập đoàn.", "5": "Chuyên gia đàm phán hợp đồng thầu xây dựng; không để xảy ra bất kỳ sơ hở pháp lý nào."}, "method": "Bảng đối chiếu điều khoản thẩm định, Đánh giá của Trưởng phòng"}, {"id": "PP_PC_T2", "pillar": "Kỹ Năng Tranh Tụng & Xử Lý Tranh Chấp (Litigation)", "name": "Chủ Trì Xây Dựng Hồ Sơ Tranh Tụng, Khiếu Nại & Xử Lý Tranh Chấp Công Trường (Litigation Strategy)", "weight": 20, "benchmark": 4.5, "desc": "Thu thập, củng cố chứng cứ nhật ký thi công, biên bản nghiệm thu, công văn trao đổi; soạn thảo đơn khởi kiện và trực tiếp tham gia tố tụng.", "bars": {"1": "Chứng cứ thu thập sơ sài, thiếu tính pháp lý trước Tòa án/Trọng tài.", "2": "Hồ sơ khởi kiện còn sai sót về thẩm quyền hoặc thời hiệu giải quyết tranh chấp.", "3": "Xây dựng bộ hồ sơ chứng cứ vững chắc, lập luận pháp lý sắc bén bảo vệ quyền lợi công ty.", "4": "Tham gia phiên xử Tòa án/VIAC tự tin, bảo vệ thành công 90% các yêu cầu đòi quyền lợi.", "5": "Chiến lược gia tranh tụng xuất sắc; luôn giành lợi thế đàm phán trên bàn trọng tài."}, "method": "Bản án/Quyết định Trọng tài VIAC có lợi, Hồ sơ chứng cứ hoàn chỉnh"}, {"id": "PP_PC_L1", "pillar": "Kèm Cặp & Quản Lý Đội Ngũ (SHRM People Leadership)", "name": "Kèm Cặp Chuyên Viên Pháp Chế & Phân Công Ca Kíp Kiểm Soát (People Development & EDAC)", "weight": 15, "benchmark": 4.0, "desc": "Hướng dẫn chuyên viên phương pháp bóc tách hợp đồng, phương pháp tra cứu luật; kiểm tra chất lượng ý kiến pháp lý của cấp dưới.", "bars": {"1": "Không kiểm tra bài làm của chuyên viên, để sót lỗi văn bản gửi ra ngoài.", "2": "Giao việc nhưng không chỉ dẫn, chỉ trích khi cấp dưới làm sai thay vì hướng dẫn.", "3": "Kèm cặp chuyên viên tận tình theo phương pháp EDAC, rà soát kỹ lưỡng ý kiến pháp lý.", "4": "Nâng cao rõ rệt kỹ năng của đội ngũ chuyên viên; đào tạo được nhân sự cứng cáp.", "5": "Người quản lý tận tâm và mẫu mực; xây dựng nhóm pháp chế gắn kết, chuẩn xác cao."}, "method": "Tỷ lệ sai sót của chuyên viên giảm, Đánh giá OJT nội bộ"}, {"id": "PP_PC_E1", "pillar": "Liêm Chính & Tuân Thủ (Ethics)", "name": "Đạo Đức Nghề Nghiệp & Bản Lĩnh Pháp Lý Trước Áp Lực Kinh Doanh (Ethical Firmness)", "weight": 10, "benchmark": 4.5, "desc": "Kiên định giữ vững chuẩn mực pháp lý; không vì nể nang hoặc áp lực tiến độ mà chấp nhận các điều khoản vi phạm pháp luật nghiêm trọng.", "bars": {"1": "Dễ thỏa hiệp trước sức ép của bộ phận kinh doanh/công trường, ký duyệt sai quy định.", "2": "Ngại va chạm, không dám bày tỏ quan điểm phản biện pháp lý khi thấy có dấu hiệu sai phạm.", "3": "Kiên định bảo vệ nguyên tắc pháp lý đúng đắn nhưng mềm mỏng, đề xuất giải pháp thay thế hợp pháp.", "4": "Bản lĩnh pháp lý vững vàng; thuyết phục thành công các phòng ban tuân thủ đúng quy chuẩn.", "5": "Tấm gương về tính chính trực và bản lĩnh luật sư doanh nghiệp."}, "method": "Biên bản bảo lưu quan điểm pháp lý, Đánh giá của Trưởng phòng"}, {"id": "PP_PC_B1", "pillar": "Kỹ Năng Thẩm Định Hợp Đồng Xây Dựng (Contract Law)", "name": "Phối Hợp Pháp Lý Lao Động Với Ban Nhân Sự & Kỷ Luật Thôi Việc (Labor Law Compliance)", "weight": 15, "benchmark": 4.0, "desc": "Thẩm định tính pháp lý của quy trình xử lý kỷ luật lao động, giải quyết tranh chấp HĐLĐ, chấm dứt hợp đồng đúng Bộ luật Lao động 2019.", "bars": {"1": "Tư vấn kỷ luật lao động sai trình tự dẫn đến việc công ty bị kiện đòi bồi thường.", "2": "Chưa nắm vững các án lệ về tranh chấp lao động, tư vấn còn cảm tính.", "3": "Phối hợp chặt chẽ với HR, đảm bảo 100% các quyết định kỷ luật/chấm dứt HĐLĐ đúng thủ tục.", "4": "Hòa giải thành công các khiếu nại lao động căng thẳng, bảo vệ tối đa uy tín công ty.", "5": "Chuyên gia pháp luật lao động; phòng ngừa triệt để mọi rủi ro tranh chấp lao động cho Tập đoàn."}, "method": "Biên bản họp kỷ luật lao động đúng chuẩn pháp lý, 0 vụ tranh chấp thua kiện"}]}, "CV_HD": {"title": "Chuyên viên Pháp chế Hợp đồng & Giao dịch (Contract Legal Specialist)", "code": "CV_HD", "grade": "G5-VB", "level": "L3 - Chuyên viên Tác nghiệp Trụ sở", "bhxh": "Làn B (Văn phòng Trụ sở)", "reporting": "Báo cáo: Trưởng/Phó phòng Pháp chế Tập đoàn", "purpose": "Trực tiếp rà soát, thẩm định tính pháp lý của các hợp đồng kinh tế, hợp đồng thi công xây dựng, hợp đồng cung cấp vật tư thiết bị, thỏa thuận bảo mật và các văn bản giao dịch của Tập đoàn.", "responsibilities": ["Soát xét, thẩm định tính pháp lý của các dự thảo hợp đồng thầu, thầu phụ, mua bán, thuê mướn thiết bị.", "Xây dựng và cập nhật hệ thống mẫu hợp đồng chuẩn (Standard Templates) cho các giao dịch định kỳ.", "Tham gia đàm phán hợp đồng cùng các Ban/Phòng nghiệp vụ (Đấu thầu, Cung ứng, Kinh doanh).", "Theo dõi việc thực hiện nghĩa vụ hợp đồng, cảnh báo rủi ro vi phạm tiến độ hoặc trễ hạn thanh toán.", "Quản lý lưu trữ và số hóa toàn bộ hồ sơ hợp đồng kinh tế của Tập đoàn."], "authorities": "Ký nháy phiếu thẩm định hợp đồng chuyển cấp quản lý phê duyệt; Yêu cầu các đơn vị cung cấp đầy đủ hồ sơ tài liệu kèm theo hợp đồng.", "kpis": [{"name": "Thời gian thẩm định hợp đồng", "target": "≥ 95% hợp đồng xử lý đúng hạn SLA (trong 24-48h)", "weight": "35%"}, {"name": "Chất lượng soát xét hợp đồng", "target": "0 hợp đồng bị khiếu nại do lỗi bất cẩn trong điều khoản", "weight": "30%"}, {"name": "Chuẩn hóa hợp đồng mẫu", "target": "Hoàn thành 100% bộ mẫu hợp đồng mua bán & thầu phụ", "weight": "20%"}, {"name": "Số hóa lưu trữ hợp đồng", "target": "100% hợp đồng có bản scan lưu trữ hệ thống", "weight": "15%"}], "qualifications": "Cử nhân Luật (chính quy); Tối thiểu 3 năm kinh nghiệm pháp chế hợp đồng tại các công ty xây dựng, sản xuất hoặc văn phòng luật sư; Thành thạo kỹ năng soạn thảo văn bản và tra cứu pháp luật.", "pillars": [{"name": "Kỹ Năng Rà Soát & Soạn Thảo Hợp Đồng (Drafting & Review)", "weight": 40, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Tư Duy Rủi Ro Thương Mại & Thanh Toán (Commercial Risk)", "weight": 30, "color": "text-blue-700 bg-blue-50 border-blue-200"}, {"name": "Kỷ Luật Tác Nghiệp & Thẩm Định SLA (Execution Discipline)", "weight": 15, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}, {"name": "Giao Tiếp & Phối Hợp Phòng Ban (Teamwork & SHRM Ethics)", "weight": 15, "color": "text-purple-700 bg-purple-50 border-purple-200"}], "criteria": [{"id": "CVHD_T1", "pillar": "Kỹ Năng Rà Soát & Soạn Thảo Hợp Đồng (Drafting & Review)", "name": "Kỹ Năng Rà Soát, Soạn Thảo & Hoàn Thiện Điều Khoản Hợp Đồng (Drafting Excellence)", "weight": 25, "benchmark": 4.0, "desc": "Sử dụng ngôn ngữ pháp lý chuẩn xác, chặt chẽ; phát hiện câu từ đa nghĩa gây rủi ro tranh chấp; hiệu chỉnh điều khoản quyền và nghĩa vụ cân bằng.", "bars": {"1": "Soạn thảo lủng củng, câu từ mơ hồ dễ dẫn đến hiểu nhầm khi thực hiện hợp đồng.", "2": "Chỉ áp dụng máy móc hợp đồng mẫu, chưa biết chỉnh sửa linh hoạt theo thực tế giao dịch.", "3": "Soạn thảo và rà soát hợp đồng chuẩn xác, câu từ chặt chẽ, bảo đảm đầy đủ các điều khoản trọng yếu.", "4": "Phát hiện nhanh các cạm bẫy pháp lý tinh vi trong hợp đồng của đối tác; đề xuất phương án sửa đổi tối ưu.", "5": "Kỹ năng soạn thảo điều khoản bậc thầy; hợp đồng chuẩn mực mẫu mực cho toàn bộ phận."}, "method": "Tỷ lệ phiếu thẩm định đạt chất lượng ngay lần đầu, Đánh giá của Phó phòng"}, {"id": "CVHD_T2", "pillar": "Tư Duy Rủi Ro Thương Mại & Thanh Toán (Commercial Risk)", "name": "Kiểm Soát Điều Khoản Tạm Ứng, Bảo Lãnh, Phạt Vi Phạm & Bất Khả Kháng (Risk Mitigation)", "weight": 20, "benchmark": 3.5, "desc": "Kiểm tra kỹ lưỡng điều kiện giải tỏa bảo lãnh thực hiện hợp đồng, bảo lãnh tạm ứng, bảo lãnh bảo hành; kiểm soát mức phạt vi phạm đúng Luật Thương mại và Luật Xây dựng.", "bars": {"1": "Không kiểm tra điều kiện bảo lãnh, để xảy ra tình trạng ngân hàng tịch thu bảo lãnh sai sót.", "2": "Nắm quy định nhưng chưa đối soát kỹ các mốc thời gian hiệu lực của bảo lãnh ngân hàng.", "3": "Kiểm tra chặt chẽ điều kiện bảo lãnh, các mốc thanh toán và điều khoản phạt vi phạm đúng luật.", "4": "Chủ động đề xuất các biện pháp phòng ngừa rủi ro chậm thanh toán của nhà thầu phụ và khách hàng.", "5": "Kiểm soát rủi ro tài chính hợp đồng toàn diện; bảo vệ an toàn 100% dòng tiền của công ty."}, "method": "Sổ theo dõi bảo lãnh ngân hàng, Báo cáo rà soát rủi ro thanh toán"}, {"id": "CVHD_T3", "pillar": "Kỷ Luật Tác Nghiệp & Thẩm Định SLA (Execution Discipline)", "name": "Kỷ Luật Thẩm Định Hợp Đồng Đúng Hạn SLA (Service Level Agreement)", "weight": 15, "benchmark": 4.0, "desc": "Thực hiện thẩm định hợp đồng trong vòng 24h (hợp đồng đơn giản) và 48h (hợp đồng phức tạp); không để tắc nghẽn công việc của bộ phận kinh doanh và đấu thầu.", "bars": {"1": "Để hồ sơ hợp đồng tồn đọng nhiều ngày không xử lý, gây chậm trễ tiến độ đấu thầu.", "2": "Thẩm định chậm, thường xuyên cần nhắc nhở từ các phòng ban nghiệp vụ.", "3": "Luôn hoàn thành thẩm định hợp đồng đúng hạn cam kết SLA, phản hồi rõ ràng, mạch lạc.", "4": "Xử lý hồ sơ thần tốc trong các đợt chạy thầu khẩn cấp; hỗ trợ tối đa bộ phận tiền tuyến.", "5": "Tấm gương về năng suất và tốc độ phục vụ; được các phòng ban đối tác đánh giá 5 sao."}, "method": "Báo cáo thống kê thời gian xử lý hợp đồng trên phần mềm / sổ theo dõi"}, {"id": "CVHD_I1", "pillar": "Giao Tiếp & Phối Hợp Phòng Ban (Teamwork & SHRM Ethics)", "name": "Thái Độ Đồng Hành, Tư Vấn Mềm Mỏng & Giải Thích Rõ Ràng Cho Phòng Ban (Customer Mindset)", "weight": 15, "benchmark": 4.0, "desc": "Giao tiếp hòa nhã, giải thích cặn kẽ lý do sửa đổi điều khoản; không quan liêu hách dịch; tìm kiếm giải pháp hợp lý giúp công việc trôi chảy.", "bars": {"1": "Thái độ trịch thượng, từ chối hợp đồng cứng nhắc gây ức chế cho các phòng ban.", "2": "Chỉ đưa ra lý do không được làm mà không hướng dẫn giải pháp thay thế hợp pháp.", "3": "Giao tiếp lịch sự, giải thích rõ căn cứ pháp lý và hướng dẫn tận tình cách sửa đổi điều khoản.", "4": "Chủ động ngồi lại cùng đơn vị nghiệp vụ để đàm phán tháo gỡ điểm nghẽn với đối tác.", "5": "Tư duy dịch vụ pháp lý nội bộ xuất sắc; được toàn thể cán bộ công ty yêu mến và tin tưởng."}, "method": "Khảo sát độ hài lòng của các phòng ban đối với dịch vụ Pháp chế"}]}, "CV_TT": {"title": "Chuyên viên Pháp chế Tranh chấp & Xử lý Nợ (Litigation & Dispute Specialist)", "code": "CV_TT", "grade": "G5-VB", "level": "L3 - Chuyên viên Tác nghiệp Trụ sở", "bhxh": "Làn B (Văn phòng Trụ sở)", "reporting": "Báo cáo: Trưởng/Phó phòng Pháp chế Tập đoàn", "purpose": "Chuyên trách theo dõi, thu thập chứng cứ, soạn thảo hồ sơ khiếu nại, khởi kiện và phối hợp giải quyết tranh chấp hợp đồng kinh tế, thu hồi công nợ tồn đọng khó đòi tại các dự án xây dựng.", "responsibilities": ["Rà soát danh mục các dự án có công nợ quá hạn, đánh giá khả năng thu hồi và rủi ro khởi kiện.", "Soạn thảo công văn đòi nợ, thông báo vi phạm hợp đồng, đơn khiếu nại và đơn khởi kiện.", "Trực tiếp liên hệ, làm việc với đối tác nợ đọng, thương lượng phương án gia hạn và cam kết trả nợ.", "Tham gia các phiên họp hòa giải tại Tòa án, phối hợp với Chi cục Thi hành án dân sự.", "Lập báo cáo định kỳ tình hình xử lý các vụ việc tranh chấp và tiến độ thu hồi dòng tiền."], "authorities": "Ký gửi các công văn đôn đốc công nợ theo phân công; Trực tiếp tiếp cận tài liệu hồ sơ thanh quyết toán dự án.", "kpis": [{"name": "Giá trị công nợ khó đòi thu hồi", "target": "≥ 80% chỉ tiêu thu hồi nợ được Ban TGĐ giao", "weight": "35%"}, {"name": "Tiến độ lập hồ sơ khởi kiện", "target": "100% hồ sơ hoàn thành trong 15 ngày kể từ khi có chủ trương", "weight": "30%"}, {"name": "Tỷ lệ hòa giải thành công", "target": "≥ 60% vụ việc đạt thỏa thuận trước khi phải xét xử", "weight": "20%"}, {"name": "Bảo toàn thời hiệu khởi kiện", "target": "100% không để bất kỳ khoản nợ nào bị hết thời hiệu", "weight": "15%"}], "qualifications": "Cử nhân Luật chính quy; Tối thiểu 3 năm kinh nghiệm xử lý tranh chấp, thu hồi nợ tại các doanh nghiệp xây dựng, ngân hàng hoặc văn phòng thừa phát lại/luật sư; Kỹ năng giao tiếp và tâm lý đàm phán vững vàng.", "pillars": [{"name": "Kỹ Năng Đàm Phán Thu Hồi Nợ & Tâm Lý Tranh Chấp (Debt Negotiation)", "weight": 35, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Kỹ Năng Thu Thập Chứng Cứ & Hồ Sơ Tố Tụng (Evidence & Court Filing)", "weight": 35, "color": "text-blue-700 bg-blue-50 border-blue-200"}, {"name": "Kiên Trì, Bản Lĩnh & Thượng Tôn Pháp Luật (Tenacity & Ethics)", "weight": 15, "color": "text-purple-700 bg-purple-50 border-purple-200"}, {"name": "Báo Cáo & Theo Dõi Tiến Độ Thi Hành Án (Case Management)", "weight": 15, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}], "criteria": [{"id": "CVTT_T1", "pillar": "Kỹ Năng Đàm Phán Thu Hồi Nợ & Tâm Lý Tranh Chấp (Debt Negotiation)", "name": "Nghệ Thuật Đàm Phán, Thuyết Phục & Chốt Kế Hoạch Trả Nợ (Negotiation Mastery)", "weight": 20, "benchmark": 4.0, "desc": "Phân tích tình hình tài chính của bên nợ; sử dụng công cụ pháp lý (cảnh báo khởi kiện, phong tỏa tài khoản) làm đòn bẩy đàm phán thu hồi tiền mặt hiệu quả.", "bars": {"1": "Ngại va chạm, giao tiếp lúng túng để bên nợ hứa suông kéo dài nhiều tháng.", "2": "Chỉ biết gửi công văn đòi nợ định kỳ, chưa có chiến thuật gặp gỡ đàm phán trực tiếp.", "3": "Đàm phán cương quyết, đúng luật, buộc bên nợ ký biên bản cam kết lộ trình thanh toán cụ thể.", "4": "Nắm bắt điểm yếu pháp lý của đối tác, thu hồi thành công các khoản nợ khó đòi tưởng chừng đã mất.", "5": "Chuyên gia đàm phán thu hồi nợ; thu hồi hàng chục tỷ tiền nợ đọng cho Tập đoàn mỗi năm."}, "method": "Tổng số tiền nợ thực tế thu hồi về tài khoản công ty, Biên bản cam kết thanh toán"}, {"id": "CVTT_T2", "pillar": "Kỹ Năng Thu Thập Chứng Cứ & Hồ Sơ Tố Tụng (Evidence & Court Filing)", "name": "Kỹ Năng Thu Thập Chứng Cứ Hồ Sơ Hoàn Công, Nghiệm Thu & Lập Luận Khởi Kiện (Evidence Building)", "weight": 20, "benchmark": 4.0, "desc": "Làm việc với công trường thu thập biên bản giao nhận vật tư, bảng đối chiếu công nợ, hóa đơn VAT, chứng từ xác nhận nợ; bảo đảm chứng cứ có giá trị pháp lý tuyệt đối.", "bars": {"1": "Hồ sơ khởi kiện thiếu chứng từ quan trọng, bị Tòa án trả lại đơn nhiều lần.", "2": "Chưa biết cách khai thác các chứng cứ điện tử (email, Zalo, biên bản bàn giao tạm).", "3": "Thu thập chứng cứ đầy đủ, logic; lập luận đơn khởi kiện chặt chẽ, Tòa án thụ lý ngay lần đầu.", "4": "Chủ động lập vi bằng thừa phát lại, củng cố chuỗi chứng cứ đanh thép khiến bên nợ phải khuất phục.", "5": "Kỹ năng xây dựng hồ sơ chứng cứ mẫu mực; tỷ lệ hồ sơ được chấp thuận 100%."}, "method": "Biên bản kiểm tra chứng cứ của Tòa án, Tỷ lệ hồ sơ thụ lý thành công"}, {"id": "CVTT_E1", "pillar": "Kiên Trì, Bản Lĩnh & Thượng Tôn Pháp Luật (Tenacity & Ethics)", "name": "Kiên Định, Bền Bỉ & Tuyệt Đối Tuân Thủ Pháp Luật Trong Thu Hồi Nợ (Legal Tenacity)", "weight": 15, "benchmark": 4.0, "desc": "Bền bỉ bám sát mục tiêu đòi nợ; tuyệt đối không sử dụng các biện pháp trái pháp luật hoặc xã hội đen; bảo vệ chuẩn mực văn minh của Tập đoàn.", "bars": {"1": "Nhanh nản chí khi bên nợ từ chối làm việc; có hành vi phát ngôn thiếu chuẩn mực.", "2": "Chưa duy trì được tần suất theo đuổi nợ đều đặn, dễ bị phân tán bởi các công việc khác.", "3": "Kiên trì theo đuổi sự vụ hàng tháng, luôn giữ thái độ chuyên nghiệp, thượng tôn pháp luật.", "4": "Bản lĩnh kiên cường trước mọi áp lực và đe dọa của đối tác tiêu cực; bảo vệ uy tín công ty.", "5": "Hình mẫu về bản lĩnh pháp lý văn minh; được đối tác nợ nể phục và thực hiện nghĩa vụ."}, "method": "Nhật ký tác nghiệp theo dõi nợ, Đánh giá đạo đức từ Trưởng phòng"}]}, "CV_TTNB": {"title": "Chuyên viên Pháp chế Tuân thủ & Quản trị Nội bộ (Compliance Specialist)", "code": "CV_TTNB", "grade": "G5-VB", "level": "L3 - Chuyên viên Tác nghiệp Trụ sở", "bhxh": "Làn B (Văn phòng Trụ sở)", "reporting": "Báo cáo: Trưởng/Phó phòng Pháp chế Tập đoàn", "purpose": "Rà soát tính pháp lý của các quy chế, quy định nội bộ; theo dõi việc thực hiện phân cấp thẩm quyền (DOA); thực hiện thủ tục pháp lý doanh nghiệp (thay đổi ĐKKD, con dấu, ủy quyền, giấy phép).", "responsibilities": ["Thẩm định tính pháp lý của các Quy chế, Quy trình, Quy định (SOP) trước khi ban hành.", "Theo dõi, cập nhật hệ thống Điều lệ và Ma trận Phân quyền phê duyệt (DOA) toàn Tập đoàn.", "Thực hiện các thủ tục đăng ký kinh doanh, tăng vốn điều lệ, lập chi nhánh, văn phòng đại diện.", "Quản lý hồ sơ pháp nhân, giấy phép hoạt động xây dựng, chứng chỉ năng lực hoạt động xây dựng.", "Kiểm tra định kỳ việc tuân thủ pháp luật và quy chế nội bộ tại các công ty con và đơn vị thành viên."], "authorities": "Ký nháy văn bản thẩm định thể chế; Làm việc trực tiếp với Sở Kế hoạch & Đầu tư, Sở Xây dựng.", "kpis": [{"name": "Tiến độ thủ tục ĐKKD & Giấy phép", "target": "100% hồ sơ hoàn thành đúng hoặc trước hạn", "weight": "35%"}, {"name": "Chất lượng rà soát quy chế nội bộ", "target": "100% quy chế ban hành không trái pháp luật hiện hành", "weight": "30%"}, {"name": "Kiểm tra tuân thủ nội bộ", "target": "Hoàn thành 100% kế hoạch audit tuân thủ các đơn vị thành viên", "weight": "20%"}, {"name": "Cập nhật văn bản pháp luật mới", "target": "Bản tin điểm tin pháp luật hàng tháng cho CBNV", "weight": "15%"}], "qualifications": "Cử nhân Luật; Tối thiểu 3 năm kinh nghiệm pháp chế doanh nghiệp, quản trị nội bộ hoặc tư vấn luật doanh nghiệp; am hiểu sâu Luật Doanh nghiệp, Luật Đầu tư và thủ tục hành chính.", "pillars": [{"name": "Pháp Lý Doanh Nghiệp & Thủ Tục Hành Chính (Corporate Secretarial)", "weight": 35, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Kiểm Soát Thể Chế & Quy Chế Nội Bộ (Governance Compliance)", "weight": 35, "color": "text-blue-700 bg-blue-50 border-blue-200"}, {"name": "Audit Tuân Thủ Đơn Vị Thành Viên (Internal Audit)", "weight": 15, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}, {"name": "Quản Trị Hồ Sơ Pháp Nhân & Bản Tin Pháp Luật (Records & Knowledge)", "weight": 15, "color": "text-purple-700 bg-purple-50 border-purple-200"}], "criteria": [{"id": "CVTTNB_T1", "pillar": "Pháp Lý Doanh Nghiệp & Thủ Tục Hành Chính (Corporate Secretarial)", "name": "Thực Hiện Thủ Tục ĐKKD, Giấy Phép Xây Dựng & Con Dấu (Corporate Procedures)", "weight": 20, "benchmark": 4.0, "desc": "Soạn thảo hồ sơ đại hội đồng cổ đông, biên bản họp HĐQT, thủ tục thay đổi ĐKKD, bổ sung ngành nghề, xin cấp chứng chỉ năng lực xây dựng đúng hạn.", "bars": {"1": "Hồ sơ hành chính sai sót nhiều lần, làm chậm tiến độ cấp phép hoạt động kinh doanh.", "2": "Chỉ làm được các thủ tục đơn giản, còn lúng túng khi tăng vốn hoặc tái cơ cấu pháp nhân.", "3": "Thực hiện thuần thục các thủ tục pháp lý doanh nghiệp; nộp và nhận kết quả đúng hạn.", "4": "Xử lý nhanh chóng các thủ tục pháp lý phức tạp; quan hệ đối ngoại hành chính khéo léo.", "5": "Chuyên gia thủ tục doanh nghiệp; đảm bảo tính hợp pháp tối đa cho bộ máy Holding 11 công ty."}, "method": "Giấy chứng nhận ĐKKD / Giấy phép được cấp đúng hạn, Đánh giá của Trưởng phòng"}, {"id": "CVTTNB_T2", "pillar": "Kiểm Soát Thể Chế & Quy Chế Nội Bộ (Governance Compliance)", "name": "Rà Soát Thể Chế, Quy Chế Phân Cấp Thẩm Quyền (DOA) & Quy Định Nội Bộ (SOP Alignment)", "weight": 20, "benchmark": 4.0, "desc": "Rà soát tính pháp lý và tính khả thi của các quy định ban hành; bảo đảm không vượt quá thẩm quyền và phù hợp với Điều lệ Tập đoàn.", "bars": {"1": "Để ban hành các quy chế trái luật hoặc vi phạm quy định phân cấp của HĐQT.", "2": "Soát xét quy chế sơ sài, chưa đối chiếu kỹ với Điều lệ và các văn bản quy phạm pháp luật.", "3": "Thẩm định chặt chẽ, đảm bảo tính pháp lý và tính thống nhất của toàn bộ cây thư mục thể chế.", "4": "Chủ động đề xuất sửa đổi các quy chế lỗi thời, góp phần tinh gọn hóa quy trình vận hành.", "5": "Kiến tạo hệ thống thể chế nội bộ mẫu mực, khoa học và chặt chẽ."}, "method": "Báo cáo thẩm định quy chế, Bảng ma trận phân quyền DOA cập nhật"}]}, "TL_PC": {"title": "Trợ lý / Thực tập sinh Pháp chế (Legal Assistant / Intern)", "code": "TL_PC", "grade": "G6-VB / G8-VB", "level": "L1/L2 - Tập sự / Hỗ trợ Pháp lý", "bhxh": "Làn B (Văn phòng Trụ sở)", "reporting": "Báo cáo: Trưởng phòng Pháp chế / Các Chuyên viên chính", "purpose": "Hỗ trợ công tác văn thư pháp lý, tra cứu văn bản quy phạm pháp luật, scan và lưu trữ hợp đồng, hỗ trợ chuẩn bị hồ sơ công chứng, nộp hồ sơ cơ quan nhà nước.", "responsibilities": ["Tra cứu văn bản pháp luật, án lệ, cập nhật cơ sở dữ liệu pháp luật hàng tuần.", "In ấn, sắp xếp, đóng dấu, lấy số và lưu trữ hợp đồng kinh tế, biên bản thanh lý.", "Hỗ trợ đi lại làm thủ tục công chứng, nộp hồ sơ tại Sở Kế hoạch Đầu tư, Tòa án.", "Hỗ trợ soạn thảo các công văn thông báo, thư ngỏ, biên bản cuộc họp pháp lý.", "Soạn thảo bản tin điểm tin pháp luật (Legal Newsletter) tóm tắt các điểm mới gửi CBNV."], "authorities": "Tiếp nhận hồ sơ hợp đồng từ các phòng ban; Quản lý tủ lưu trữ hồ sơ pháp lý phòng.", "kpis": [{"name": "Độ chính xác văn bản & lưu trữ", "target": "100% hồ sơ được sắp xếp, scan và lưu trữ chuẩn mã", "weight": "35%"}, {"name": "Tốc độ tra cứu thông tin", "target": "Cung cấp văn bản pháp luật cần tìm trong vòng 1-2h", "weight": "30%"}, {"name": "Thủ tục công chứng & nộp hồ sơ", "target": "100% công việc ngoại nghiệp hoàn thành đúng tiến độ", "weight": "20%"}, {"name": "Học hỏi & Nâng cao năng lực", "target": "Đạt chuẩn kỳ sát hạch chuyên viên sau thời gian tập sự", "weight": "15%"}], "qualifications": "Sinh viên năm cuối hoặc tốt nghiệp Cử nhân Luật (Đại học Luật, ĐHQG); Nhanh nhẹn, cẩn thận, ham học hỏi; Kỹ năng tin học văn phòng tốt và tư duy logic.", "pillars": [{"name": "Kỹ Năng Tra Cứu & Quản Trị Dữ Liệu Pháp Lý (Legal Research)", "weight": 35, "color": "text-blue-700 bg-blue-50 border-blue-200"}, {"name": "Cẩn Thận, Chi Tiết & Lưu Trữ Hồ Sơ (Detail-Oriented & Filing)", "weight": 35, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}, {"name": "Tinh Thần Cầu Thị & Học Hỏi Nhanh (Learning Agility & Ethics)", "weight": 30, "color": "text-purple-700 bg-purple-50 border-purple-200"}], "criteria": [{"id": "TLPC_T1", "pillar": "Kỹ Năng Tra Cứu & Quản Trị Dữ Liệu Pháp Lý (Legal Research)", "name": "Kỹ Năng Tra Cứu Văn Bản Luật, Án Lệ & Điểm Tin Pháp Luật Mới (Legal Research)", "weight": 20, "benchmark": 3.0, "desc": "Thành thạo tra cứu trên Thư Viện Pháp Luật, Cổng thông tin điện tử Chính phủ; xác định chính xác hiệu lực của văn bản và tóm tắt nội dung chính.", "bars": {"1": "Tra cứu nhầm văn bản hết hiệu lực hoặc không tìm thấy quy định đang áp dụng.", "2": "Tìm được văn bản nhưng chưa biết trích dẫn đúng điều khoản cần tham chiếu.", "3": "Tra cứu nhanh chóng, chính xác hiệu lực văn bản; cung cấp trích dẫn luật đúng yêu cầu.", "4": "Tóm tắt các điểm mới của luật thành bảng so sánh dễ hiểu, hỗ trợ đắc lực cho chuyên viên.", "5": "Kỹ năng tra cứu và tổng hợp thông tin pháp lý xuất sắc; chủ động biên soạn điểm tin luật."}, "method": "Bản tổng hợp tra cứu pháp luật, Bản tin pháp lý hàng tháng"}, {"id": "TLPC_T2", "pillar": "Cẩn Thận, Chi Tiết & Lưu Trữ Hồ Sơ (Detail-Oriented & Filing)", "name": "Cẩn Thận, Tỉ Mỉ Trong Quản Lý Hồ Sơ, Scan & Lưu Trữ Hợp Đồng (Filing Discipline)", "weight": 20, "benchmark": 3.0, "desc": "Đảm bảo hồ sơ hợp đồng bản cứng được đóng gáy, dán nhãn, lưu trữ khoa học; bản mềm scan đúng thư mục, tra cứu được trong 30 giây.", "bars": {"1": "Làm thất lạc hợp đồng bản gốc hoặc lưu trữ lộn xộn không tìm thấy khi cần.", "2": "Scan hồ sơ mờ, thiếu trang, đặt tên file không theo quy ước chuẩn.", "3": "Quản lý hồ sơ cẩn thận, khoa học; scan đầy đủ, đặt tên file chuẩn quy ước, dễ tra cứu.", "4": "Số hóa toàn bộ kho hồ sơ pháp lý lên Google Drive/Server nội bộ khoa học, bảo mật cao.", "5": "Mô hình quản trị văn thư pháp lý hoàn hảo; không bao giờ để thất lạc bất kỳ trang tài liệu nào."}, "method": "Kiểm tra định kỳ kho hồ sơ pháp lý, Tốc độ xuất trình bản gốc khi có yêu cầu"}]}}, "employees": [{"stt": 1, "empCode": "NV0000059", "fullName": "Mai Diệu Hương", "gender": "Nữ", "degree": "Thạc sĩ Luật / Luật sư", "contractType": "Chính thức", "jobTitle": "Trưởng phòng Pháp chế Tập đoàn", "roleKey": "TP_PC", "grade": "G4-VB", "bhxhTrack": "Làn B (Văn phòng Trụ sở)", "dept": "Ban Pháp chế Tập đoàn", "loc": "Trụ sở chính (301 Phúc Lợi, Long Biên)", "email": "huongmd@minhduccorp.com.vn", "joinDate": "05/2020", "p2": "Bậc 11 (38.0 tr)", "note": "Luật sư dày dạn kinh nghiệm, bản lĩnh đàm phán hợp đồng FIDIC & quản trị rủi ro toàn Tập đoàn", "scores": {"TP_PC_E1": 4.9, "TP_PC_B1": 4.8, "TP_PC_B2": 4.9, "TP_PC_C1": 4.7, "TP_PC_D1": 4.8, "TP_PC_A1": 4.9, "TP_PC_P1": 4.6, "TP_PC_I1": 4.7}, "avgScore": 4.8, "fitScore": 97.5, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 11 (38.0 tr)"}, {"stt": 2, "empCode": "NV0000185", "fullName": "Vũ Đình Phong", "gender": "Nam", "degree": "Thạc sĩ Luật / Luật sư", "contractType": "Chính thức (Quy hoạch)", "jobTitle": "Phó Trưởng phòng Pháp chế", "roleKey": "PP_PC", "grade": "G4-VB", "bhxhTrack": "Làn B (Văn phòng Trụ sở)", "dept": "Ban Pháp chế Tập đoàn", "loc": "Trụ sở chính", "email": "phongvd@minhduccorp.com.vn", "joinDate": "03/2023", "p2": "Bậc 8 (22.0 tr)", "note": "Vững chuyên môn tranh tụng Tòa án, thẩm định BPTC pháp lý và hợp đồng kinh tế phức tạp", "scores": {"PP_PC_T1": 4.4, "PP_PC_T2": 4.5, "PP_PC_L1": 4.1, "PP_PC_E1": 4.5, "PP_PC_B1": 4.2}, "avgScore": 4.34, "fitScore": 100.7, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 8 (22.0 tr)"}, {"stt": 3, "empCode": "NV0000639", "fullName": "Nguyễn Thị Minh Trang", "gender": "Nữ", "degree": "Cử nhân Luật", "contractType": "Chính thức", "jobTitle": "Chuyên viên Pháp chế Hợp đồng & Giao dịch", "roleKey": "CV_HD", "grade": "G5-VB", "bhxhTrack": "Làn B (Văn phòng Trụ sở)", "dept": "Ban Pháp chế Tập đoàn", "loc": "Trụ sở chính", "email": "trangntm@minhduccorp.com.vn", "joinDate": "08/2026", "p2": "Bậc 6 (16.0 tr)", "note": "Thẩm định hợp đồng thầu thi công & mua bán nhanh chóng, rà soát điều khoản chặt chẽ", "scores": {"CVHD_T1": 3.9, "CVHD_T2": 3.8, "CVHD_T3": 4.1, "CVHD_I1": 4.0}, "avgScore": 3.93, "fitScore": 101.7, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 6 (16.0 tr)"}, {"stt": 4, "empCode": "NV0000412", "fullName": "Lê Thị Quỳnh Anh", "gender": "Nữ", "degree": "Cử nhân Luật", "contractType": "Chính thức", "jobTitle": "Chuyên viên Pháp chế Tranh chấp & Xử lý Nợ", "roleKey": "CV_TT", "grade": "G5-VB", "bhxhTrack": "Làn B (Văn phòng Trụ sở)", "dept": "Ban Pháp chế Tập đoàn", "loc": "Trụ sở chính", "email": "anhltq@minhduccorp.com.vn", "joinDate": "10/2025", "p2": "Bậc 6 (16.0 tr)", "note": "Nhiệt huyết, kiên trì đàm phán thu hồi nợ đọng dự án, củng cố chứng cứ khởi kiện bài bản", "scores": {"CVTT_T1": 4.0, "CVTT_T2": 4.1, "CVTT_E1": 4.2}, "avgScore": 4.09, "fitScore": 102.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 6 (16.0 tr)"}, {"stt": 5, "empCode": "NV0000488", "fullName": "Trần Tuấn Kiệt", "gender": "Nam", "degree": "Cử nhân Luật", "contractType": "Chính thức", "jobTitle": "Chuyên viên Pháp chế Tuân thủ & Quản trị Nội bộ", "roleKey": "CV_TTNB", "grade": "G5-VB", "bhxhTrack": "Làn B (Văn phòng Trụ sở)", "dept": "Ban Pháp chế Tập đoàn", "loc": "Trụ sở chính", "email": "kiettt@minhduccorp.com.vn", "joinDate": "02/2026", "p2": "Bậc 5 (13.5 tr)", "note": "Nắm vững thủ tục ĐKKD, giấy phép xây dựng và ma trận phân cấp ủy quyền các công ty thành viên", "scores": {"CVTTNB_T1": 3.8, "CVTTNB_T2": 3.7}, "avgScore": 3.75, "fitScore": 93.8, "ratingClass": "Đạt chuẩn", "salaryP2": "Bậc 5 (13.5 tr)"}, {"stt": 6, "empCode": "NV0000525", "fullName": "Đinh Minh Phương", "gender": "Nữ", "degree": "Cử nhân Luật (Đang học việc)", "contractType": "Tập sự / Hỗ trợ", "jobTitle": "Trợ lý / Thực tập sinh Pháp chế", "roleKey": "TL_PC", "grade": "G6-VB", "bhxhTrack": "Làn B (Văn phòng Trụ sở)", "dept": "Ban Pháp chế Tập đoàn", "loc": "Trụ sở chính", "email": "phuongdm@minhduccorp.com.vn", "joinDate": "07/2026", "p2": "Bậc 2 (8.5 tr)", "note": "Cẩn thận, tỉ mỉ trong công tác scan lưu trữ hợp đồng, tra cứu luật và hỗ trợ văn thư", "scores": {"TLPC_T1": 3.2, "TLPC_T2": 3.3}, "avgScore": 3.25, "fitScore": 108.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 2 (8.5 tr)"}]};
+
+    let currentEmpCode = "NV0000059"; // Default: Mai Dieu Huong (TP_PC)
+    let currentEmployee = null;
+    let currentRole = null;
+    let activeRoleTab = "TP_PC";
+
+    // Initialize application on DOM loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      initRolePills();
+      initEmployeeDropdown();
+      renderRankingTable();
+      renderRoleDetail(activeRoleTab);
+      loadEmployeeEvaluation(currentEmpCode);
+    });
+
+    // Tab Navigation
+    function switchTab(tabId) {
+      const tabs = ['jd-dict', 'eval', 'ranking', 'compensation'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-btn-' + t);
+        const section = document.getElementById('tab-' + t);
+        if (t === tabId) {
+          section.classList.remove('hidden');
+          btn.classList.add('tab-btn-active');
+          btn.classList.remove('text-slate-600', 'hover:bg-slate-50');
+        } else {
+          section.classList.add('hidden');
+          btn.classList.remove('tab-btn-active');
+          btn.classList.add('text-slate-600', 'hover:bg-slate-50');
+        }
+      });
+      if (tabId === 'eval') {
+        updateEvaluationUI();
+      }
+    }
+
+    // ==========================================
+    // TAB 1: JD & KHUNG NĂNG LỰC PHÁP CHẾ
+    // ==========================================
+    function initRolePills() {
+      const container = document.getElementById("rolePillsContainer");
+      container.innerHTML = "";
+      const roleKeys = ["TP_PC", "PP_PC", "CV_HD", "CV_TT", "CV_TTNB", "TL_PC"];
+      
+      roleKeys.forEach(k => {
+        const r = MASTER_DATA.roles[k];
+        if (!r) return;
+        const btn = document.createElement("button");
+        btn.id = "role-pill-" + k;
+        btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition border border-slate-200 " + 
+          (k === activeRoleTab ? "role-pill-active" : "bg-slate-50 text-slate-700 hover:bg-slate-100");
+        btn.innerText = r.title;
+        btn.onclick = () => {
+          activeRoleTab = k;
+          document.querySelectorAll("[id^='role-pill-']").forEach(b => {
+            b.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100";
+          });
+          btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition border border-slate-200 role-pill-active";
+          renderRoleDetail(k);
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function renderRoleDetail(roleKey) {
+      const role = MASTER_DATA.roles[roleKey];
+      const container = document.getElementById("roleDetailContent");
+      if (!role) return;
+
+      let kpisHtml = role.kpis.map(k => `
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="text-[11px] text-slate-400 font-bold uppercase">${k.name} (${k.weight})</div>
+          <div class="text-xs font-bold text-slate-800 mt-1">${k.target}</div>
+        </div>
+      `).join("");
+
+      let respHtml = role.responsibilities.map((res, idx) => `
+        <li class="flex items-start gap-2">
+          <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-900 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">${idx+1}</span>
+          <span class="text-slate-800 font-medium">${res}</span>
+        </li>
+      `).join("");
+
+      let pillarsHtml = role.pillars.map(p => `
+        <div class="p-3.5 rounded-xl border ${p.color}">
+          <div class="text-[11px] font-bold uppercase tracking-wider">${p.name}</div>
+          <div class="text-xl font-black mt-1">Trọng số: ${p.weight}%</div>
+        </div>
+      `).join("");
+
+      let criteriaRows = role.criteria.map((c, i) => `
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 bg-[#0F2756] text-white rounded text-[10px] font-black">${c.id}</span>
+              <span class="font-bold text-slate-900 text-sm">${c.name}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-[11px] font-bold">Trọng số: ${c.weight}%</span>
+              <span class="px-2 py-0.5 bg-purple-100 text-purple-900 rounded text-[11px] font-black">Chuẩn: Cấp ${c.benchmark.toFixed(1)}</span>
+            </div>
+          </div>
+          
+          <p class="text-xs text-slate-600 italic bg-white p-2.5 rounded-lg border border-slate-100">
+            <strong>Mục tiêu năng lực:</strong> ${c.desc}
+          </p>
+
+          <!-- BARS 5 Levels Table -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-[11px] bg-white rounded-lg border">
+              <thead class="bg-slate-100 text-slate-700 font-bold border-b">
+                <tr>
+                  <th class="p-2 w-24">Cấp Độ</th>
+                  <th class="p-2">Mô Tả Hành Vi Thực Chiến (BARS Description)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-600">
+                <tr class="${c.benchmark === 1 ? 'bg-red-50 font-bold' : ''}">
+                  <td class="p-2 font-bold text-slate-800">Cấp 1 (Novice)</td>
+                  <td class="p-2">${c.bars["1"]}</td>
+                </tr>
+                <tr class="${c.benchmark === 2 ? 'bg-amber-50 font-bold' : ''}">
+                  <td class="p-2 font-bold text-slate-800">Cấp 2 (Developing)</td>
+                  <td class="p-2">${c.bars["2"]}</td>
+                </tr>
+                <tr class="${c.benchmark === 3 ? 'bg-blue-50 font-bold text-blue-900' : ''}">
+                  <td class="p-2 font-bold text-slate-800">Cấp 3 (Competent)</td>
+                  <td class="p-2">${c.bars["3"]}</td>
+                </tr>
+                <tr class="${c.benchmark === 4 ? 'bg-emerald-50 font-bold text-emerald-900' : ''}">
+                  <td class="p-2 font-bold text-slate-800">Cấp 4 (Advanced)</td>
+                  <td class="p-2">${c.bars["4"]}</td>
+                </tr>
+                <tr class="${c.benchmark === 5 ? 'bg-purple-50 font-bold text-purple-900' : ''}">
+                  <td class="p-2 font-bold text-slate-800">Cấp 5 (Expert)</td>
+                  <td class="p-2">${c.bars["5"]}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="text-[11px] text-slate-500">
+            <strong>Phương pháp kiểm chứng:</strong> ${c.method}
+          </div>
+        </div>
+      `).join("");
+
+      container.innerHTML = `
+        <!-- PART A: JOB DESCRIPTION -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6">
+          <div class="border-b pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 bg-blue-100 text-blue-900 text-xs font-black rounded-full">BẢN MÔ TẢ CÔNG VIỆC (JD)</span>
+                <span class="text-xs text-slate-400 font-bold">Mã: ${role.code}</span>
+              </div>
+              <h2 class="text-2xl font-black text-slate-900 mt-1">${role.title}</h2>
+              <div class="flex flex-wrap gap-2 text-xs font-semibold text-slate-500 mt-1">
+                <span>Ngạch: <strong class="text-slate-800">${role.grade}</strong></span> • 
+                <span>Cấp bậc: <strong class="text-slate-800">${role.level}</strong></span> • 
+                <span>BHXH: <strong class="text-slate-800">${role.bhxh}</strong></span>
+              </div>
+            </div>
+            <button onclick="selectRoleInEvaluation('${roleKey}')" class="px-4 py-2 bg-[#0F2756] hover:bg-[#1E3A8A] text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-md shadow-blue-900/20">
+              <span>⚡</span> Chấm Điểm Vị Trí Này
+            </button>
+          </div>
+
+          <!-- Reporting & Purpose -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+              <span class="font-bold text-slate-500 uppercase block mb-1">Cơ Cấu Báo Cáo & Quản Lý:</span>
+              <p class="text-slate-800 font-medium leading-relaxed">${role.reporting}</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+              <span class="font-bold text-slate-500 uppercase block mb-1">Mục Đích Vị Trí (Job Purpose):</span>
+              <p class="text-slate-800 font-medium leading-relaxed">${role.purpose}</p>
+            </div>
+          </div>
+
+          <!-- Key Responsibilities -->
+          <div class="text-xs space-y-2">
+            <h4 class="font-bold text-slate-800 uppercase tracking-wider">Nhiệm Vụ & Trách Nhiệm Cốt Lõi (Key Responsibilities):</h4>
+            <ul class="space-y-2 text-slate-700 leading-relaxed">${respHtml}</ul>
+          </div>
+
+          <!-- Authorities & Decision Rights -->
+          <div class="p-4 bg-blue-50 rounded-xl border border-blue-200 text-xs">
+            <span class="font-bold text-blue-900 uppercase block mb-1">Thẩm Quyền & Quyền Hạn Ra Quyết Định:</span>
+            <p class="text-slate-700 leading-relaxed">${role.authorities}</p>
+          </div>
+
+          <!-- KPIs -->
+          <div class="space-y-2">
+            <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Chỉ Số Đo Lường Hiệu Quả (KPIs):</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">${kpisHtml}</div>
+          </div>
+
+          <!-- Qualifications -->
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+            <span class="font-bold text-slate-500 uppercase block mb-1">Tiêu Chuẩn Bổ Nhiệm & Bằng Cấp (Qualifications):</span>
+            <p class="text-slate-800 leading-relaxed">${role.qualifications}</p>
+          </div>
+        </div>
+
+        <!-- PART B: SHRM BASK COMPETENCY FRAMEWORK -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6">
+          <div class="border-b pb-4">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 bg-purple-100 text-purple-900 text-xs font-black rounded-full">CHUẨN SHRM BASK™</span>
+              <span class="text-xs text-slate-400 font-bold">Thang Đo BARS 5 Cấp Độ</span>
+            </div>
+            <h3 class="text-xl font-black text-slate-900 mt-1">Khung Năng Lực Chuẩn Hóa Riêng Cho ${role.title}</h3>
+            <p class="text-xs text-slate-500">Phân rã theo 4 trụ cột SHRM & Nghiệp vụ Pháp chế Doanh nghiệp Xây dựng</p>
+          </div>
+
+          <!-- 4 Pillars Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">${pillarsHtml}</div>
+
+          <!-- Detailed Criteria List -->
+          <div class="space-y-4">
+            <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Danh Sách Tiêu Chí & Thang Đo Hành Vi BARS:</h4>
+            <div class="space-y-4">${criteriaRows}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectRoleInEvaluation(roleKey) {
+      const emp = MASTER_DATA.employees.find(e => e.roleKey === roleKey);
+      if (emp) {
+        switchTab('eval');
+        document.getElementById("empSelect").value = emp.empCode;
+        onEmployeeSelect(emp.empCode);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alert("Vị trí này hiện đang khuyết nhân sự thực tế. Hệ thống sẽ chuyển đến Tab 2 để bạn đánh giá các cán bộ khác.");
+        switchTab('eval');
+      }
+    }
+
+    // ==========================================
+    // TAB 2: CHẤM ĐIỂM & ĐÁNH GIÁ TƯƠNG TÁC
+    // ==========================================
+    function initEmployeeDropdown() {
+      const select = document.getElementById("empSelect");
+      select.innerHTML = "";
+      
+      MASTER_DATA.employees.forEach(e => {
+        const opt = document.createElement("option");
+        opt.value = e.empCode;
+        opt.innerText = `${e.empCode} — ${e.fullName} (${e.jobTitle} • ${e.grade})`;
+        select.appendChild(opt);
+      });
+      select.value = currentEmpCode;
+    }
+
+    function onEmployeeSelect(empCode) {
+      currentEmpCode = empCode;
+      loadEmployeeEvaluation(empCode);
+    }
+
+    function loadEmployeeEvaluation(empCode) {
+      currentEmployee = MASTER_DATA.employees.find(e => e.empCode === empCode);
+      if (!currentEmployee) return;
+      currentRole = MASTER_DATA.roles[currentEmployee.roleKey];
+      if (!currentRole) return;
+
+      // Update candidate banner
+      document.getElementById("evalCandidateHeader").innerHTML = `
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Họ và Tên</div>
+          <div class="font-black text-slate-900 text-sm">${currentEmployee.fullName}</div>
+        </div>
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Mã Cán Bộ</div>
+          <div class="font-bold text-slate-800">${currentEmployee.empCode}</div>
+        </div>
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Chức Danh Hiện Tại</div>
+          <div class="font-bold text-[#0F2756] truncate" title="${currentEmployee.jobTitle}">${currentEmployee.jobTitle}</div>
+        </div>
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Ngạch Lương / Làn</div>
+          <div class="font-bold text-slate-800">${currentEmployee.grade} • ${currentEmployee.bhxhTrack}</div>
+        </div>
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Ngày Vào / Học Vấn</div>
+          <div class="font-bold text-slate-800">${currentEmployee.joinDate} • ${currentEmployee.degree}</div>
+        </div>
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Địa Điểm Làm Việc</div>
+          <div class="font-bold text-slate-800">${currentEmployee.loc}</div>
+        </div>
+      `;
+
+      document.getElementById("roleBadgeInScoring").innerText = currentRole.title;
+      renderDynamicCriteriaSliders();
+      updateEvaluationUI();
+    }
+
+    function renderDynamicCriteriaSliders() {
+      const container = document.getElementById("dynamicCriteriaContainer");
+      container.innerHTML = "";
+
+      currentRole.criteria.forEach(c => {
+        const currentScore = currentEmployee.scores[c.id] || 3.0;
+        const diff = currentScore - c.benchmark;
+        let diffColor = diff >= 0 ? "text-emerald-700 bg-emerald-50 border-emerald-200" : "text-amber-700 bg-amber-50 border-amber-200";
+
+        const div = document.createElement("div");
+        div.className = "p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5";
+        div.innerHTML = `
+          <div class="flex justify-between items-start gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 bg-[#0F2756] text-white rounded text-[10px] font-black">${c.id}</span>
+                <span class="font-bold text-slate-900 text-xs">${c.name}</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-1">${c.desc}</p>
+            </div>
+            <div class="text-right shrink-0">
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold border ${diffColor}">
+                BM: ${c.benchmark.toFixed(1)}
+              </span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 pt-1">
+            <input type="range" min="1.0" max="5.0" step="0.1" value="${currentScore}" 
+              id="slider-${c.id}" 
+              oninput="onScoreSliderChange('${c.id}', this.value)" 
+              class="w-full h-2 bg-slate-200 rounded-lg cursor-pointer">
+            <span id="score-val-${c.id}" class="w-12 text-center text-sm font-black text-[#0F2756] bg-white px-2 py-1 rounded border border-slate-200">
+              ${currentScore.toFixed(1)}
+            </span>
+          </div>
+
+          <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+            <span>Cấp 1: Chưa đạt</span>
+            <span>Cấp 2: Kèm cặp</span>
+            <span>Cấp 3: Chuẩn tác nghiệp</span>
+            <span>Cấp 4: Thành thạo</span>
+            <span>Cấp 5: Chuyên gia</span>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function onScoreSliderChange(criteriaId, value) {
+      const numVal = parseFloat(value);
+      currentEmployee.scores[criteriaId] = numVal;
+      document.getElementById("score-val-" + criteriaId).innerText = numVal.toFixed(1);
+      updateEvaluationUI();
+    }
+
+    function updateEvaluationUI() {
+      if (!currentEmployee || !currentRole) return;
+
+      const criteria = currentRole.criteria;
+      let totalWeightedScore = 0;
+      let totalWeightedBench = 0;
+      let totalWeight = 0;
+
+      criteria.forEach(c => {
+        const score = currentEmployee.scores[c.id] || 3.0;
+        totalWeightedScore += score * c.weight;
+        totalWeightedBench += c.benchmark * c.weight;
+        totalWeight += c.weight;
+      });
+
+      const avgScore = (totalWeightedScore / totalWeight).toFixed(2);
+      const fitScore = Math.round((totalWeightedScore / totalWeightedBench) * 1000) / 10;
+
+      currentEmployee.avgScore = parseFloat(avgScore);
+      currentEmployee.fitScore = fitScore;
+
+      // Rating classification
+      let ratingClass = "Xuất sắc";
+      let ratingColor = "bg-blue-900";
+      let p2Salary = "Bậc 11 (38.0 tr)";
+
+      if (fitScore >= 94) {
+        ratingClass = "XUẤT SẮC (Cán bộ nòng cốt)";
+        ratingColor = "bg-blue-900";
+        p2Salary = currentEmployee.grade.includes("G4") ? "Bậc 11 (38.0 tr)" : "Bậc 8 (22.0 tr)";
+      } else if (fitScore >= 80) {
+        ratingClass = "ĐẠT CHUẨN BENCHMARK";
+        ratingColor = "bg-emerald-600";
+        p2Salary = currentEmployee.grade.includes("G4") ? "Bậc 9 (28.5 tr)" : "Bậc 6 (16.0 tr)";
+      } else if (fitScore >= 70) {
+        ratingClass = "ĐANG PHÁT TRIỂN (Cần OJT)";
+        ratingColor = "bg-amber-600";
+        p2Salary = "Bậc 4 (11.5 tr)";
+      } else {
+        ratingClass = "THỬ THÁCH / CHƯA ĐẠT";
+        ratingColor = "bg-slate-600";
+        p2Salary = "Bậc 2 (8.5 tr)";
+      }
+
+      currentEmployee.ratingClass = ratingClass;
+      currentEmployee.salaryP2 = p2Salary;
+
+      // Update Top Card Display
+      document.getElementById("fitScoreDisplay").innerText = fitScore.toFixed(1);
+      const badge = document.getElementById("ratingBadge");
+      badge.className = `px-2.5 py-0.5 rounded-full text-white text-[11px] font-bold ${ratingColor}`;
+      badge.innerText = ratingClass;
+      document.getElementById("avgScoreDisplay").innerText = avgScore;
+      document.getElementById("salaryP2Display").innerText = p2Salary;
+
+      // Update Gap Analysis List
+      renderGapAnalysis();
+
+      // Redraw Dynamic SVG Radar Chart
+      drawDynamicRadarChart();
+
+      // Refresh Ranking Table row
+      updateRankingTableRow(currentEmployee.empCode);
+    }
+
+    function renderGapAnalysis() {
+      const container = document.getElementById("gapAnalysisList");
+      container.innerHTML = "";
+
+      const criteria = currentRole.criteria;
+      let gaps = criteria.map(c => {
+        const score = currentEmployee.scores[c.id] || 3.0;
+        return {
+          id: c.id,
+          name: c.name,
+          diff: Math.round((score - c.benchmark) * 10) / 10,
+          score: score,
+          benchmark: c.benchmark
+        };
+      });
+
+      // Sort by gap ascending (biggest negative gaps first)
+      gaps.sort((a, b) => a.diff - b.diff);
+
+      gaps.slice(0, 4).forEach(g => {
+        const isDeficit = g.diff < 0;
+        const color = isDeficit ? "text-amber-800 bg-amber-50 border-amber-200" : "text-emerald-800 bg-emerald-50 border-emerald-200";
+        const icon = isDeficit ? "⚠️ Hổng: " : "⭐ Vượt: ";
+
+        const div = document.createElement("div");
+        div.className = `p-2 rounded-lg border text-[11px] flex justify-between items-center ${color}`;
+        div.innerHTML = `
+          <span class="truncate pr-2"><strong>${g.id}:</strong> ${g.name}</span>
+          <span class="shrink-0 font-black">${icon}${g.diff > 0 ? '+' : ''}${g.diff.toFixed(1)}</span>
+        `;
+        container.appendChild(div);
+      });
+
+      // IDP text
+      const idpBox = document.getElementById("idpRecommendationText");
+      if (currentEmployee.fitScore >= 94) {
+        idpBox.innerHTML = `<strong>Kế hoạch IDP:</strong> Năng lực pháp lý xuất sắc, bản lĩnh tranh tụng và đàm phán hợp đồng vững vàng. Đề xuất quy hoạch lãnh đạo pháp chế cấp cao, tham gia cố vấn trực tiếp các thương vụ M&A và dự án quốc tế của HĐQT.`;
+      } else if (currentEmployee.fitScore >= 80) {
+        idpBox.innerHTML = `<strong>Kế hoạch IDP:</strong> Đạt chuẩn năng lực công việc. Khuyến nghị bồi dưỡng chuyên sâu về Hợp đồng xây dựng quốc tế (FIDIC Rainbow Suite) và kỹ năng tranh tụng Trọng tài VIAC để chuẩn bị nâng bậc lương P2.`;
+      } else {
+        idpBox.innerHTML = `<strong>Kế hoạch IDP:</strong> Kèm cặp 1-kèm-1 theo mô hình EDAC với Trưởng/Phó phòng Pháp chế trong 90 ngày; tập trung vào kỹ năng bóc tách điều khoản rủi ro và thu thập chứng cứ tranh chấp.`;
+      }
+    }
+
+    // Dynamic SVG Radar Chart Generator
+    function drawDynamicRadarChart() {
+      const svg = document.getElementById("radarSvg");
+      svg.innerHTML = "";
+
+      const criteria = currentRole.criteria;
+      const totalPoints = criteria.length;
+      if (totalPoints < 3) return;
+
+      const centerX = 170;
+      const centerY = 160;
+      const radius = 105;
+
+      // Draw concentric background web (5 levels: 1 to 5)
+      for (let level = 1; level <= 5; level++) {
+        const r = (radius / 5) * level;
+        let polyPoints = [];
+        for (let i = 0; i < totalPoints; i++) {
+          const angle = (Math.PI * 2 / totalPoints) * i - (Math.PI / 2);
+          const x = centerX + r * Math.cos(angle);
+          const y = centerY + r * Math.sin(angle);
+          polyPoints.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+        }
+        const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        polygon.setAttribute("points", polyPoints.join(" "));
+        polygon.setAttribute("fill", level % 2 === 0 ? "#F8FAFC" : "#FFFFFF");
+        polygon.setAttribute("stroke", "#E2E8F0");
+        polygon.setAttribute("stroke-width", "1");
+        svg.appendChild(polygon);
+      }
+
+      // Draw axis lines and labels
+      let benchPoints = [];
+      let actualPoints = [];
+
+      criteria.forEach((c, i) => {
+        const angle = (Math.PI * 2 / totalPoints) * i - (Math.PI / 2);
+        const axisX = centerX + radius * Math.cos(angle);
+        const axisY = centerY + radius * Math.sin(angle);
+
+        // Axis line
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", centerX);
+        line.setAttribute("y1", centerY);
+        line.setAttribute("x2", axisX);
+        line.setAttribute("y2", axisY);
+        line.setAttribute("stroke", "#CBD5E1");
+        line.setAttribute("stroke-width", "1");
+        svg.appendChild(line);
+
+        // Label
+        const labelR = radius + 22;
+        const labelX = centerX + labelR * Math.cos(angle);
+        const labelY = centerY + labelR * Math.sin(angle);
+
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", labelX);
+        text.setAttribute("y", labelY + 3);
+        text.setAttribute("font-size", "10");
+        text.setAttribute("font-weight", "bold");
+        text.setAttribute("fill", "#0F2756");
+        text.setAttribute("text-anchor", "middle");
+        text.textContent = c.id;
+        svg.appendChild(text);
+
+        // Benchmark coordinate
+        const bR = (radius / 5) * c.benchmark;
+        const bx = centerX + bR * Math.cos(angle);
+        const by = centerY + bR * Math.sin(angle);
+        benchPoints.push(`${bx.toFixed(1)},${by.toFixed(1)}`);
+
+        // Actual score coordinate
+        const score = currentEmployee.scores[c.id] || 3.0;
+        const aR = (radius / 5) * score;
+        const ax = centerX + aR * Math.cos(angle);
+        const ay = centerY + aR * Math.sin(angle);
+        actualPoints.push(`${ax.toFixed(1)},${ay.toFixed(1)}`);
+      });
+
+      // Draw Benchmark Polygon (Gray dashed line)
+      const benchPoly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+      benchPoly.setAttribute("points", benchPoints.join(" "));
+      benchPoly.setAttribute("fill", "none");
+      benchPoly.setAttribute("stroke", "#64748B");
+      benchPoly.setAttribute("stroke-width", "2");
+      benchPoly.setAttribute("stroke-dasharray", "4,4");
+      svg.appendChild(benchPoly);
+
+      // Draw Actual Score Polygon (Navy Blue semi-transparent)
+      const actualPoly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+      actualPoly.setAttribute("points", actualPoints.join(" "));
+      actualPoly.setAttribute("fill", "rgba(15, 39, 86, 0.35)");
+      actualPoly.setAttribute("stroke", "#0F2756");
+      actualPoly.setAttribute("stroke-width", "2.5");
+      svg.appendChild(actualPoly);
+
+      // Draw point markers on actual scores
+      criteria.forEach((c, i) => {
+        const angle = (Math.PI * 2 / totalPoints) * i - (Math.PI / 2);
+        const score = currentEmployee.scores[c.id] || 3.0;
+        const aR = (radius / 5) * score;
+        const ax = centerX + aR * Math.cos(angle);
+        const ay = centerY + aR * Math.sin(angle);
+
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", ax);
+        circle.setAttribute("cy", ay);
+        circle.setAttribute("r", "3.5");
+        circle.setAttribute("fill", "#0F2756");
+        circle.setAttribute("stroke", "#FFFFFF");
+        circle.setAttribute("stroke-width", "1.5");
+        svg.appendChild(circle);
+      });
+    }
+
+    // Presets
+    function applyPreset(type) {
+      currentRole.criteria.forEach(c => {
+        if (type === 'benchmark') {
+          currentEmployee.scores[c.id] = c.benchmark;
+        } else if (type === 'high') {
+          currentEmployee.scores[c.id] = Math.min(5.0, c.benchmark + 0.3);
+        } else if (type === 'low') {
+          currentEmployee.scores[c.id] = Math.max(1.0, c.benchmark - 0.7);
+        }
+        const slider = document.getElementById("slider-" + c.id);
+        if (slider) slider.value = currentEmployee.scores[c.id];
+        const valSpan = document.getElementById("score-val-" + c.id);
+        if (valSpan) valSpan.innerText = currentEmployee.scores[c.id].toFixed(1);
+      });
+      updateEvaluationUI();
+    }
+
+    function resetCurrentScores() {
+      loadEmployeeEvaluation(currentEmpCode);
+    }
+
+    // ==========================================
+    // TAB 3: MA TRẬN XẾP HẠNG NHÂN SỰ
+    // ==========================================
+    function renderRankingTable() {
+      const tbody = document.getElementById("rankingTableBody");
+      tbody.innerHTML = "";
+
+      // Sort by fitScore descending
+      const sorted = [...MASTER_DATA.employees].sort((a, b) => b.fitScore - a.fitScore);
+
+      sorted.forEach((e, idx) => {
+        let badgeColor = e.fitScore >= 94 ? "bg-blue-100 text-blue-900 border-blue-200" : (e.fitScore >= 80 ? "bg-emerald-100 text-emerald-800 border-emerald-200" : "bg-amber-100 text-amber-800 border-amber-200");
+
+        const tr = document.createElement("tr");
+        tr.id = "ranking-row-" + e.empCode;
+        tr.className = "hover:bg-slate-50 transition";
+        tr.innerHTML = `
+          <td class="p-3 font-bold text-slate-400">${idx + 1}</td>
+          <td class="p-3 font-semibold text-slate-800">${e.empCode}</td>
+          <td class="p-3 font-bold text-slate-900">${e.fullName}</td>
+          <td class="p-3 font-semibold text-slate-700">${e.jobTitle}</td>
+          <td class="p-3">${e.grade}</td>
+          <td class="p-3">${e.bhxhTrack}</td>
+          <td class="p-3 text-center font-bold text-slate-800">${e.avgScore.toFixed(2)}</td>
+          <td class="p-3 text-center font-black text-[#0F2756] text-sm">${e.fitScore.toFixed(1)}%</td>
+          <td class="p-3 text-center">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${badgeColor}">
+              ${e.ratingClass}
+            </span>
+          </td>
+          <td class="p-3 font-bold text-slate-800">${e.salaryP2 || e.p2 || '--'}</td>
+          <td class="p-3 text-center">
+            <button onclick="inspectEmployee('${e.empCode}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-[11px] transition">
+              Đánh Giá &rarr;
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateRankingTableRow(empCode) {
+      const tr = document.getElementById("ranking-row-" + empCode);
+      if (!tr) return;
+      const e = MASTER_DATA.employees.find(emp => emp.empCode === empCode);
+      if (!e) return;
+
+      let badgeColor = e.fitScore >= 94 ? "bg-blue-100 text-blue-900 border-blue-200" : (e.fitScore >= 80 ? "bg-emerald-100 text-emerald-800 border-emerald-200" : "bg-amber-100 text-amber-800 border-amber-200");
+
+      tr.children[6].innerText = e.avgScore.toFixed(2);
+      tr.children[7].innerText = e.fitScore.toFixed(1) + "%";
+      tr.children[8].innerHTML = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${badgeColor}">${e.ratingClass}</span>`;
+      tr.children[9].innerText = e.salaryP2;
+    }
+
+    function filterRankingTable() {
+      const query = document.getElementById("rankingSearchInput").value.toLowerCase();
+      const roleFilter = document.getElementById("rankingRoleFilter").value;
+      const rows = document.querySelectorAll("#rankingTableBody tr");
+
+      rows.forEach(r => {
+        const empCode = r.children[1].innerText.toLowerCase();
+        const fullName = r.children[2].innerText.toLowerCase();
+        const emp = MASTER_DATA.employees.find(e => e.empCode.toLowerCase() === empCode);
+
+        const matchText = empCode.includes(query) || fullName.includes(query);
+        const matchRole = roleFilter === "ALL" || (emp && emp.roleKey === roleFilter);
+
+        if (matchText && matchRole) {
+          r.style.display = "";
+        } else {
+          r.style.display = "none";
+        }
+      });
+    }
+
+    function inspectEmployee(empCode) {
+      switchTab('eval');
+      document.getElementById("empSelect").value = empCode;
+      onEmployeeSelect(empCode);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // PRINT MODAL (A4 CORPORATE PRINTOUT)
+    // ==========================================
+    function openPrintCurrent() {
+      if (!currentEmployee || !currentRole) return;
+
+      document.getElementById("printName").innerText = currentEmployee.fullName;
+      document.getElementById("printEmpCode").innerText = currentEmployee.empCode;
+      document.getElementById("printTitle").innerText = currentEmployee.jobTitle;
+      document.getElementById("printGrade").innerText = `${currentEmployee.grade} • ${currentEmployee.bhxhTrack}`;
+      document.getElementById("printDept").innerText = currentEmployee.dept;
+      document.getElementById("printJoinDate").innerText = `${currentEmployee.joinDate} (${currentEmployee.contractType})`;
+
+      document.getElementById("printOverallScore").innerText = currentEmployee.avgScore.toFixed(2);
+      document.getElementById("printFitScore").innerText = currentEmployee.fitScore.toFixed(1) + "%";
+      document.getElementById("printClass").innerText = currentEmployee.ratingClass;
+      document.getElementById("printSalaryP2").innerText = currentEmployee.salaryP2 || currentEmployee.p2;
+      document.getElementById("printNote").innerText = currentEmployee.note;
+      document.getElementById("signEmpName").innerText = currentEmployee.fullName;
+
+      // Populate Criteria Table for Print
+      const tbody = document.getElementById("printCriteriaTableBody");
+      tbody.innerHTML = "";
+
+      let totalBench = 0;
+      let totalWeight = 0;
+
+      currentRole.criteria.forEach(c => {
+        const score = currentEmployee.scores[c.id] || 3.0;
+        const rate = Math.round((score / c.benchmark) * 100);
+        totalBench += c.benchmark * c.weight;
+        totalWeight += c.weight;
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="p-2.5">
+            <strong>${c.id}:</strong> ${c.name}
+          </td>
+          <td class="p-2.5 text-center">${c.weight}%</td>
+          <td class="p-2.5 text-center font-bold text-blue-900">${score.toFixed(1)}</td>
+          <td class="p-2.5 text-center text-slate-500">${c.benchmark.toFixed(1)}</td>
+          <td class="p-2.5 text-center font-semibold ${rate >= 100 ? 'text-emerald-700' : 'text-amber-700'}">${rate}%</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("printOverallBench").innerText = (totalBench / totalWeight).toFixed(2);
+      document.getElementById("printModal").classList.remove("hidden");
+    }
+
+    function closePrintModal() {
+      document.getElementById("printModal").classList.add("hidden");
+    }
+  </script>
+</body>
+</html>

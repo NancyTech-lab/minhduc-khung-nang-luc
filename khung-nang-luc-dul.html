@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hệ Thống Quản Trị Khung Năng Lực & Đánh Giá Cán Bộ — P.KTTC DUL | Minh Đức Group</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary: #1F4E79;
+      --primary-dark: #153755;
+      --accent: #A7302B;
+      --accent-hover: #8C2621;
+      --bg-card: rgba(255, 255, 255, 0.98);
+      --border-color: #E2E8F0;
+    }
+    .tab-btn-active {
+      border-bottom: 3px solid #A7302B;
+      color: #A7302B;
+      font-weight: 700;
+      background-color: #FEF2F2;
+    }
+    .role-btn-active {
+      background-color: #1F4E79 !important;
+      color: #FFFFFF !important;
+      font-weight: 700;
+      box-shadow: 0 4px 6px -1px rgba(31, 78, 121, 0.3);
+    }
+    input[type=range] {
+      accent-color: #A7302B;
+    }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printModalContent, #printModalContent * {
+        visibility: visible;
+      }
+      #printModalContent {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-800 antialiased p-3 md:p-6 font-sans">
+
+  <!-- TOP HEADER / BRANDING -->
+  <header class="max-w-7xl mx-auto mb-6 bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-4">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#A7302B] to-[#781F1B] flex flex-col items-center justify-center text-white font-black shadow-lg shadow-red-900/20 border-2 border-red-300">
+          <span class="text-xl leading-none">MDG</span>
+          <span class="text-[10px] tracking-widest uppercase opacity-90 mt-0.5">DUL</span>
+        </div>
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-red-100 text-red-800 border border-red-200">CÔNG TY TNHH DỰ ỨNG LỰC MINH ĐỨC</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Phòng Kỹ Thuật Thi Công (P.KTTC)</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">Chuẩn SHRM BASK™ & BARS</span>
+          </div>
+          <h1 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mt-1">
+            HỆ THỐNG QUẢN TRỊ KHUNG NĂNG LỰC & ĐÁNH GIÁ CÁN BỘ P.KTTC
+          </h1>
+          <p class="text-sm text-slate-500 font-medium">
+            Bám sát Mô Tả Công Việc (JD) 8 vị trí • Phân tầng cấp độ Level 2 đến Level 5 • Tích hợp SHRM & Quản lý DTTC • Đánh giá 34 nhân sự
+          </p>
+        </div>
+      </div>
+
+      <!-- Executive Controls & Export -->
+      <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-start lg:justify-end">
+        <div class="text-xs text-slate-500 bg-slate-50 p-2.5 rounded-xl border border-slate-200 leading-relaxed">
+          <div><span class="font-bold text-slate-700">Chủ trì:</span> Ban Nhân sự MDG (<span class="text-red-700 font-semibold">Nancy Thúy</span>)</div>
+          <div><span class="font-bold text-slate-700">Thẩm định:</span> Ban Giám đốc DUL & Trưởng phòng KTTC</div>
+        </div>
+        <button onclick="openPrintCurrent()" class="px-4 py-2.5 bg-[#A7302B] hover:bg-[#8C2621] text-white rounded-xl text-sm font-semibold shadow-md shadow-red-900/20 transition flex items-center gap-2">
+          <span>🖨️</span> In Phiếu Đánh Giá A4
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Quick Stats Bar -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-slate-100">
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+        <div class="text-xs text-slate-400 font-semibold uppercase">Tổng Nhân Sự P.KTTC</div>
+        <div class="text-2xl font-black text-[#1F4E79] mt-0.5">34</div>
+        <div class="text-[11px] text-slate-500">2 VP • 32 Công trường</div>
+      </div>
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+        <div class="text-xs text-slate-400 font-semibold uppercase">Vị Trí Chức Danh</div>
+        <div class="text-2xl font-black text-slate-800 mt-0.5">8</div>
+        <div class="text-[11px] text-slate-500">JD & Barem Chuyên Biệt</div>
+      </div>
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+        <div class="text-xs text-slate-400 font-semibold uppercase">Chuẩn Năng Lực</div>
+        <div class="text-2xl font-black text-blue-800 mt-0.5">SHRM BASK™</div>
+        <div class="text-[11px] text-slate-500">Leadership • Business • Interpersonal</div>
+      </div>
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+        <div class="text-xs text-slate-400 font-semibold uppercase">Tỷ Lệ Đạt Chuẩn (≥80%)</div>
+        <div class="text-2xl font-black text-purple-700 mt-0.5">82.4%</div>
+        <div class="text-[11px] text-slate-500">28/34 Cán bộ vững nghề</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="max-w-7xl mx-auto mb-6 bg-white rounded-2xl p-2 shadow-sm border border-slate-200">
+    <div class="flex flex-wrap gap-2">
+      <button onclick="switchTab('jd-dict')" id="tab-btn-jd-dict" class="px-4 py-2.5 rounded-xl text-sm font-semibold transition tab-btn-active">
+        📋 1. JD & Khung Năng Lực 8 Vị Trí (SHRM)
+      </button>
+      <button onclick="switchTab('eval')" id="tab-btn-eval" class="px-4 py-2.5 rounded-xl text-sm font-semibold transition text-slate-600 hover:bg-slate-50">
+        ⚡ 2. Chấm Điểm & Radar Chart Realtime
+      </button>
+      <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="px-4 py-2.5 rounded-xl text-sm font-semibold transition text-slate-600 hover:bg-slate-50">
+        📊 3. Ma Trận Xếp Hạng 34 Nhân Sự
+      </button>
+      <button onclick="switchTab('compensation')" id="tab-btn-compensation" class="px-4 py-2.5 rounded-xl text-sm font-semibold transition text-slate-600 hover:bg-slate-50">
+        💰 4. Chính Sách Lương 3P & Lộ Trình
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN TAB CONTENT AREA -->
+  <main class="max-w-7xl mx-auto">
+    
+    <!-- ========================================== -->
+    <!-- TAB 1: BẢN MÔ TẢ CÔNG VIỆC (JD) & KHUNG NĂNG LỰC 8 VỊ TRÍ -->
+    <!-- ========================================== -->
+    <section id="tab-jd-dict" class="space-y-6">
+      
+      <!-- Role Selection Pills -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+          Chọn Vị Trí Chức Danh Để Xem Bản Mô Tả Công Việc (JD) & Khung Năng Lực Chuẩn SHRM:
+        </label>
+        <div class="flex flex-wrap gap-2" id="rolePillsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Role JD & Competency Detail View -->
+      <div id="roleDetailContent" class="space-y-6">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: CHẤM ĐIỂM & ĐÁNH GIÁ TƯƠNG TÁC REALTIME -->
+    <!-- ========================================== -->
+    <section id="tab-eval" class="space-y-6 hidden">
+      
+      <!-- Employee Selector Bar -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div class="w-full md:w-1/2">
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+              Chọn Cán Bộ Đánh Giá (34 Cán Bộ Phòng Kỹ Thuật Thi Công):
+            </label>
+            <select id="empSelect" onchange="onEmployeeSelect(this.value)" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
+              <!-- Options populated by JS -->
+            </select>
+          </div>
+
+          <!-- Quick Presets -->
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs font-bold text-slate-400">Thiết lập nhanh:</span>
+            <button onclick="applyPreset('benchmark')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition border border-slate-200">
+              🎯 Đạt Chuẩn (100%)
+            </button>
+            <button onclick="applyPreset('high')" class="px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg text-xs font-semibold transition border border-emerald-200">
+              ⭐ Xuất Sắc (+10%)
+            </button>
+            <button onclick="applyPreset('low')" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-lg text-xs font-semibold transition border border-amber-200">
+              ⚠️ Cần Kèm Cặp (-15%)
+            </button>
+            <button onclick="resetCurrentScores()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition">
+              🔄 Khôi Phục Ban Đầu
+            </button>
+          </div>
+        </div>
+
+        <!-- Real-time Candidate Banner Info -->
+        <div id="evalCandidateHeader" class="mt-4 pt-4 border-t border-slate-100 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 text-xs">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Realtime Scoring & Live Radar Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left: Interactive Scoring Form (Role-specific criteria loaded dynamically) (7 Cols) -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+            <div class="flex items-center justify-between border-b pb-4 mb-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900" id="scoringSectionTitle">
+                  Bảng Chấm Điểm Năng Lực Chuẩn Hóa Theo JD Chức Danh
+                </h3>
+                <p class="text-xs text-slate-500">Bộ tiêu chí được nạp tự động tương ứng chính xác với mô tả công việc của vị trí</p>
+              </div>
+              <span id="roleBadgeInScoring" class="px-3 py-1 bg-red-100 text-red-800 text-xs font-bold rounded-lg border border-red-200">
+                <!-- Role title -->
+              </span>
+            </div>
+
+            <!-- Dynamic Criteria Form Container -->
+            <div id="dynamicCriteriaContainer" class="space-y-6">
+              <!-- Populated by JS based on current employee's role -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Realtime Analytics, SVG Radar Chart & Gap Analysis (5 Cols) -->
+        <div class="lg:col-span-5 space-y-6 sticky top-6">
+          
+          <!-- Overall Fit Score Card -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center relative overflow-hidden">
+            <div class="absolute top-0 right-0 left-0 h-1.5 bg-gradient-to-r from-red-600 via-blue-600 to-emerald-600"></div>
+            
+            <div class="flex justify-between items-center text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">
+              <span>Độ Tương Thích Năng Lực</span>
+              <span id="ratingBadge" class="px-2.5 py-0.5 rounded-full text-white bg-slate-600 font-bold text-[11px]">Chờ Đánh Giá</span>
+            </div>
+
+            <!-- Big Gauge Number -->
+            <div class="flex items-baseline justify-center gap-1 my-2">
+              <span id="fitScoreDisplay" class="text-5xl font-black text-slate-900 tracking-tight">--</span>
+              <span class="text-xl font-bold text-slate-400">%</span>
+            </div>
+
+            <p class="text-xs text-slate-500 font-medium" id="fitScoreSummaryText">
+              Điểm trung bình có trọng số so với chuẩn Benchmark của vị trí
+            </p>
+
+            <!-- Salary P2 Recommendation -->
+            <div class="mt-4 p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-left text-xs">
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500 font-bold">Khuyến nghị Bậc Lương P2:</span>
+                <span id="salaryP2Display" class="font-black text-red-700 text-sm">--</span>
+              </div>
+              <div class="flex justify-between items-center mt-1 text-[11px] text-slate-500">
+                <span>Điểm trung bình (1-5): <strong id="avgScoreDisplay" class="text-slate-800">--</strong></span>
+                <span>Thang bảng lương: <strong>15 Bậc Minh Đức</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic SVG Radar Chart Card -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+            <div class="flex justify-between items-center mb-3">
+              <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                Đa Giác Năng Lực Trực Quan (SVG Radar Chart)
+              </h4>
+              <div class="flex items-center gap-3 text-[10px]">
+                <div class="flex items-center gap-1"><span class="w-3 h-3 bg-red-600 rounded-sm"></span> Thực Tế</div>
+                <div class="flex items-center gap-1"><span class="w-3 h-0.5 bg-slate-400 border border-dashed"></span> Chuẩn BM</div>
+              </div>
+            </div>
+
+            <!-- SVG Radar Canvas -->
+            <div class="flex justify-center items-center py-2" id="radarChartContainer">
+              <svg id="radarSvg" width="340" height="320" viewBox="0 0 340 320" class="overflow-visible">
+                <!-- Drawn by JS -->
+              </svg>
+            </div>
+          </div>
+
+          <!-- Competency Gap Analysis & Action IDP -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-xs">
+            <h4 class="font-bold text-slate-800 uppercase tracking-wider mb-3">
+              Phân Tích Khoảng Cách (Gap Analysis) & Kế Hoạch IDP:
+            </h4>
+            
+            <div id="gapAnalysisList" class="space-y-2 mb-4">
+              <!-- Populated by JS -->
+            </div>
+
+            <div class="p-3 bg-blue-50 rounded-xl border border-blue-200 text-[11px] text-blue-900 leading-relaxed" id="idpRecommendationText">
+              <!-- Recommended training actions -->
+            </div>
+
+            <button onclick="openPrintCurrent()" class="w-full mt-4 py-2.5 bg-slate-900 hover:bg-black text-white rounded-xl font-bold transition flex items-center justify-center gap-2">
+              <span>🖨️</span> Xuất Phiếu Đánh Giá A4 (Bản In)
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: MA TRẬN XẾP HẠNG 34 NHÂN SỰ -->
+    <!-- ========================================== -->
+    <section id="tab-ranking" class="space-y-6 hidden">
+      
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">Bảng Ma Trận Năng Lực & Xếp Hạng 34 Nhân Sự P.KTTC</h2>
+            <p class="text-xs text-slate-500">Dữ liệu đánh giá phân hóa theo từng chức danh, ngạch bậc lương và mức độ đáp ứng chuẩn SHRM</p>
+          </div>
+          
+          <!-- Filters -->
+          <div class="flex flex-wrap items-center gap-3">
+            <input type="text" id="rankingSearchInput" onkeyup="filterRankingTable()" placeholder="🔍 Tìm theo tên hoặc mã NV..." class="px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-red-500">
+            <select id="rankingRoleFilter" onchange="filterRankingTable()" class="px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:outline-none">
+              <option value="ALL">Tất cả chức danh (8 vị trí)</option>
+              <option value="TP_KTTC">Trưởng phòng KTTC (1)</option>
+              <option value="GDDA">Giám đốc Dự án (2)</option>
+              <option value="CHT">Chỉ huy trưởng (2)</option>
+              <option value="CHP">Chỉ huy phó (5)</option>
+              <option value="CBKT_CHINH">Cán bộ Kỹ thuật chính (2)</option>
+              <option value="CBKT">Cán bộ Kỹ thuật (21)</option>
+              <option value="TRO_LY_KTTC">Trợ lý phòng KTTC (1)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50 text-slate-700 font-bold uppercase tracking-wider text-[11px] border-b">
+              <tr>
+                <th class="p-3">STT</th>
+                <th class="p-3">Mã NV</th>
+                <th class="p-3">Họ và Tên</th>
+                <th class="p-3">Chức Danh</th>
+                <th class="p-3">Ngạch</th>
+                <th class="p-3">Làn BHXH</th>
+                <th class="p-3 text-center">Điểm TB</th>
+                <th class="p-3 text-center">Fit Score</th>
+                <th class="p-3 text-center">Xếp Loại</th>
+                <th class="p-3">Lương P2</th>
+                <th class="p-3 text-center">Thao Tác</th>
+              </tr>
+            </thead>
+            <tbody id="rankingTableBody" class="divide-y divide-slate-100">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: LƯƠNG 3P & LỘ TRÌNH THĂNG TIẾN -->
+    <!-- ========================================== -->
+    <section id="tab-compensation" class="space-y-6 hidden">
+      
+      <!-- Thang Bang Luong 15 Bac -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+        <div class="flex items-center gap-3 border-b pb-4 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-[#1F4E79] text-white flex items-center justify-center font-bold text-lg">💰</div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">Thang Bảng Lương 15 Bậc Minh Đức Group (Cải Cách 08/2026)</h2>
+            <p class="text-xs text-slate-500">Cơ chế xác định mức Lương Năng lực P2 dựa trên điểm Fit Score chuẩn SHRM</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs mb-6">
+          <div class="p-3 rounded-xl bg-slate-50 border">
+            <div class="font-bold text-slate-500">BẬC 1 — BẬC 3</div>
+            <div class="text-base font-black text-slate-800 my-0.5">7.5 — 9.5 tr</div>
+            <div class="text-[11px] text-slate-500">Thử việc, Kỹ sư tập sự (Fit &lt; 70%)</div>
+          </div>
+          <div class="p-3 rounded-xl bg-blue-50 border border-blue-200">
+            <div class="font-bold text-blue-700">BẬC 4 — BẬC 6</div>
+            <div class="text-base font-black text-blue-900 my-0.5">11.5 — 16.0 tr</div>
+            <div class="text-[11px] text-blue-700">Kỹ sư hiện trường G5/G6 (Fit 70-85%)</div>
+          </div>
+          <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+            <div class="font-bold text-emerald-700">BẬC 7 — BẬC 8</div>
+            <div class="text-base font-black text-emerald-900 my-0.5">19.5 — 22.0 tr</div>
+            <div class="text-[11px] text-emerald-700">Chỉ huy phó, CBKT chính (Fit 85-89%)</div>
+          </div>
+          <div class="p-3 rounded-xl bg-purple-50 border border-purple-200">
+            <div class="font-bold text-purple-700">BẬC 9 — BẬC 10</div>
+            <div class="text-base font-black text-purple-900 my-0.5">28.5 — 31.5 tr</div>
+            <div class="text-[11px] text-purple-700">Chỉ huy trưởng G4-CT (Fit 90-93%)</div>
+          </div>
+          <div class="p-3 rounded-xl bg-red-50 border-2 border-red-500">
+            <div class="font-bold text-red-700">BẬC 11 — BẬC 15</div>
+            <div class="text-base font-black text-red-900 my-0.5">38.0 — 60.0 tr</div>
+            <div class="text-[11px] text-red-700">GĐDA & Trưởng phòng L5 (Fit ≥ 94%)</div>
+          </div>
+        </div>
+
+        <!-- 3 Lan BHXH & Career Path -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-3">
+            <div class="font-bold text-slate-900 text-sm">Cơ Chế Phân 3 Làn Đóng BHXH Minh Đức:</div>
+            <div class="p-3 bg-red-100 rounded-lg border border-red-200">
+              <div class="font-bold text-red-900">LÀN A — Khối Công Trường (32 nhân sự)</div>
+              <p class="text-slate-600 mt-1">Đóng BHXH theo mức tối thiểu vùng / hệ số pháp lý (5.3 - 8.5 tr). Thu nhập thực nhận thỏa thuận cao (15 - 45 tr) thông qua Lương năng lực P2 và phụ cấp công trường.</p>
+            </div>
+            <div class="p-3 bg-white rounded-lg border border-slate-200">
+              <div class="font-bold text-slate-800">LÀN B — Khối Văn Phòng Trụ Sở (2 nhân sự)</div>
+              <p class="text-slate-600 mt-1">Đóng BHXH theo thu nhập thỏa thuận có tỷ lệ bảo hiểm cao hơn (10 - 25 tr) bảo đảm quyền lợi thai sản, hưu trí.</p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+            <div class="font-bold text-slate-900 text-sm mb-3">Lộ Trình Thăng Tiến 6 Nấc Thang (Career Path):</div>
+            <div class="space-y-2 border-l-2 border-red-300 pl-3">
+              <div><strong class="text-slate-900">Nấc 1:</strong> Kỹ sư Thử thách (G6-CT) &rarr; Fit &ge; 70%</div>
+              <div><strong class="text-slate-900">Nấc 2:</strong> Kỹ sư Hiện trường (G5-CT) &rarr; Fit &ge; 80%</div>
+              <div><strong class="text-slate-900">Nấc 3:</strong> Chỉ huy phó / CBKT chính (G4/G5) &rarr; Fit &ge; 85%</div>
+              <div><strong class="text-red-700">Nấc 4:</strong> Chỉ huy trưởng công trường (G4-CT) &rarr; Fit &ge; 90%</div>
+              <div><strong class="text-purple-700">Nấc 5:</strong> Giám đốc Dự án (G3) &rarr; Fit &ge; 94%</div>
+              <div><strong class="text-amber-800">Nấc 6:</strong> Trưởng phòng KTTC / Giám đốc Kỹ thuật &rarr; Lãnh đạo cấp cao</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PRINT ASSESSMENT MODAL (A4 CORPORATE PRINTOUT) -->
+  <div id="printModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden no-print">
+    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-8 shadow-2xl relative">
+      <button onclick="closePrintModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-black text-xl">✕</button>
+
+      <div id="printModalContent" class="space-y-6 text-slate-900 font-sans p-4">
+        
+        <!-- Corporate Header for Print -->
+        <div class="flex justify-between items-start border-b-2 border-red-800 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-[#A7302B] text-white font-black flex flex-col items-center justify-center rounded-lg">
+              <span class="text-xs">MDG</span>
+              <span class="text-[8px]">DUL</span>
+            </div>
+            <div>
+              <div class="text-[11px] font-bold text-slate-600 uppercase">Tập Đoàn Xây Dựng Minh Đức — DUL</div>
+              <div class="text-base font-black text-slate-900">PHIẾU ĐÁNH GIÁ NĂNG LỰC CÁN BỘ THI CÔNG DỰ ỨNG LỰC</div>
+              <div class="text-xs text-slate-500">Phòng Kỹ Thuật Thi Công • Chuẩn SHRM BASK™ & BARS 5 Cấp Độ</div>
+            </div>
+          </div>
+          <div class="text-right text-xs text-slate-500">
+            <div>Mẫu số: <span class="font-bold text-slate-700">MDG-HR-DUL-01</span></div>
+            <div>Kỳ đánh giá: <span class="font-bold text-slate-700">Năm 2026</span></div>
+          </div>
+        </div>
+
+        <!-- Candidate Profile Info -->
+        <div class="grid grid-cols-2 gap-4 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <div><span class="text-slate-500 font-bold">Họ và tên:</span> <span class="font-black text-sm text-slate-900" id="printName">--</span></div>
+          <div><span class="text-slate-500 font-bold">Mã nhân sự:</span> <span class="font-bold text-slate-800" id="printEmpCode">--</span></div>
+          <div><span class="text-slate-500 font-bold">Vị trí chức danh:</span> <span class="font-bold text-slate-800" id="printTitle">--</span></div>
+          <div><span class="text-slate-500 font-bold">Ngạch lương / Làn BHXH:</span> <span class="font-bold text-slate-800" id="printGrade">--</span></div>
+          <div><span class="text-slate-500 font-bold">Đơn vị công tác:</span> <span class="font-bold text-slate-800" id="printDept">--</span></div>
+          <div><span class="text-slate-500 font-bold">Ngày vào làm / HĐ:</span> <span class="font-bold text-slate-800" id="printJoinDate">--</span></div>
+        </div>
+
+        <!-- Role-Specific Criteria Evaluation Table -->
+        <div class="border rounded-xl overflow-hidden text-xs">
+          <table class="w-full text-left">
+            <thead class="bg-slate-100 text-slate-700 font-bold">
+              <tr>
+                <th class="p-2.5">Tiêu Chí Năng Lực (Theo JD Vị Trí)</th>
+                <th class="p-2.5 text-center">Trọng Số</th>
+                <th class="p-2.5 text-center">Điểm Đạt (1-5)</th>
+                <th class="p-2.5 text-center">Điểm Chuẩn (1-5)</th>
+                <th class="p-2.5 text-center">Tỷ Lệ Đạt (%)</th>
+              </tr>
+            </thead>
+            <tbody id="printCriteriaTableBody" class="divide-y divide-slate-100">
+              <!-- Populated by JS based on current employee's specific criteria -->
+            </tbody>
+            <tfoot>
+              <tr class="bg-slate-50 font-black text-sm border-t-2 border-slate-300">
+                <td class="p-3 text-slate-900">TỔNG ĐIỂM FIT SCORE TOÀN DIỆN</td>
+                <td class="p-3 text-center">100%</td>
+                <td class="p-3 text-center text-red-700" id="printOverallScore">--</td>
+                <td class="p-3 text-center" id="printOverallBench">--</td>
+                <td class="p-3 text-center text-red-700 text-base" id="printFitScore">--%</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- Evaluation Conclusion & Recommendation -->
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-2">
+          <div><strong>Xếp loại năng lực:</strong> <span class="font-black text-red-700 text-sm" id="printClass">--</span></div>
+          <div><strong>Khuyến nghị mức lương P2:</strong> <span class="font-bold text-slate-900" id="printSalaryP2">--</span></div>
+          <div><strong>Nhận xét & Kế hoạch phát triển IDP:</strong> <span class="italic text-slate-600" id="printNote">--</span></div>
+        </div>
+
+        <!-- 4 Signature Blocks -->
+        <div class="grid grid-cols-4 gap-4 text-center text-xs pt-8">
+          <div>
+            <div class="font-bold text-slate-800">CÁN BỘ ĐÁNH GIÁ</div>
+            <div class="text-[10px] text-slate-400 italic mb-12">(Ký và ghi rõ họ tên)</div>
+            <div class="font-bold text-slate-900" id="signEmpName">--</div>
+          </div>
+          <div>
+            <div class="font-bold text-slate-800">TRƯỞNG PHÒNG KTTC</div>
+            <div class="text-[10px] text-slate-400 italic mb-12">(Ký và duyệt)</div>
+            <div class="font-bold text-slate-900">Trần Văn Huy</div>
+          </div>
+          <div>
+            <div class="font-bold text-slate-800">GIÁM ĐỐC NHÂN SỰ</div>
+            <div class="text-[10px] text-slate-400 italic mb-12">(Thẩm định & xếp lương)</div>
+            <div class="font-bold text-slate-900">Nancy (Trần Thị Thu Thủy)</div>
+          </div>
+          <div>
+            <div class="font-bold text-slate-800">BAN TỔNG GIÁM ĐỐC</div>
+            <div class="text-[10px] text-slate-400 italic mb-12">(Phê duyệt chính thức)</div>
+            <div class="font-bold text-slate-900">Trần Đại Nghĩa</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="mt-6 pt-4 border-t flex justify-end gap-3 no-print">
+        <button onclick="closePrintModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold">Đóng</button>
+        <button onclick="window.print()" class="px-5 py-2 bg-[#A7302B] hover:bg-[#8C2621] text-white rounded-xl text-xs font-bold shadow-md flex items-center gap-1.5">
+          <span>🖨️</span> Xác Nhận In Phiếu (A4)
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EMBEDDED MASTER DATA & INTERACTIVE JAVASCRIPT ENGINE -->
+  <script>
+    const MASTER_DATA = {"roles": {"TP_KTTC": {"title": "Trưởng phòng Kỹ thuật Thi công", "code": "TP_KTTC", "grade": "G4-VM / G3", "level": "L5 - Quản lý Cấp cao / Giám đốc Chức năng", "bhxh": "Làn B (Văn phòng / Quản lý Trụ sở)", "reporting": "Báo cáo: Ban Tổng Giám đốc (TGĐ & Giám đốc Khối Xây dựng) | Quản lý trực tiếp: Phó phòng, các GĐDA, CHT, CHP, CBKT, Trợ lý (33 nhân sự)", "purpose": "Lãnh đạo toàn diện hoạt động kỹ thuật, an toàn và thi công cáp dự ứng lực trên toàn bộ các công trình của DUL; chịu trách nhiệm trước Ban TGĐ về năng lực thi công, uy tín công nghệ và hiệu quả chi phí P&L của Phòng KTTC.", "responsibilities": ["Hoạch định chiến lược công nghệ thi công cáp DUL & phát triển năng lực nhà thầu chuyên nghiệp toàn quốc.", "Thẩm định, phê duyệt biện pháp thi công (BPTC) đặc biệt và kiểm soát tiến độ tổng thể danh mục dự án.", "Kiểm soát ngân sách dự toán thi công (DTTC), định mức hao hụt cáp thép/neo và rủi ro tài chính vĩ mô.", "Xây dựng, chuẩn hóa quy trình kỹ thuật, hệ thống hồ sơ QA/QC và kiểm soát an toàn lao động HSE.", "Quy hoạch, đào tạo, đánh giá và phát triển đội ngũ chỉ huy công trường (GĐDA, CHT, CHP, CBKT) kế thừa.", "Tham mưu đối ngoại kỹ thuật cấp cao với Chủ đầu tư, Tư vấn giám sát và các đối tác chiến lược."], "authorities": "Phê duyệt BPTC nội bộ trước khi trình CĐT; Phân công bổ nhiệm Chỉ huy trưởng/Chỉ huy phó các dự án; Phê duyệt đề xuất điều động thiết bị kích kéo/trạm bơm; Ký duyệt tờ trình thanh toán thầu phụ và thưởng phạt cán bộ công trường.", "kpis": [{"name": "Tiến độ & An toàn danh mục", "target": "≥ 95% dự án đạt tiến độ cam kết & 0 tai nạn nặng", "weight": "30%"}, {"name": "Biên lợi nhuận gộp P.KTTC", "target": "≥ 9.73% doanh thu (bảo vệ DTTC)", "weight": "30%"}, {"name": "Hao hụt vật tư cáp thép", "target": "≤ 1.2% toàn công ty (định mức thầu 1.5%)", "weight": "20%"}, {"name": "Tỷ lệ chuẩn hóa năng lực", "target": "≥ 85% cán bộ đạt chuẩn Benchmark BARS", "weight": "20%"}], "qualifications": "Kỹ sư Cầu đường / Xây dựng Dân dụng (Đại học chính quy trở lên); Tối thiểu 10 năm kinh nghiệm thi công DUL, trong đó 5 năm ở cấp Quản lý/CHT/GĐDA; Chứng chỉ Hành nghề TVGS Hạng I / Chỉ huy trưởng Hạng I; có kiến thức về quản trị nhân sự và quản trị tài chính.", "pillars": [{"name": "Lãnh Đạo Chiến Lược & Định Hướng (SHRM Leadership)", "weight": 30, "color": "text-purple-700 bg-purple-50 border-purple-200"}, {"name": "Tư Duy Kinh Doanh & Quản Trị DTTC (SHRM Business)", "weight": 30, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Tham Vấn Cấp Cao & Đối Ngoại (SHRM Interpersonal)", "weight": 20, "color": "text-blue-700 bg-blue-50 border-blue-200"}, {"name": "Làm Chủ Công Nghệ & Tiêu Chuẩn Kỹ Thuật (Technical)", "weight": 20, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}], "criteria": [{"id": "TP_L1", "pillar": "Lãnh Đạo Chiến Lược (SHRM Leadership)", "name": "Hoạch Định Chiến Lược Thi Công & Điều Hướng Tổ Chức (SHRM Leadership & Navigation)", "weight": 15, "benchmark": 5.0, "desc": "Xây dựng tầm nhìn kỹ thuật dài hạn, thiết lập mục tiêu chiến lược P.KTTC gắn kết với mục tiêu P&L Tập đoàn; điều hướng tổ chức thích ứng với biến động thị trường xây dựng.", "bars": {"1": "Chỉ làm việc sự vụ hàng ngày, không có kế hoạch trung hạn cho phòng KTTC.", "2": "Lập kế hoạch tuần/tháng bị động, chưa gắn kết mục tiêu phòng với chiến lược công ty.", "3": "Hoạch định tốt kế hoạch thi công năm, phân bổ nguồn lực kỹ sư và thiết bị hợp lý cho các dự án.", "4": "Dự báo chính xác rủi ro thi công dài hạn, chủ động điều phối nguồn lực đa dự án linh hoạt.", "5": "Định hình chiến lược công nghệ thi công DUL đón đầu xu thế, dẫn dắt đổi mới mô hình quản trị dự án toàn Tập đoàn."}, "method": "Thẩm định Kế hoạch năm của Phòng, Tỷ lệ hoàn thành mục tiêu chiến lược"}, {"id": "TP_L2", "pillar": "Lãnh Đạo Chiến Lược (SHRM Leadership)", "name": "Đạo Đức Nghề Nghiệp, Quản Trị Rủi Ro & Thượng Tôn Pháp Luật (SHRM Ethical Practice)", "weight": 15, "benchmark": 5.0, "desc": "Thiết lập chuẩn mực liêm chính, bảo vệ bí mật công nghệ, phòng ngừa gian lận khối lượng và kiểm soát rủi ro pháp lý hợp đồng xây dựng.", "bars": {"1": "Thiếu kiểm soát tính chính xác của hồ sơ nghiệm thu, để xảy ra rủi ro pháp lý.", "2": "Biết quy định nhưng chưa có cơ chế giám sát liêm chính hiện trường chặt chẽ.", "3": "Thực hiện nghiêm túc quy chuẩn đạo đức nghề nghiệp, kiểm tra chéo số liệu nghiệm thu định kỳ.", "4": "Xây dựng văn hóa minh bạch, xử lý kiên quyết các hiện tượng tiêu cực thất thoát vật tư cáp thép.", "5": "Hình mẫu chuẩn mực về đạo đức nghề nghiệp; xây dựng hệ thống kiểm soát nội bộ kỹ thuật tuyệt đối tin cậy."}, "method": "Audit nội bộ, Biên bản kiểm tra tuân thủ pháp lý & đạo đức"}, {"id": "TP_B1", "pillar": "Tư Duy Kinh Doanh & Quản Trị DTTC (SHRM Business)", "name": "Quản Trị Dự Toán Thi Công (DTTC) & Bảo Vệ Biên Lợi Nhuận Gộp (SHRM Business Acumen)", "weight": 15, "benchmark": 5.0, "desc": "Nắm vững cấu trúc chi phí dự án, phê duyệt ngân sách DTTC, kiểm soát hao hụt vật tư cáp/neo và tối ưu hóa biên lợi nhuận gộp (≥ 9.73%).", "bars": {"1": "Chỉ quan tâm tiến độ kỹ thuật, không nắm được số liệu doanh thu và chi phí dự án.", "2": "Nắm được tổng chi phí nhưng không kiểm soát được các yếu tố phát sinh chi phí lán trại và ca máy.", "3": "Kiểm soát tốt ngân sách DTTC các dự án, chỉ đạo xử lý kịp thời các dự án có nguy cơ vượt định mức.", "4": "Tối ưu hóa chi phí đa dự án, cân đối dòng tiền thi công và định mức vật tư đạt hiệu quả cao.", "5": "Chuyên gia tài chính dự án xây dựng; kiến tạo các giải pháp kỹ thuật mang lại biên lợi nhuận đột phá cho công ty."}, "method": "Báo cáo P&L P.KTTC, Báo cáo kiểm soát DTTC thực tế vs kế hoạch"}, {"id": "TP_B2", "pillar": "Tư Duy Kinh Doanh & Quản Trị DTTC (SHRM Business)", "name": "Năng Lực Phân Tích Dữ Liệu & Ra Quyết Định Kỹ Thuật Trọng Yếu (SHRM Analytical Aptitude)", "weight": 15, "benchmark": 5.0, "desc": "Phân tích nguyên nhân gốc rễ (RCA) các sai lệch kỹ thuật, đánh giá rủi ro địa tầng/kết cấu và ra quyết định dứt khoát bảo vệ an toàn công trình.", "bars": {"1": "Đánh giá sự cố cảm tính, ra quyết định chậm trễ gây đình trệ công trường.", "2": "Phân tích được sự cố cơ bản nhưng cần trợ giúp từ chuyên gia bên ngoài đối với sự cố phức tạp.", "3": "Phân tích chính xác nguyên nhân sai lệch kỹ thuật và đưa ra quyết định xử lý dứt khoát, an toàn.", "4": "Mô hình hóa dữ liệu đo dãn dài cáp và áp lực bơm dầu đa công trường để phòng ngừa sự cố từ sớm.", "5": "Đưa ra các quyết định kỹ thuật cấp cao mang tính định hình chuẩn mực xử lý sự cố cho toàn ngành DUL."}, "method": "Hồ sơ xử lý sự cố kỹ thuật phức tạp, Đánh giá từ Ban Cố vấn"}, {"id": "TP_I1", "pillar": "Tham Vấn Cấp Cao & Đối Ngoại (SHRM Interpersonal)", "name": "Tham Vấn Chiến Lược Cho Ban TGĐ & Đối Tác Cấp Cao (SHRM Consultation)", "weight": 10, "benchmark": 5.0, "desc": "Đóng vai trò cố vấn công nghệ hàng đầu cho Ban TGĐ; tư vấn giải pháp kỹ thuật vượt trội thuyết phục Chủ đầu tư lớn (Vingroup, Masterise, Sungroup...).", "bars": {"1": "Bị động trả lời khi được hỏi, chưa chủ động tham mưu giải pháp cho Ban TGĐ.", "2": "Tham mưu được các vấn đề kỹ thuật đơn giản, còn lúng túng trước các đề bài hóc búa của CĐT.", "3": "Tham mưu hiệu quả các giải pháp biện pháp thi công tối ưu cho Ban TGĐ và bảo vệ thành công trước TVGS.", "4": "Cố vấn xuất sắc, chuyển hóa các thách thức kỹ thuật phức tạp thành lợi thế thương mại đấu thầu của công ty.", "5": "Đối tác tham vấn chiến lược không thể thay thế của Ban TGĐ; tạo niềm tin tuyệt đối với các Chủ đầu tư lớn nhất."}, "method": "Biên bản làm việc với CĐT lớn, Đánh giá 360 độ từ Ban TGĐ"}, {"id": "TP_I2", "pillar": "Tham Vấn Cấp Cao & Đối Ngoại (SHRM Interpersonal)", "name": "Phát Triển Đội Ngũ Kế Thừa & Dẫn Dắt Thay Đổi (SHRM People Development & EDAC)", "weight": 10, "benchmark": 5.0, "desc": "Quy hoạch nhân sự kế thừa (Succession Planning), huấn luyện kèm cặp đội ngũ chỉ huy công trường (CHT, CHP, CBKT) theo mô hình EDAC; dẫn dắt chuyển đổi số.", "bars": {"1": "Không quan tâm đào tạo cấp dưới, tình trạng thiếu hụt cán bộ chỉ huy khi mở dự án mới.", "2": "Chỉ đào tạo khi có sự cố, chưa có lộ trình kèm cặp bài bản cho kỹ sư trẻ.", "3": "Tổ chức đào tạo nội bộ định kỳ, phân công kèm cặp OJT rõ ràng và đánh giá công tâm theo chuẩn ASK.", "4": "Xây dựng thành công đội ngũ CHT/CHP kế cận vững vàng, sẵn sàng tiếp quản các đại dự án độc lập.", "5": "Kiến tạo văn hóa học tập liên tục; là bậc thầy truyền cảm hứng và ươm mầm tài năng kỹ thuật cho Tập đoàn."}, "method": "Tỷ lệ thăng tiến nội bộ, Khảo sát mức độ gắn kết đội ngũ P.KTTC"}, {"id": "TP_T1", "pillar": "Làm Chủ Công Nghệ & Tiêu Chuẩn Kỹ Thuật (Technical)", "name": "Thẩm Định & Phê Duyệt Biện Pháp Thi Công (BPTC) Đột Phá (Technical Mastery)", "weight": 10, "benchmark": 5.0, "desc": "Làm chủ công nghệ cáp dự ứng lực căng trước/sau, khoan neo đất đa tầng; phê duyệt các giải pháp BPTC rút ngắn tiến độ và tiết kiệm chi phí.", "bars": {"1": "Duyệt BPTC theo lối mòn, không phát hiện được sai sót trong hồ sơ thiết kế shop drawing.", "2": "Nắm vững BPTC thông thường nhưng chưa có giải pháp tối ưu cho điều kiện mặt bằng khó khăn.", "3": "Thẩm định chặt chẽ, phê duyệt BPTC khoa học, tối ưu hóa công năng thiết bị kích kéo và an toàn.", "4": "Đề xuất nhiều cải tiến BPTC đột phá, rút ngắn 10-15% thời gian chu kỳ sàn bê tông DUL.", "5": "Chuyên gia đầu ngành về công nghệ cáp DUL; chủ trì các công trình kỷ lục về khẩu độ và tải trọng kết cấu."}, "method": "Hồ sơ BPTC được duyệt, Báo cáo cải tiến chu kỳ thi công"}, {"id": "TP_T2", "pillar": "Làm Chủ Công Nghệ & Tiêu Chuẩn Kỹ Thuật (Technical)", "name": "Định Hình Tiêu Chuẩn Kỹ Thuật & Công Nghệ Cáp DUL Toàn Quốc (Innovation & Standards)", "weight": 10, "benchmark": 5.0, "desc": "Cập nhật và áp dụng các tiêu chuẩn quốc tế (ASTM, BS, Eurocode, ACI, fib); chuẩn hóa sổ tay kỹ thuật DUL và ứng dụng vật liệu neo/cáp mới.", "bars": {"1": "Chỉ áp dụng tiêu chuẩn cũ, chậm cập nhật quy chuẩn và công nghệ vật liệu mới.", "2": "Biết tiêu chuẩn mới nhưng chưa áp dụng thực tế vào quy trình kiểm soát của phòng.", "3": "Áp dụng thuần thục các tiêu chuẩn TCVN và quốc tế vào quy trình nghiệm thu chất lượng công trường.", "4": "Chủ trì biên soạn Sổ tay Kỹ thuật Thi công DUL chuẩn hóa áp dụng thống nhất toàn Tập đoàn.", "5": "Đại diện công ty tham gia đóng góp xây dựng tiêu chuẩn ngành; tiên phong chuyển giao công nghệ mới."}, "method": "Sổ tay quy chuẩn kỹ thuật DUL ban hành, Báo cáo nghiên cứu R&D"}]}, "GDDA": {"title": "Giám đốc Dự án (Project Director)", "code": "GDDA", "grade": "G3", "level": "L5 - Quản lý Cấp cao Hiện trường", "bhxh": "Làn A (Công trường / Dự án)", "reporting": "Báo cáo: Ban Giám đốc DUL / Trưởng phòng KTTC | Quản lý trực tiếp: Ban Chỉ huy công trường (CHT, CHP, CBKT), các nhà thầu phụ tại dự án", "purpose": "Toàn quyền quản trị điều hành đại dự án thi công cáp DUL từ khởi động đến quyết toán; chịu trách nhiệm toàn diện về P&L dự án, tiến độ cam kết, an toàn tuyệt đối và thỏa mãn Chủ đầu tư.", "responsibilities": ["Lập và kiểm soát tổng tiến độ thi công dự án (Master Schedule), điều phối tối ưu các mũi thi công cáp DUL.", "Quản trị dự toán thi công (DTTC), chịu trách nhiệm trực tiếp trước Ban TGĐ về biên lợi nhuận gộp của dự án.", "Đại diện cao nhất tại dự án đàm phán hợp đồng, bảo vệ khối lượng phát sinh và giải quyết tranh chấp với CĐT/TVGS.", "Điều hành và phân bổ nguồn lực máy móc trạm bơm/kích kéo, nhân lực kỹ sư và nhà thầu phụ.", "Đôn đốc nghiệm thu thanh toán theo giai đoạn và thu hồi công nợ theo đúng kế hoạch dòng tiền."], "authorities": "Ký nghiệm thu thanh toán A-B với CĐT/TVGS; Ký hợp đồng giao khoán tổ đội/thầu phụ trong hạn mức; Quyết định điều động nhân sự nội bộ dự án; Phê duyệt chi phí hiện trường trong hạn mức DTTC.", "kpis": [{"name": "Tổng tiến độ & Mốc bàn giao", "target": "100% đạt mốc Milestone cam kết với CĐT", "weight": "35%"}, {"name": "Biên lợi nhuận gộp dự án", "target": "≥ 100% theo DTTC được Ban TGĐ phê duyệt", "weight": "30%"}, {"name": "Thu hồi công nợ dự án", "target": "≥ 90% nợ đến hạn trong kỳ thanh toán", "weight": "20%"}, {"name": "An toàn & Sự cố kỹ thuật", "target": "0 sự cố kỹ thuật nghiêm trọng & 0 sự cố HSE", "weight": "15%"}], "qualifications": "Kỹ sư Xây dựng/Cầu đường (Đại học); Tối thiểu 8 năm kinh nghiệm chỉ huy công trường DUL quy mô lớn; Chứng chỉ Hành nghề Quản lý Dự án Hạng I / CHT Hạng I; Kỹ năng đàm phán hợp đồng và làm chủ tài chính dự án.", "pillars": [{"name": "Quản Trị P&L & Dự Toán DTTC (SHRM Business)", "weight": 35, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Lãnh Đạo & Điều Hành Dự Án (SHRM Leadership)", "weight": 25, "color": "text-purple-700 bg-purple-50 border-purple-200"}, {"name": "Đàm Phán CĐT & Quản Trị Hợp Đồng (SHRM Interpersonal)", "weight": 20, "color": "text-blue-700 bg-blue-50 border-blue-200"}, {"name": "Kỹ Thuật Thi Công & Rủi Ro Dự Án (Technical)", "weight": 20, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}], "criteria": [{"id": "GD_B1", "pillar": "Quản Trị P&L & Dự Toán DTTC (SHRM Business)", "name": "Kiểm Soát Dự Toán Thi Công (DTTC) & P&L Dự Án (Business Acumen)", "weight": 20, "benchmark": 5.0, "desc": "Lập và bám sát dự toán DTTC, kiểm soát chi phí nhân công, ca máy, lán trại và hao hụt cáp thép/neo đảm bảo biên lợi nhuận mục tiêu.", "bars": {"1": "Để dự án vượt ngân sách dự toán nghiêm trọng mà không báo cáo giải trình kịp thời.", "2": "Chỉ nắm chi phí khi kế toán thông báo, bị động trong việc kiểm soát các khoản chi phí phát sinh.", "3": "Kiểm soát chi phí chặt chẽ theo tuần, bám sát các hạng mục DTTC, đảm bảo biên gộp đạt kế hoạch.", "4": "Chủ động tối ưu hóa chi phí thi công, tiết giảm 3-5% chi phí vận hành mà vẫn đảm bảo chất lượng vượt trội.", "5": "Quản trị P&L xuất sắc; biến dự án thành hình mẫu về hiệu quả tài chính và quản trị dòng tiền của công ty."}, "method": "Báo cáo P&L dự án hàng tháng, Bảng đối soát DTTC chi tiết"}, {"id": "GD_B2", "pillar": "Quản Trị P&L & Dự Toán DTTC (SHRM Business)", "name": "Quản Lý Dòng Tiền & Thu Hồi Công Nợ Hợp Đồng (Cash Flow Governance)", "weight": 15, "benchmark": 5.0, "desc": "Thúc đẩy hồ sơ thanh toán từng đợt, gắn kết nghiệm thu kỹ thuật với thu hồi tiền mặt thực tế, giải quyết dứt điểm nợ đọng công trình.", "bars": {"1": "Để hồ sơ thanh toán tồn đọng nhiều tháng, công nợ khó đòi tăng cao gây áp lực dòng tiền.", "2": "Có làm hồ sơ thanh toán nhưng thụ động chờ Chủ đầu tư giải ngân, chậm xử lý các vướng mắc chứng từ.", "3": "Bám sát tiến độ giải ngân của CĐT, thu hồi tiền đạt trên 85% kế hoạch dòng tiền từng giai đoạn.", "4": "Đàm phán xuất sắc các điều khoản tạm ứng và thanh toán nhanh; thu hồi nợ đạt trên 95% mốc hợp đồng.", "5": "Bảo vệ dòng tiền dự án hoàn hảo; không để xảy ra bất kỳ khoản nợ xấu hoặc trễ hạn thanh toán nào."}, "method": "Báo cáo tuổi nợ dự án, Tiến độ thu tiền mặt thực tế vào tài khoản"}, {"id": "GD_L1", "pillar": "Lãnh Đạo & Điều Hành Dự Án (SHRM Leadership)", "name": "Lãnh Đạo Ban Chỉ Huy & Điều Phối Mũi Thi Công Quy Mô Lớn (Leadership & Navigation)", "weight": 15, "benchmark": 5.0, "desc": "Dẫn dắt toàn thể Ban chỉ huy công trường, phân công nhiệm vụ minh bạch cho CHT/CHP, tạo động lực làm việc và giải quyết khủng hoảng.", "bars": {"1": "Không kiểm soát được Ban chỉ huy, nội bộ chia rẽ, công trường lộn xộn mất an toàn.", "2": "Chỉ đạo độc đoán hoặc thiếu kiên quyết, chưa khơi dậy được tinh thần trách nhiệm của đội ngũ.", "3": "Tổ chức bộ máy Ban chỉ huy khoa học, phân công rõ người rõ việc, duy trì kỷ luật thép trên công trường.", "4": "Truyền cảm hứng và gắn kết mạnh mẽ các tổ đội; xử lý linh hoạt và dập tắt khủng hoảng tiến độ nhanh gọn.", "5": "Thủ lĩnh kiệt xuất; xây dựng đội ngũ công trường tinh nhuệ, sẵn sàng chinh phục mọi kỷ lục tiến độ."}, "method": "Khảo sát ý kiến nhân viên Ban chỉ huy, Đánh giá hiệu suất điều hành"}, {"id": "GD_L2", "pillar": "Lãnh Đạo & Điều Hành Dự Án (SHRM Leadership)", "name": "Chính Trực, Tuân Thủ Hợp Đồng & Chống Gian Lận Khối Lượng (Ethical Practice)", "weight": 10, "benchmark": 5.0, "desc": "Đảm bảo tính trung thực tuyệt đối trong hồ sơ hoàn công và nghiệm thu; kiên quyết ngăn ngừa tiêu cực, thông đồng thầu phụ.", "bars": {"1": "Có biểu hiện nể nang, buông lỏng quản lý để thầu phụ gian lận vật tư hoặc chất lượng.", "2": "Chưa kiểm tra sâu các số liệu nghiệm thu, dễ bị qua mặt ở các khâu nghiệm thu trung gian.", "3": "Tuyệt đối liêm chính, kiểm tra độc lập các số liệu thanh toán thầu phụ và nghiệm thu A-B.", "4": "Thiết lập hệ thống kiểm soát chống thất thoát vật tư và gian lận khối lượng cực kỳ hiệu quả.", "5": "Biểu tượng của sự chính trực; tạo dựng uy tín minh bạch tuyệt đối của thương hiệu Minh Đức với CĐT."}, "method": "Kết quả thanh tra nội bộ, Nhật ký kiểm soát khối lượng"}, {"id": "GD_I1", "pillar": "Đàm Phán CĐT & Quản Trị Hợp Đồng (SHRM Interpersonal)", "name": "Đàm Phán Cấp Cao & Quản Trị Xung Đột Hợp Đồng (Relationship & Negotiation)", "weight": 10, "benchmark": 5.0, "desc": "Thương thảo các điều khoản phụ lục hợp đồng, giải quyết hài hòa xung đột quyền lợi với TVGS và Ban QLDA Chủ đầu tư.", "bars": {"1": "Giao tiếp đối đầu, gây căng thẳng với CĐT/TVGS làm đình trệ công việc.", "2": "Nhượng bộ quá mức khiến công ty chịu thiệt thòi về khối lượng và đơn giá phát sinh.", "3": "Đàm phán chuyên nghiệp, bảo vệ vững chắc quyền lợi hợp đồng của công ty trên cơ sở tôn trọng đối tác.", "4": "Hóa giải khéo léo các xung đột phức tạp; biến quan hệ đối đầu thành hợp tác chiến lược cùng thắng.", "5": "Bậc thầy đàm phán; bảo vệ thành công 100% các giá trị phát sinh hợp đồng có lợi nhất cho công ty."}, "method": "Biên bản đàm phán hợp đồng, Giá trị phát sinh được phê duyệt"}, {"id": "GD_I2", "pillar": "Đàm Phán CĐT & Quản Trị Hợp Đồng (SHRM Interpersonal)", "name": "Kèm Cặp & Phát Triển Chỉ Huy Trưởng / Chỉ Huy Phó (People Coaching)", "weight": 10, "benchmark": 4.5, "desc": "Chuyển giao kinh nghiệm điều hành và quản trị chi phí cho các CHT/CHP thông qua thực chiến công trường.", "bars": {"1": "Ôm đồm công việc, không tin tưởng và không hướng dẫn cho cấp phó.", "2": "Giao việc nhưng không kiểm tra, chỉ trích khi cấp dưới làm sai thay vì chỉ dẫn.", "3": "Ủy quyền hợp lý, thường xuyên kèm cặp CHT/CHP về kỹ năng làm việc với TVGS và quản lý chi phí.", "4": "Đào tạo thành công các CHT độc lập tác nghiệp vững vàng tại các công trình lớn tiếp theo.", "5": "Là người thầy thực chiến vĩ đại của đội ngũ cán bộ thi công Minh Đức."}, "method": "Mức độ trưởng thành của các CHT dưới quyền, Đánh giá OJT"}, {"id": "GD_T1", "pillar": "Kỹ Thuật Thi Công & Rủi Ro Dự Án (Technical)", "name": "Quản Trị Biện Pháp Thi Công Phức Tạp & Rủi Ro Địa Tầng (Technical Governance)", "weight": 10, "benchmark": 5.0, "desc": "Nắm vững biện pháp thi công cáp DUL dầm sàn khẩu độ lớn, cọc neo đất; lường trước rủi ro sụt lún, đứt cáp và đưa ra giải pháp phòng ngừa.", "bars": {"1": "Không hiểu sâu kỹ thuật, phó mặc hoàn toàn cho cán bộ kỹ thuật hiện trường.", "2": "Nắm kỹ thuật cơ bản nhưng lúng túng khi gặp các điều kiện địa tầng bất thường hoặc sự cố lớn.", "3": "Làm chủ BPTC dự án, chỉ đạo xử lý kịp thời các vướng mắc kỹ thuật phức tạp tại hiện trường.", "4": "Tối ưu hóa BPTC giúp rút ngắn tiến độ thi công tổng thể của dự án từ 1 đến 2 tháng.", "5": "Làm chủ tuyệt đối các công nghệ thi công DUL phức tạp nhất; đảm bảo công trình an toàn tuyệt đối."}, "method": "Hồ sơ BPTC đại dự án, Báo cáo đánh giá rủi ro kỹ thuật"}, {"id": "GD_T2", "pillar": "Kỹ Thuật Thi Công & Rủi Ro Dự Án (Technical)", "name": "Bảo Vệ Hồ Sơ Nghiệm Thu Quyết Toán Khối Lượng A-B (Project Closeout)", "weight": 10, "benchmark": 5.0, "desc": "Chỉ đạo đo bóc chính xác khối lượng hoàn công, bảo vệ hồ sơ quyết toán tránh bị CĐT/TVGS cắt giảm chi phí.", "bars": {"1": "Hồ sơ hoàn công chậm trễ, bị TVGS cắt giảm trên 10% giá trị quyết toán.", "2": "Hồ sơ nghiệm thu thiếu sót nhiều thủ tục pháp lý, kéo dài thời gian quyết toán công trình.", "3": "Hoàn thiện hồ sơ quyết toán đúng hạn, tỷ lệ cắt giảm khối lượng dưới 2% tổng giá trị.", "4": "Bảo vệ thành công 100% khối lượng thi công thực tế và các phụ lục phát sinh hợp đồng.", "5": "Quyết toán thần tốc, thu hồi toàn bộ tiền bảo hành công trình trước hạn cam kết."}, "method": "Tỷ lệ phê duyệt quyết toán cuối cùng, Thời gian hoàn thành quyết toán"}]}, "CHT": {"title": "Chỉ huy trưởng (Site Manager)", "code": "CHT", "grade": "G4-CT", "level": "L4 - Quản lý Cấp trung Hiện trường", "bhxh": "Làn A (Công trường / Dự án)", "reporting": "Báo cáo: Giám đốc Dự án / Trưởng phòng KTTC | Quản lý trực tiếp: Chỉ huy phó, Cán bộ kỹ thuật hiện trường, các tổ đội thi công", "purpose": "Thủ lĩnh hiện trường trực tiếp chỉ huy toàn bộ hoạt động thi công cáp DUL tại công trường; quản lý tổ đội thầu phụ, máy móc thiết bị, vật tư và bảo vệ khối lượng nghiệm thu thực tế với Tư vấn giám sát.", "responsibilities": ["Lập kế hoạch thi công chi tiết tuần/tháng, điều phối nhân lực và máy móc thiết bị trên mặt bằng.", "Kiểm soát chặt chẽ tỷ lệ hao hụt cáp thép DUL (≤ 1.2%), nêm neo và phụ kiện theo định mức thầu.", "Quản lý toàn diện chi phí vận hành lán trại, ca máy, điện nước và chi phí hành chính công trường.", "Trực tiếp tổ chức đo bóc nghiệm thu khối lượng A-B và lập biên bản phát sinh ngay tại hiện trường.", "Đảm bảo an toàn lao động tuyệt đối (HSE) trong khu vực căng kéo kích thủy lực áp lực cao.", "Dẫn dắt, tạo động lực cho các tổ đội công nhân và kèm cặp cán bộ kỹ thuật trẻ."], "authorities": "Ký nghiệm thu nội bộ và 3 bên với TVGS; Đình chỉ công việc nếu vi phạm quy trình kỹ thuật hoặc an toàn; Ký xác nhận khối lượng công việc hàng ngày của thầu phụ; Đề xuất thưởng/phạt công nhân tại công trường.", "kpis": [{"name": "Tiến độ thi công tuần/tháng", "target": "≥ 98% đạt kế hoạch được phê duyệt", "weight": "30%"}, {"name": "Tỷ lệ hao hụt cáp thép DUL", "target": "≤ 1.2% (định mức thầu 1.5%)", "weight": "25%"}, {"name": "Chi phí lán trại & ca máy", "target": "Không vượt ngân sách khoán công trường", "weight": "20%"}, {"name": "Khối lượng nghiệm thu A-B", "target": "≥ 95% được TVGS chấp thuận ngay lần đầu", "weight": "15%"}, {"name": "An toàn lao động HSE", "target": "100% tuân thủ, 0 tai nạn lao động", "weight": "10%"}], "qualifications": "Kỹ sư Xây dựng / Cầu đường (Đại học); Tối thiểu 5 năm kinh nghiệm thi công DUL, có chứng chỉ CHT Hạng II trở lên; Kỹ năng quản lý tổ đội, kiểm soát hao hụt và xử lý tình huống hiện trường xuất sắc.", "pillars": [{"name": "Kỹ Thuật Thi Công & An Toàn HSE (Technical)", "weight": 30, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}, {"name": "Quản Trị Chi Phí DTTC & Hao Hụt (SHRM Business)", "weight": 30, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Lãnh Đạo Tổ Đội & Giải Quyết Xung Đột (SHRM Leadership)", "weight": 25, "color": "text-purple-700 bg-purple-50 border-purple-200"}, {"name": "Đạo Đức Nghề Nghiệp & Giao Tiếp TVGS (SHRM Interpersonal)", "weight": 15, "color": "text-blue-700 bg-blue-50 border-blue-200"}], "criteria": [{"id": "CHT_T1", "pillar": "Kỹ Thuật Thi Công & An Toàn HSE (Technical)", "name": "Chỉ Huy Quy Trình Thi Công Cáp DUL & An Toàn Lao Động Tuyệt Đối (Site Execution)", "weight": 15, "benchmark": 4.5, "desc": "Làm chủ biện pháp thi công, điều hành quy trình rải cáp, luồn ống ghen, căng kéo và bơm vữa; thiết lập rào chắn an toàn vùng kích áp lực cao.", "bars": {"1": "Để xảy ra vi phạm an toàn lao động trong ca kéo cáp, quy trình thi công lộn xộn.", "2": "Nắm quy trình nhưng giám sát chưa chặt, còn phụ thuộc vào nhắc nhở của TVGS.", "3": "Chỉ huy thi công chuẩn mực, tuân thủ 100% quy trình kỹ thuật và biện pháp an toàn HSE.", "4": "Bố trí mặt bằng thi công khoa học, rút ngắn thời gian ca kéo cáp, an toàn tuyệt đối.", "5": "Mẫu mực về quản lý hiện trường; công trường được CĐT và TVGS khen ngợi về tính chuyên nghiệp."}, "method": "Biên bản kiểm tra an toàn HSE, Nhật ký thi công hàng ngày"}, {"id": "CHT_T2", "pillar": "Kỹ Thuật Thi Công & An Toàn HSE (Technical)", "name": "Phản Ứng Nhanh & Xử Lý Sự Cố Kỹ Thuật Hiện Trường (Problem Solving)", "weight": 15, "benchmark": 4.0, "desc": "Phát hiện sớm và xử lý dứt điểm các sự cố đứt sợi cáp, tụt neo, nứt bê tông đầu neo, kẹt kích; không để ảnh hưởng tiến độ đổ bê tông.", "bars": {"1": "Lúng túng khi gặp sự cố, che giấu lỗi kỹ thuật hoặc để xảy ra hậu quả nghiêm trọng.", "2": "Báo cáo sự cố chậm, cần sự can thiệp trực tiếp từ văn phòng công ty mới xử lý được.", "3": "Bình tĩnh cô lập sự cố, thực hiện đúng quy trình xử lý kỹ thuật đã được phê duyệt.", "4": "Chủ động nhận diện nguy cơ từ sớm, xử lý sự cố nhanh gọn không làm chậm tiến độ dự án.", "5": "Xử lý điêu luyện mọi sự cố phức tạp; đúc kết thành bài học kinh nghiệm cho toàn đội ngũ."}, "method": "Báo cáo xử lý sự cố hiện trường, Đánh giá của GĐDA"}, {"id": "CHT_C1", "pillar": "Quản Trị Chi Phí DTTC & Hao Hụt (SHRM Business)", "name": "Kiểm Soát Định Mức Hao Hụt Cáp DUL, Nêm Neo & Phụ Kiện (Material Control)", "weight": 15, "benchmark": 4.5, "desc": "Quản lý cấp phát vật tư chính xác, kiểm soát chiều dài đầu thừa cắt cáp, chống lãng phí nêm neo và vữa không co ngót (hao hụt ≤ 1.2%).", "bars": {"1": "Hao hụt vật tư vượt trên 2.0%, quản lý bừa bãi làm mất mát nêm neo và phụ kiện.", "2": "Kiểm soát vật tư định kỳ lỏng lẻo, số liệu tồn kho trên sổ sách lệch so với thực tế.", "3": "Kiểm soát hao hụt cáp thép chặt chẽ dưới 1.2%, đối soát xuất nhập tồn hàng tuần minh bạch.", "4": "Tối ưu hóa sơ đồ cắt cáp, tận dụng đầu mẩu tiết kiệm hàng trăm triệu đồng cho dự án.", "5": "Kiểm soát định mức vật tư hoàn hảo (hao hụt dưới 1.0%); là điển hình tiết kiệm của công ty."}, "method": "Bảng đối soát hao hụt cáp thép định kỳ, Biên bản kiểm kê kho công trường"}, {"id": "CHT_C2", "pillar": "Quản Trị Chi Phí DTTC & Hao Hụt (SHRM Business)", "name": "Quản Trị Chi Phí Vận Hành Lán Trại & Ca Máy Thiết Bị (Field Cost Optimization)", "weight": 15, "benchmark": 4.0, "desc": "Kiểm soát chặt chẽ chi phí văn phòng tạm, điện nước, ăn ở, công tác phí, bảo dưỡng trạm bơm và hiệu suất sử dụng ca máy.", "bars": {"1": "Để chi phí lán trại vượt dự toán, máy móc để không lãng phí ca máy phát sinh chi phí.", "2": "Theo dõi chi phí thụ động, chưa có giải pháp tiết kiệm điện nước và chi phí hành chính.", "3": "Quản lý chi phí lán trại nằm trong hạn mức khoán, bố trí ca máy kích kéo đạt hiệu suất cao.", "4": "Chủ động đàm phán tối ưu chi phí thuê mướn địa phương, cắt giảm 10% chi phí vận hành lán trại.", "5": "Mô hình quản trị chi phí hiện trường tinh gọn, tiết kiệm tối đa tài chính cho công ty."}, "method": "Báo cáo chi phí lán trại hàng tháng, Nhật trình sử dụng máy kích kéo"}, {"id": "CHT_L1", "pillar": "Lãnh Đạo Tổ Đội & Giải Quyết Xung Đột (SHRM Leadership)", "name": "Lãnh Đạo Hiện Trường, Phân Công Ca Kíp & Quản Trị Tổ Đội (Leadership & Motivation)", "weight": 15, "benchmark": 4.0, "desc": "Phân công công việc công bằng, đôn đốc thầu phụ, tạo động lực cho công nhân làm việc tăng ca trong giai đoạn chạy nước rút.", "bars": {"1": "Bỏ mặc tổ đội tự xoay xở, không phân công ca kíp rõ ràng dẫn đến chậm tiến độ sàn.", "2": "Quản lý bằng mệnh lệnh cứng nhắc, công nhân bất mãn dễ bỏ việc hoặc đình công.", "3": "Phân công công việc khoa học, thấu hiểu khó khăn công trường, giữ vững tinh thần đoàn kết cao.", "4": "Tạo động lực xuất sắc, đội ngũ sẵn sàng đồng lòng tăng ca hoàn thành vượt tiến độ khi có lệnh.", "5": "Thủ lĩnh hiện trường được toàn thể công nhân và kỹ sư kính trọng; năng suất lao động luôn dẫn đầu."}, "method": "Năng suất lao động tổ đội, Tỷ lệ ổn định nhân sự hiện trường"}, {"id": "CHT_L2", "pillar": "Lãnh Đạo Tổ Đội & Giải Quyết Xung Đột (SHRM Leadership)", "name": "Giải Quyết Xung Đột Mặt Bằng & Tranh Chấp Thi Công (Conflict Management)", "weight": 10, "benchmark": 4.0, "desc": "Hóa giải nhanh các va chạm giữa tổ thầu phụ DUL với các nhà thầu cốt thép, cốp pha, cơ điện (MEP) trên cùng mặt bằng sàn thi công.", "bars": {"1": "Hay cãi vã, để xảy ra ẩu đả hoặc tranh chấp mặt bằng làm đình trệ công tác đổ bê tông.", "2": "Chờ đợi sự can thiệp của Ban QLDA dự án, chưa chủ động thương lượng với nhà thầu bạn.", "3": "Chủ động phối hợp với các tổ đội bạn, giải quyết hài hòa xung đột mặt bằng và thứ tự thi công.", "4": "Giao tiếp thuyết phục, luôn giành được mặt bằng ưu tiên cho công tác rải cáp DUL nhanh nhất.", "5": "Chuyên gia hòa giải hiện trường; biến quan hệ cạnh tranh mặt bằng thành liên minh tương hỗ."}, "method": "Số vụ việc va chạm mặt bằng, Phản hồi từ Ban QLDA Tổng thầu"}, {"id": "CHT_E1", "pillar": "Đạo Đức Nghề Nghiệp & Giao Tiếp TVGS (SHRM Interpersonal)", "name": "Đạo Đức Kỹ Sư, Liêm Chính & Chống Thất Thoát Hiện Trường (Ethical Practice)", "weight": 8, "benchmark": 4.5, "desc": "Tuyệt đối không thông đồng nghiệm thu khống, không tiếp tay cho việc bán trộm vật tư cáp thép, trung thực trong số liệu đo dãn dài.", "bars": {"1": "Thiếu trung thực trong ghi chép số liệu đo dãn dài hoặc có nghi vấn tiếp tay thất thoát vật tư.", "2": "Chưa kiên quyết ngăn chặn các hành vi vi phạm kỷ luật của công nhân trong việc giữ gìn vật tư.", "3": "Trung thực, liêm khiết tuyệt đối; bảo vệ tài sản công ty cẩn mật, số liệu kỹ thuật chính xác 100%.", "4": "Chủ động phát hiện và ngăn chặn kịp thời các nguy cơ thất thoát vật tư, giữ gìn uy tín công ty.", "5": "Tấm gương sáng về lòng trung thực và đạo đức nghề nghiệp xây dựng; được công ty tôn vinh."}, "method": "Kiểm toán độc lập vật tư, Đánh giá đạo đức từ Ban Giám đốc"}, {"id": "CHT_I1", "pillar": "Đạo Đức Nghề Nghiệp & Giao Tiếp TVGS (SHRM Interpersonal)", "name": "Giao Tiếp Thuyết Phục TVGS & Ký Biên Bản Phát Sinh (Communication & Claims)", "weight": 7, "benchmark": 4.0, "desc": "Làm việc hàng ngày với TVGS, giải trình các sai số cho phép, ký xác nhận biên bản phát sinh ngay tại công trường không để mất quyền lợi.", "bars": {"1": "Để TVGS ép cắt giảm khối lượng vô lý mà không biết cách giải trình bảo vệ.", "2": "Ngại va chạm, chậm ký biên bản phát sinh hiện trường dẫn đến việc bị từ chối thanh toán sau này.", "3": "Giao tiếp tự tin, giải trình kỹ thuật chặt chẽ, ký đầy đủ biên bản phát sinh với TVGS kịp thời.", "4": "Thuyết phục TVGS chấp thuận các giải pháp có lợi cho tiến độ và chi phí của công ty.", "5": "Xây dựng mối quan hệ tin cậy và tôn trọng đặc biệt từ phía TVGS và Chủ đầu tư."}, "method": "Tỷ lệ biên bản phát sinh được TVGS ký duyệt ngay tại hiện trường"}]}, "CHP": {"title": "Chỉ huy phó (Deputy Site Manager)", "code": "CHP", "grade": "G5-CT", "level": "L3/L4 - Giám sát Cấp trung Hiện trường", "bhxh": "Làn A (Công trường / Dự án)", "reporting": "Báo cáo: Chỉ huy trưởng | Quản lý trực tiếp: Cán bộ kỹ thuật hiện trường và các mũi thi công cáp DUL/khoan neo", "purpose": "Hỗ trợ Chỉ huy trưởng chỉ đạo trực tiếp các mũi thi công cáp DUL hoặc cọc neo đất; phụ trách kỹ thuật thi công, an toàn HSE và trực tiếp kèm cặp kỹ sư hiện trường.", "responsibilities": ["Trực tiếp chỉ đạo kỹ thuật tại các mũi thi công sàn cáp DUL hoặc tường vây khoan neo đất.", "Tổ chức công tác nghiệm thu nội bộ (QA/QC) trước khi mời Tư vấn giám sát nghiệm thu chính thức.", "Kiểm soát thông số kỹ thuật kéo cáp: lực kéo, áp lực dầu, độ dãn dài thực tế $\\Delta L$ từng tao cáp.", "Giám sát việc bảo dưỡng, kiểm định thiết bị máy kích kéo và trạm bơm thủy lực.", "Huấn luyện, kèm cặp cán bộ kỹ thuật trẻ theo mô hình EDAC (Giải thích - Làm mẫu - Áp dụng - Đúc kết)."], "authorities": "Ký biên bản nghiệm thu nội bộ; Yêu cầu công nhân sửa chữa lỗi kỹ thuật trước khi đổ bê tông; Điều hành ca kíp tại mũi thi công được phân công.", "kpis": [{"name": "Chất lượng nghiệm thu nội bộ", "target": "≥ 98% công việc đạt chuẩn lần 1", "weight": "35%"}, {"name": "Sai số đo dãn dài cáp", "target": "100% nằm trong dung sai thiết kế (±5%)", "weight": "25%"}, {"name": "Kèm cặp kỹ sư trẻ (EDAC)", "target": "Đào tạo thành công ít nhất 1 CBKT sau 6 tháng", "weight": "20%"}, {"name": "An toàn lao động mũi thi công", "target": "0 vi phạm an toàn, đầy đủ đồ bảo hộ", "weight": "20%"}], "qualifications": "Kỹ sư Xây dựng/Cầu đường (Cao đẳng/Đại học); Tối thiểu 3 năm kinh nghiệm thi công DUL; Nắm vững quy trình căng kéo cáp, đo dãn dài và phương pháp kèm cặp OJT.", "pillars": [{"name": "Kỹ Thuật Căng Kéo & Nghiệm Thu Nội Bộ (Technical)", "weight": 40, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}, {"name": "Kiểm Soát Hao Hụt & Khối Lượng (SHRM Business)", "weight": 25, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Kèm Cặp Kỹ Sư Trẻ Theo EDAC (SHRM People Coaching)", "weight": 20, "color": "text-purple-700 bg-purple-50 border-purple-200"}, {"name": "Tuân Thủ An Toàn & Kỷ Luật HSE (SHRM Ethics)", "weight": 15, "color": "text-blue-700 bg-blue-50 border-blue-200"}], "criteria": [{"id": "CHP_T1", "pillar": "Kỹ Thuật Căng Kéo & Nghiệm Thu Nội Bộ (Technical)", "name": "Chỉ Đạo Quy Trình Căng Kéo Cáp DUL & Bơm Vữa Không Co Ngót (Technical Control)", "weight": 20, "benchmark": 4.0, "desc": "Trực tiếp chỉ đạo đo độ dãn dài từng sợi cáp, kiểm tra nêm neo khóa chặt, chỉ đạo pha trộn và bơm vữa đầy khít ống ghen.", "bars": {"1": "Không kiểm tra lực kéo, để xảy ra tình trạng tụt nêm hoặc rỗ đầu neo bê tông.", "2": "Chỉ đạo còn lúng túng khi gặp dầm cáp cong phức tạp hoặc chiều dài cáp lớn.", "3": "Chỉ đạo quy trình kéo cáp và bơm vữa chuẩn xác, kiểm soát độ dãn dài trong dung sai cho phép.", "4": "Thành thạo xử lý các tình huống cáp dài căng 2 đầu, phát hiện lỗi thi công trước khi đổ bê tông.", "5": "Chuyên gia chỉ huy kỹ thuật căng kéo; tỷ lệ đạt chuẩn chất lượng 100% không có lỗi."}, "method": "Nhật ký đo dãn dài cáp DUL, Biên bản thí nghiệm vữa bơm"}, {"id": "CHP_T2", "pillar": "Kỹ Thuật Căng Kéo & Nghiệm Thu Nội Bộ (Technical)", "name": "Nghiệm Thu Nội Bộ & Chuẩn Bị Hồ Sơ Nghiệm Thu 3 Bên (QA/QC Inspection)", "weight": 20, "benchmark": 4.0, "desc": "Tổ chức kiểm tra hình học tim cáp, cao độ nẹp cáp, ống thông hơi trước khi mời TVGS; đảm bảo 100% đạt chuẩn nghiệm thu.", "bars": {"1": "Không nghiệm thu nội bộ, để TVGS chỉ ra nhiều lỗi sai lệch vị trí ống ghen.", "2": "Kiểm tra qua loa, hồ sơ nghiệm thu thiếu các phiếu kiểm tra kích thước hình học.", "3": "Kiểm tra kỹ lưỡng từng mét ống ghen, xử lý dứt điểm các lỗi trước khi mời TVGS.", "4": "Hồ sơ nghiệm thu đầy đủ, chuẩn xác, TVGS nghiệm thu nhanh chóng không cần chỉnh sửa.", "5": "Hệ thống nghiệm thu nội bộ hoàn hảo; tạo niềm tin tuyệt đối cho Tư vấn giám sát."}, "method": "Tỷ lệ nghiệm thu TVGS đạt ngay lần 1, Biên bản QA/QC"}, {"id": "CHP_C1", "pillar": "Kiểm Soát Hao Hụt & Khối Lượng (SHRM Business)", "name": "Giám Sát Định Mức Cắt Cáp & Kiểm Soát Hao Hụt Mũi Thi Công (Cost Monitoring)", "weight": 25, "benchmark": 3.5, "desc": "Giám sát công nhân cắt cáp đúng bảng tính toát profile, tránh cắt thừa gây lãng phí hoặc cắt thiếu phải nối cáp.", "bars": {"1": "Để công nhân cắt cáp tùy tiện gây lãng phí lớn, hao hụt vượt định mức.", "2": "Có bảng tính cắt cáp nhưng không giám sát chặt chẽ thao tác cắt của công nhân.", "3": "Giám sát chặt việc cắt cáp, kiểm soát chiều dài đầu kích vừa đủ, hao hụt đạt định mức.", "4": "Chủ động gom các đoạn cáp thừa để tận dụng cho các dầm phụ, tiết kiệm vật tư.", "5": "Quản lý vật tư mũi thi công chuẩn mực, không có bất kỳ lãng phí vật tư nào xảy ra."}, "method": "Biên bản kiểm tra chiều dài cắt cáp, Báo cáo hao hụt mũi thi công"}, {"id": "CHP_P1", "pillar": "Kèm Cặp Kỹ Sư Trẻ Theo EDAC (SHRM People Coaching)", "name": "Huấn Luyện, Kèm Cặp Cán Bộ Kỹ Thuật Theo Mô Hình EDAC (Field Coaching)", "weight": 20, "benchmark": 3.5, "desc": "Áp dụng mô hình EDAC (Explain - Demonstrate - Apply - Consolidate) kèm cặp kỹ sư hiện trường đọc bản vẽ và thao tác đo đạc.", "bars": {"1": "Không hướng dẫn kỹ sư mới, để kỹ sư trẻ tự xoay xở và la mắng khi họ mắc lỗi.", "2": "Chỉ giải thích lý thuyết mà không làm mẫu thao tác thực tế tại hiện trường.", "3": "Kèm cặp bài bản theo 4 bước EDAC, kiên nhẫn hướng dẫn và sửa lỗi cho kỹ sư trẻ.", "4": "Đào tạo kỹ sư trẻ tiến bộ vượt bậc, có thể độc lập phụ trách ca kéo cáp sau 3 tháng.", "5": "Người hướng dẫn tận tâm xuất sắc; được cán bộ trẻ yêu mến và học hỏi nhiều điều."}, "method": "Báo cáo đánh giá sự tiến bộ của kỹ sư được kèm cặp, Phỏng vấn CBKT"}, {"id": "CHP_E1", "pillar": "Tuân Thủ An Toàn & Kỷ Luật HSE (SHRM Ethics)", "name": "Kỷ Luật Hiện Trường & An Toàn Lao Động Vùng Căng Kéo (Safety Leadership)", "weight": 15, "benchmark": 4.0, "desc": "Duy trì kỷ luật công trường, kiên quyết xử lý công nhân không đeo kính bảo hộ hoặc đứng phía sau đầu kích khi bơm dầu áp lực cao.", "bars": {"1": "Lơ là an toàn, cho phép công nhân đứng vào vùng nguy hiểm phía sau kích kéo.", "2": "Nhắc nhở an toàn nhưng không kiên quyết xử lý khi công nhân vi phạm.", "3": "Thiết lập vùng an toàn nghiêm ngặt, trang bị đầy đủ bảo hộ cho toàn bộ tổ đội.", "4": "Chủ động huấn luyện an toàn đầu giờ (Toolbox Talk) cho công nhân mỗi ngày.", "5": "Văn hóa an toàn tuyệt đối; mũi thi công chưa từng xảy ra sự cố mất an toàn nào."}, "method": "Nhật ký kiểm tra an toàn đầu giờ, Biên bản vi phạm HSE"}]}, "CBKT_CHINH": {"title": "Cán bộ Kỹ thuật chính (Senior Engineer)", "code": "CBKT_CHINH", "grade": "G4-CT", "level": "L3/L4 - Kỹ sư Cao cấp", "bhxh": "Làn A (Công trường / Dự án)", "reporting": "Báo cáo: Chỉ huy trưởng / Trưởng phòng KTTC | Phối hợp: Chỉ huy phó, CBKT", "purpose": "Chuyên gia kỹ thuật nòng cốt tại hiện trường; giải quyết các bài toán kỹ thuật phức tạp, triển khai bản vẽ Shop Drawing, tính toán độ dãn dài cáp $\\Delta L$ và xử lý các sự cố kỹ thuật hóc búa.", "responsibilities": ["Bóc tách bản vẽ kết cấu, triển khai bản vẽ thi công chi tiết (Shop Drawing) cáp DUL chuẩn xác.", "Tính toán lý thuyết lực kéo, áp lực bơm dầu và độ dãn dài cáp $\\Delta L$ cho từng bó cáp.", "Trực tiếp chủ trì xử lý các sự cố kỹ thuật phức tạp: đứt sợi, tụt nêm, nứt bê tông đầu neo, nghẹt ống ghen.", "Lập hồ sơ hoàn công, kiểm tra bản vẽ as-built và đối soát bảo vệ số liệu khối lượng kỹ thuật A-B.", "Đề xuất các giải pháp kỹ thuật tối ưu hóa profile cáp giúp tiết kiệm chiều dài thép."], "authorities": "Xác nhận tính chính xác của bản vẽ Shop Drawing; Đề xuất phương án kỹ thuật xử lý sự cố công trình; Ký xác nhận thông số tính toán độ dãn dài cáp.", "kpis": [{"name": "Độ chính xác Shop Drawing", "target": "100% khớp thiết kế, không có xung đột MEP", "weight": "35%"}, {"name": "Tính toán độ dãn dài cáp", "target": "Chính xác 100%, sai số lý thuyết < 1%", "weight": "25%"}, {"name": "Xử lý sự cố kỹ thuật", "target": "100% sự cố được xử lý dứt điểm, an toàn", "weight": "25%"}, {"name": "Hồ sơ hoàn công & As-built", "target": "Hoàn thành trong 7 ngày sau khi nghiệm thu", "weight": "15%"}], "qualifications": "Kỹ sư Xây dựng/Cầu đường (Đại học/Cao đẳng); Tối thiểu 5 năm kinh nghiệm chuyên sâu công nghệ DUL; Sử dụng thành thạo AutoCAD, phần mềm tính toán kết cấu; Am hiểu sâu sắc TCVN và ASTM.", "pillars": [{"name": "Chuyên Môn Kỹ Thuật & Shop Drawing (Technical Mastery)", "weight": 45, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}, {"name": "Năng Lực Phân Tích & Xử Lý Sự Cố (SHRM Analytical)", "weight": 25, "color": "text-purple-700 bg-purple-50 border-purple-200"}, {"name": "Hồ Sơ Hoàn Công & Đo Bóc Khối Lượng (SHRM Business)", "weight": 20, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Đạo Đức Kỹ Sư & Tư Vấn Kỹ Thuật (SHRM Interpersonal)", "weight": 10, "color": "text-blue-700 bg-blue-50 border-blue-200"}], "criteria": [{"id": "CBKTC_T1", "pillar": "Chuyên Môn Kỹ Thuật & Shop Drawing (Technical Mastery)", "name": "Bóc Tách Bản Vẽ & Triển Khai Shop Drawing Cáp DUL Chi Tiết (Drawing Mastery)", "weight": 25, "benchmark": 4.5, "desc": "Đọc hiểu sâu bản vẽ kết cấu, kiến trúc, MEP; vẽ profile đường cáp mượt mà, định vị chính xác vị trí con kê, ống thông hơi.", "bars": {"1": "Vẽ shop drawing sai lệch cao độ cáp, xung đột với hệ thống đường ống MEP.", "2": "Vẽ được bản vẽ thông thường nhưng chậm và cần người khác soát lỗi.", "3": "Triển khai shop drawing chuẩn xác, phát hiện và xử lý tốt các điểm giao cắt cốt thép.", "4": "Tối ưu hóa profile đường cáp giúp thi công luồn cáp dễ dàng và giảm ma sát kéo.", "5": "Bậc thầy vẽ shop drawing DUL; bản vẽ đạt chuẩn mực cao nhất, thi công thuận lợi tuyệt đối."}, "method": "Kiểm tra chất lượng bản vẽ Shop Drawing, Tỷ lệ lỗi bản vẽ thi công"}, {"id": "CBKTC_T2", "pillar": "Chuyên Môn Kỹ Thuật & Shop Drawing (Technical Mastery)", "name": "Tính Toán Lực Kéo, Áp Lực Dầu & Sai Số Độ Dãn Dài $\\Delta L$ (Analytical Calculation)", "weight": 20, "benchmark": 4.5, "desc": "Lập bảng tính toán lực căng kéo, tính toán mất mát ứng suất do ma sát và độ tụt neo, xác định áp lực bơm dầu theo từng cấp tải.", "bars": {"1": "Tính toán sai công thức lực kéo hoặc nhầm lẫn giữa áp lực bơm dầu và lực căng cáp.", "2": "Tính toán cơ bản nhưng chưa tính đủ các hệ số mất mát ứng suất do ma sát cục bộ.", "3": "Tính toán chính xác bảng độ dãn dài lý thuyết và áp lực dầu cho từng bó cáp theo thiết kế.", "4": "Phân tích và giải thích chuẩn xác các sai lệch độ dãn dài thực tế so với lý thuyết.", "5": "Chuyên gia tính toán kết cấu ứng suất trước; giải quyết các bài toán tính toán phi tuyến phức tạp."}, "method": "Bảng tính toán độ dãn dài lý thuyết được TVGS phê duyệt"}, {"id": "CBKTC_A1", "pillar": "Năng Lực Phân Tích & Xử Lý Sự Cố (SHRM Analytical)", "name": "Phân Tích Nguyên Nhân & Xử Lý Sự Cố Kỹ Thuật Phức Tạp (Root Cause Analysis)", "weight": 25, "benchmark": 4.0, "desc": "Chẩn đoán chính xác nguyên nhân đứt sợi cáp, nứt bê tông đầu neo, kẹt kích kéo; đề xuất biện pháp xử lý an toàn và hiệu quả.", "bars": {"1": "Không xác định được nguyên nhân sự cố, đưa ra phương án xử lý gây mất an toàn kết cấu.", "2": "Cần nhiều thời gian phân tích, phương án xử lý tốn kém chi phí và chậm tiến độ.", "3": "Chẩn đoán đúng nguyên nhân sự cố và đề xuất phương án xử lý kỹ thuật khả thi, an toàn.", "4": "Xử lý nhanh chóng các ca khó (đứt cáp trong lòng dầm, kẹt nêm neo) không làm nứt bê tông.", "5": "Chuyên gia cứu nguy sự cố kỹ thuật hiện trường; giải pháp luôn nhận được sự đồng thuận cao của TVGS."}, "method": "Hồ sơ biện pháp xử lý sự cố kỹ thuật, Đánh giá của Trưởng phòng"}, {"id": "CBKTC_B1", "pillar": "Hồ Sơ Hoàn Công & Đo Bóc Khối Lượng (SHRM Business)", "name": "Lập Hồ Sơ Hoàn Công & Đối Soát Khối Lượng Nghiệm Thu A-B (Technical Documentation)", "weight": 20, "benchmark": 4.0, "desc": "Lập bản vẽ hoàn công (as-built), tổng hợp hồ sơ chứng chỉ vật liệu cáp/neo và bảo vệ số liệu khối lượng kỹ thuật với TVGS.", "bars": {"1": "Lập hồ sơ hoàn công chậm trễ, sai lệch số liệu khối lượng thực tế so với bản vẽ.", "2": "Hồ sơ hoàn công còn thiếu sót chứng từ kiểm định thiết bị hoặc thí nghiệm vữa.", "3": "Lập hồ sơ hoàn công đầy đủ, đúng hạn, bảo vệ khối lượng kỹ thuật chính xác với TVGS.", "4": "Hồ sơ hoàn công chuẩn mực, được thẩm định phê duyệt nhanh trong thời gian ngắn kỷ lục.", "5": "Chuẩn hóa quy trình lập hồ sơ hoàn công số hóa, rút ngắn 50% thời gian hoàn thiện hồ sơ."}, "method": "Thời gian phê duyệt hồ sơ hoàn công, Tỷ lệ bảo vệ khối lượng"}, {"id": "CBKTC_I1", "pillar": "Đạo Đức Kỹ Sư & Tư Vấn Kỹ Thuật (SHRM Interpersonal)", "name": "Trung Thực Kỹ Thuật & Thuyết Trình Giải Pháp Với Chuyên Gia TVGS (Consultation)", "weight": 10, "benchmark": 4.0, "desc": "Bảo vệ quan điểm kỹ thuật đúng đắn trên cơ sở tiêu chuẩn khoa học, giao tiếp tự tin và thuyết phục các chuyên gia TVGS khó tính.", "bars": {"1": "Ngại tranh luận kỹ thuật, dễ dàng nhượng bộ trước các yêu cầu vô lý của TVGS.", "2": "Giải thích kỹ thuật lúng túng, chưa viện dẫn được các điều khoản tiêu chuẩn TCVN/ASTM.", "3": "Giao tiếp chuyên nghiệp, giải trình kỹ thuật dựa trên cơ sở tính toán khoa học thuyết phục.", "4": "Thuyết phục hoàn toàn chuyên gia TVGS chấp thuận các cải tiến kỹ thuật có lợi cho dự án.", "5": "Được các chuyên gia đầu ngành của TVGS đánh giá rất cao về năng lực và đạo đức kỹ sư."}, "method": "Biên bản làm việc kỹ thuật với TVGS, Đánh giá của Chỉ huy trưởng"}]}, "CBKT": {"title": "Cán bộ Kỹ thuật (Site Engineer)", "code": "CBKT", "grade": "G5-CT / G6-CT", "level": "L2/L3 - Kỹ sư Hiện trường", "bhxh": "Làn A (Công trường / Dự án)", "reporting": "Báo cáo: Chỉ huy phó / Cán bộ kỹ thuật chính | Phối hợp: Tổ đội công nhân thi công", "purpose": "Trực tiếp tác nghiệp, giám sát ca thi công căng kéo cáp DUL trên công trường; đảm bảo công việc diễn ra đúng quy trình kỹ thuật, chuẩn xác kích thước và an toàn lao động tuyệt đối.", "responsibilities": ["Kiểm tra chất lượng và số lượng vật tư đầu vào (cáp thép, nêm neo, ống ghen, vữa bơm).", "Giám sát công nhân lắp đặt ống ghen, luồn cáp, định vị tim cáp và nẹp cao độ theo bản vẽ.", "Đo đạc và ghi chép trung thực số liệu hành trình kích kéo (áp lực dầu, độ dãn dài $\\Delta L$).", "Giám sát công tác trộn và bơm vữa không co ngót vào ống ghen bảo vệ cáp.", "Tuân thủ nghiêm ngặt quy định an toàn lao động và kỷ luật công trường."], "authorities": "Yêu cầu công nhân dừng thao tác nếu phát hiện vi phạm an toàn; Đình chỉ kéo cáp nếu áp lực dầu vượt quá quy định; Ký xác nhận nhật ký đo dãn dài cáp.", "kpis": [{"name": "Ghi chép số liệu đo dãn dài", "target": "100% trung thực, đầy đủ và kịp thời", "weight": "35%"}, {"name": "Tuân thủ quy trình kỹ thuật", "target": "Không để xảy ra sai sót nẹp cáp hoặc rách ống", "weight": "25%"}, {"name": "Kiểm tra vật tư đầu vào", "target": "100% lô vật tư được kiểm tra trước khi lắp đặt", "weight": "20%"}, {"name": "Kỷ luật an toàn lao động", "target": "100% chấp hành bảo hộ, 0 vi phạm an toàn", "weight": "20%"}], "qualifications": "Kỹ sư Xây dựng/Cầu đường (Đại học/Cao đẳng/Trung cấp kỹ thuật); 0-3 năm kinh nghiệm; Đọc hiểu bản vẽ thi công, chăm chỉ, trung thực, chịu được áp lực công trường thi công dài ngày.", "pillars": [{"name": "Tác Nghiệp Kỹ Thuật Hiện Trường (Technical Execution)", "weight": 45, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}, {"name": "Nhật Ký Công Trình & Đo Dãn Dài (Documentation & Honesty)", "weight": 25, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Tuân Thủ An Toàn & Kỷ Luật Lao Động (SHRM Ethics)", "weight": 20, "color": "text-purple-700 bg-purple-50 border-purple-200"}, {"name": "Giao Tiếp & Phối Hợp Tổ Đội (SHRM Interpersonal)", "weight": 10, "color": "text-blue-700 bg-blue-50 border-blue-200"}], "criteria": [{"id": "CBKT_T1", "pillar": "Tác Nghiệp Kỹ Thuật Hiện Trường (Technical Execution)", "name": "Đọc Bản Vẽ & Giám Sát Lắp Đặt Tim Cáp, Ống Ghen (Drawing & Layout)", "weight": 25, "benchmark": 3.0, "desc": "Đọc hiểu bản vẽ thi công, kiểm tra vị trí tim cốt, cao độ con kê ống ghen, đảm bảo ống ghen không bị bẹp hoặc thủng trước khi đổ bê tông.", "bars": {"1": "Không đọc được bản vẽ, để công nhân lắp sai cao độ cáp hoặc dập ống ghen.", "2": "Đọc được bản vẽ nhưng chưa bao quát hết mặt bằng, còn bỏ sót các mối nối ống ghen hở.", "3": "Đọc bản vẽ thành thạo, giám sát tỉ mỉ từng vị trí nẹp cáp, ống thông hơi đúng thiết kế.", "4": "Nhanh chóng phát hiện các vị trí xung đột cốt thép với ống ghen để điều chỉnh kịp thời.", "5": "Tác nghiệp điêu luyện; kiểm soát chất lượng lắp đặt hoàn hảo không có lỗi."}, "method": "Biên bản kiểm tra nghiệm thu cốt thép - ống ghen trước khi đổ bê tông"}, {"id": "CBKT_T2", "pillar": "Tác Nghiệp Kỹ Thuật Hiện Trường (Technical Execution)", "name": "Giám Sát Quy Trình Căng Kéo & Thao Tác Bơm Dầu (Tensioning Supervision)", "weight": 20, "benchmark": 3.0, "desc": "Theo dõi đồng hồ đo áp lực dầu, kiểm tra nêm neo ăn đều vào đầu neo, giám sát hành trình pít-tông kích đúng chỉ dẫn của Chỉ huy phó.", "bars": {"1": "Không quan sát đồng hồ áp lực dầu, để kích quá tải hoặc nêm neo bị lệch.", "2": "Thao tác giám sát còn lúng túng, chưa nắm rõ các nấc áp lực 20%, 50%, 100%.", "3": "Giám sát thành thạo quy trình kéo cáp, kiểm tra nêm neo khóa chặt và độ dãn dài chính xác.", "4": "Xử lý khéo léo các tình huống nêm tụt nhẹ hoặc dầu bơm bị bọt khí.", "5": "Làm chủ quy trình tác nghiệp kéo cáp, hướng dẫn công nhân thao tác chuẩn xác."}, "method": "Nhật ký thi công ca kéo cáp, Đánh giá của Chỉ huy phó"}, {"id": "CBKT_D1", "pillar": "Nhật Ký Công Trình & Đo Dãn Dài (Documentation & Honesty)", "name": "Ghi Chép Nhật Ký Thi Công & Đo Dãn Dài Trung Thực (Honesty & Documentation)", "weight": 25, "benchmark": 3.0, "desc": "Đo đạc thước lá chính xác từng milimet, ghi chép số liệu đo dãn dài trung thực tuyệt đối, không làm giả số liệu báo cáo.", "bars": {"1": "Làm giả số liệu đo dãn dài hoặc ghi chép cẩu thả làm sai lệch hồ sơ chất lượng.", "2": "Ghi chép còn chậm, đôi khi bỏ sót việc ghi nhật ký thi công hàng ngày.", "3": "Đo đạc chính xác, ghi chép nhật ký thi công và biên bản đo dãn dài trung thực, đầy đủ.", "4": "Số liệu đo đạc chuẩn mực, trình bày khoa học, bàn giao hồ sơ cho CBKT chính đúng hạn.", "5": "Hình mẫu về tính cẩn thận và trung thực trong đo đạc kỹ thuật công trường."}, "method": "Kiểm tra sổ nhật ký thi công thực tế và biên bản đo dãn dài cáp"}, {"id": "CBKT_S1", "pillar": "Tuân Thủ An Toàn & Kỷ Luật Lao Động (SHRM Ethics)", "name": "Tuân Thủ Tuyệt Đối Kỷ Luật An Toàn Lao Động HSE (Safety Discipline)", "weight": 20, "benchmark": 3.0, "desc": "Luôn mang đầy đủ bảo hộ lao động (mũ, giày, kính), nhắc nhở công nhân không đứng trong vùng nguy hiểm khi kích đang kéo căng.", "bars": {"1": "Không mang đồ bảo hộ, chủ quan đi lại trong vùng nguy hiểm khi đang kích kéo cáp.", "2": "Có mang bảo hộ nhưng chưa chủ động nhắc nhở công nhân cùng tuân thủ.", "3": "Nghiêm chỉnh chấp hành 100% quy định an toàn, kiên quyết yêu cầu công nhân ra khỏi vùng nguy hiểm.", "4": "Chủ động kiểm tra dây an toàn, bình chữa cháy và dây điện máy bơm trước mỗi ca làm việc.", "5": "Ý thức an toàn tuyệt vời; luôn là tấm gương kỷ luật trên công trường."}, "method": "Biên bản kiểm tra an toàn HSE, Nhật ký vi phạm nội quy"}, {"id": "CBKT_I1", "pillar": "Giao Tiếp & Phối Hợp Tổ Đội (SHRM Interpersonal)", "name": "Giao Tiếp Rõ Ràng & Hợp Tác Với Công Nhân Tổ Đội (Communication & Teamwork)", "weight": 10, "benchmark": 3.0, "desc": "Truyền đạt mệnh lệnh kỹ thuật rõ ràng, giải thích nhẹ nhàng dễ hiểu cho công nhân, phối hợp nhịp nhàng với đồng nghiệp.", "bars": {"1": "Nói năng cộc lốc, gây mâu thuẫn với công nhân làm ảnh hưởng tiến độ ca làm việc.", "2": "Truyền đạt chưa rõ ràng khiến công nhân hiểu sai ý dẫn đến thao tác nhầm lẫn.", "3": "Giao tiếp lịch thiệp, chỉ dẫn công việc rõ ràng, được công nhân tôn trọng và hợp tác tốt.", "4": "Hỗ trợ đồng đội nhiệt tình, luôn sẵn sàng chia sẻ ca trực khi đồng nghiệp bận việc.", "5": "Tinh thần đồng đội xuất sắc, luôn tạo không khí làm việc vui vẻ, hăng say trên công trường."}, "method": "Phản hồi từ tổ đội công nhân và đồng nghiệp cùng ca"}]}, "TRO_LY_KTTC": {"title": "Trợ lý phòng Kỹ thuật Thi công", "code": "TRO_LY_KTTC", "grade": "G6-VM", "level": "L2 - Chuyên viên Hỗ trợ Văn phòng", "bhxh": "Làn B (Văn phòng / Quản lý Trụ sở)", "reporting": "Báo cáo: Trưởng phòng Kỹ thuật Thi công | Phối hợp: 32 cán bộ công trường, các phòng ban Tập đoàn", "purpose": "Hỗ trợ Trưởng phòng quản trị hệ thống văn thư kỹ thuật, điều phối thiết bị máy móc, theo dõi tiến độ báo cáo và kiểm soát các khoản chi phí hành chính nội bộ của P.KTTC.", "responsibilities": ["Tiếp nhận, kiểm tra tính hợp lệ và lưu trữ có hệ thống hồ sơ kỹ thuật, BPTC, biên bản nghiệm thu từ các công trường gửi về.", "Theo dõi lịch trình điều động, hồ sơ kiểm định kỹ thuật và vị trí hiện tại của toàn bộ máy kích kéo, trạm bơm DUL.", "Tổng hợp số liệu báo cáo tiến độ tuần/tháng từ 32 cán bộ công trường để lập báo cáo tổng hợp cho Trưởng phòng và Ban TGĐ.", "Rà soát, đối soát tính hợp lệ của các chứng từ thanh toán chi phí công trường, công tác phí, vé xe, tiền ăn lán trại.", "Quản lý văn phòng phẩm, trang thiết bị văn phòng và điều phối thông tin giữa phòng KTTC với các Ban/Phòng Tập đoàn."], "authorities": "Tiếp nhận và rà soát hồ sơ chứng từ thanh toán trước khi trình Trưởng phòng duyệt; Đôn đốc các công trường gửi báo cáo đúng hạn; Đề xuất cấp phát VPP và hậu cần cho phòng.", "kpis": [{"name": "Lưu trữ & Số hóa hồ sơ kỹ thuật", "target": "100% hồ sơ được số hóa và sắp xếp khoa học", "weight": "30%"}, {"name": "Báo cáo tiến độ tuần/tháng", "target": "100% đúng hạn (trước 17h thứ 6 hàng tuần)", "weight": "25%"}, {"name": "Đối soát chứng từ chi phí", "target": "100% chính xác, không có sai sót chứng từ", "weight": "25%"}, {"name": "Hỗ trợ hậu cần & Điều phối", "target": "Thỏa mãn 100% yêu cầu công việc từ hiện trường", "weight": "20%"}], "qualifications": "Cử nhân Quản trị Kinh doanh / Kinh tế Xây dựng / Văn thư (Đại học/Cao đẳng); Thành thạo tin học văn phòng (Word, Excel, PowerPoint), phần mềm quản lý văn bản; Cẩn thận, tỉ mỉ, bảo mật thông tin tuyệt đối.", "pillars": [{"name": "Quản Trị Hồ Sơ & Lưu Trữ Số Hóa (Documentation Governance)", "weight": 35, "color": "text-blue-700 bg-blue-50 border-blue-200"}, {"name": "Kiểm Soát Chi Phí Hành Chính & Thiết Bị (Administrative Cost)", "weight": 30, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Kỹ Năng Tổng Hợp Báo Cáo & Phần Mềm (SHRM Analytical)", "weight": 20, "color": "text-purple-700 bg-purple-50 border-purple-200"}, {"name": "Giao Tiếp Dịch Vụ Nội Bộ & Bảo Mật (SHRM Interpersonal)", "weight": 15, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}], "criteria": [{"id": "TL_D1", "pillar": "Quản Trị Hồ Sơ & Lưu Trữ Số Hóa (Documentation Governance)", "name": "Quản Trị Hệ Thống Hồ Sơ, Bản Vẽ & Lưu Trữ Văn Bản Số Hóa (Document Governance)", "weight": 35, "benchmark": 3.5, "desc": "Thiết lập hệ thống thư mục lưu trữ khoa học, số hóa 100% hồ sơ nghiệm thu, bản vẽ hoàn công, hợp đồng và biên bản họp của phòng.", "bars": {"1": "Lưu trữ lộn xộn, thất lạc hồ sơ nghiệm thu hoặc không tìm thấy tài liệu khi cần gấp.", "2": "Lưu trữ giấy có tổ chức nhưng chưa chủ động số hóa dữ liệu lên Google Drive / Server.", "3": "Lưu trữ khoa học, số hóa kịp thời, truy xuất tài liệu nhanh chóng trong vòng 3 phút.", "4": "Chuẩn hóa mã định danh tài liệu kỹ thuật, xây dựng kho lưu trữ số của phòng ngăn nắp, dễ dùng.", "5": "Chuyên gia quản trị tài liệu; xây dựng hệ thống quản lý tri thức số hóa kiểu mẫu cho công ty."}, "method": "Kiểm tra hệ thống lưu trữ số hóa, Thời gian truy xuất hồ sơ kỹ thuật"}, {"id": "TL_C1", "pillar": "Kiểm Soát Chi Phí Hành Chính & Thiết Bị (Administrative Cost)", "name": "Đối Soát Tính Hợp Lệ Chứng Từ Chi Phí & Quản Lý Thiết Bị (Cost Audit & Equipment)", "weight": 30, "benchmark": 3.5, "desc": "Kiểm tra hóa đơn chứng từ chi phí lán trại, vé xe, tiếp khách từ công trường gửi về; cập nhật vị trí và tình trạng máy kích kéo trạm bơm.", "bars": {"1": "Duyệt qua loa chứng từ thanh toán sai sót, không nắm được vị trí của các thiết bị máy móc.", "2": "Phát hiện được lỗi chứng từ nhưng xử lý chậm trễ làm ảnh hưởng việc thanh toán của kỹ sư.", "3": "Đối soát tỉ mỉ từng hóa đơn chứng từ, từ chối các chi phí không hợp lệ; theo dõi thiết bị chặt chẽ.", "4": "Chủ động cảnh báo các khoản chi phí lán trại vượt định mức, đối soát tài sản máy móc định kỳ.", "5": "Kiểm toán nội bộ chứng từ xuất sắc; tiết kiệm chi phí hành chính và bảo vệ tài sản máy móc tối ưu."}, "method": "Tỷ lệ hồ sơ chứng từ thanh toán chuẩn xác, Sổ theo dõi tài sản máy kích kéo"}, {"id": "TL_A1", "pillar": "Kỹ Năng Tổng Hợp Báo Cáo & Phần Mềm (SHRM Analytical)", "name": "Tổng Hợp Số Liệu Báo Cáo Tiến Độ & Sử Dụng Phần Mềm Văn Phòng (Reporting & Tools)", "weight": 20, "benchmark": 3.5, "desc": "Sử dụng Excel thành thạo để tổng hợp tiến độ 32 nhân sự công trường; thiết kế slide báo cáo tuần chuyên nghiệp cho Trưởng phòng báo cáo Ban TGĐ.", "bars": {"1": "Số liệu báo cáo tổng hợp sai sót, trễ hạn nộp báo cáo tuần cho Trưởng phòng.", "2": "Báo cáo số liệu đúng nhưng hình thức trình bày sơ sài, chưa trực quan hóa bằng biểu đồ.", "3": "Tổng hợp số liệu tiến độ chính xác, đúng hạn 100%, sử dụng tốt các hàm Excel và biểu đồ.", "4": "Thiết kế dashboard báo cáo tiến độ trực quan, sinh động, hỗ trợ đắc lực cho Trưởng phòng ra quyết định.", "5": "Thành thạo các công cụ số hóa, tự động hóa quy trình báo cáo tiến độ tuần bằng công nghệ mới."}, "method": "Độ chính xác và thời gian nộp Báo cáo tuần, Đánh giá của Trưởng phòng"}, {"id": "TL_I1", "pillar": "Giao Tiếp Dịch Vụ Nội Bộ & Bảo Mật (SHRM Interpersonal)", "name": "Tinh Thần Dịch Vụ Nội Bộ, Phối Hợp & Bảo Mật Thông Tin (Service Mindset & Ethics)", "weight": 15, "benchmark": 4.0, "desc": "Nhiệt tình hỗ trợ thủ tục hành chính cho kỹ sư công trường, phối hợp nhịp nhàng với các phòng ban, bảo mật tuyệt đối lương thưởng và đơn giá.", "bars": {"1": "Gắt gỏng, chậm trễ giải quyết thủ tục cho anh em công trường; làm lộ bí mật thông tin nội bộ.", "2": "Làm việc thụ động, chỉ hỗ trợ khi bị nhắc nhở nhiều lần.", "3": "Nhiệt tình, chu đáo, hỗ trợ giải quyết nhanh các thủ tục hậu cần cho anh em công trường; bảo mật tốt.", "4": "Thấu hiểu nỗi vất vả của kỹ sư công trường xa nhà, chủ động giải quyết mọi khó khăn hành chính nhanh nhất.", "5": "Hình mẫu tuyệt vời về tinh thần dịch vụ nội bộ; được toàn thể cán bộ P.KTTC yêu quý và tin cậy."}, "method": "Khảo sát độ hài lòng của cán bộ kỹ thuật công trường, Đánh giá bảo mật"}]}, "PP_KTTC": {"title": "Phó phòng Kỹ thuật Thi công", "code": "PP_KTTC", "grade": "G4-VM / G4-CT", "level": "L4 - Quản lý Cấp trung", "bhxh": "Làn B (Văn phòng) / Làn A (Công trường)", "reporting": "Báo cáo: Trưởng phòng KTTC | Phối hợp: Các GĐDA, CHT, CHP, CBKT", "purpose": "Đóng vai trò là Tổng tham mưu kỹ thuật, hỗ trợ Trưởng phòng thẩm định biện pháp thi công DUL, kiểm soát tiến độ tổng thể các dự án và tổ chức đào tạo phát triển đội ngũ kỹ sư.", "responsibilities": ["Thẩm định hồ sơ BPTC, bản vẽ Shop Drawing các công trình trước khi trình Trưởng phòng phê duyệt.", "Theo dõi, đôn đốc và phân tích sai lệch tiến độ thi công tuần/tháng của toàn bộ các dự án.", "Điều phối kỹ thuật giữa hiện trường với phòng Thiết kế, Kế hoạch Đấu thầu và Cung ứng vật tư.", "Tổ chức các chương trình đào tạo nội bộ về quy chuẩn thi công DUL và kiểm soát chất lượng QA/QC.", "Tham gia xử lý các sự cố kỹ thuật phức tạp phát sinh tại các công trường khi được phân công."], "authorities": "Ký thẩm định BPTC và bản vẽ Shop Drawing; Kiểm tra đột xuất hiện trường thi công; Đề xuất đào tạo bổ sung cho kỹ sư.", "kpis": [{"name": "Tiến độ thẩm định BPTC", "target": "100% hồ sơ thẩm định đúng hạn trong 48h", "weight": "35%"}, {"name": "Chất lượng kiểm soát tiến độ", "target": "Phát hiện sớm 100% sai lệch tiến độ đa dự án", "weight": "25%"}, {"name": "Đào tạo nội bộ kỹ thuật", "target": "Tổ chức tối thiểu 1 khóa đào tạo kỹ thuật/tháng", "weight": "20%"}, {"name": "Hỗ trợ xử lý sự cố kỹ thuật", "target": "100% sự cố được tham mưu xử lý kịp thời", "weight": "20%"}], "qualifications": "Kỹ sư Xây dựng/Cầu đường (Đại học); Tối thiểu 7 năm kinh nghiệm thi công DUL; Nắm chắc TCVN, ASTM và các tiêu chuẩn kiểm soát chất lượng quốc tế.", "pillars": [{"name": "Tham Mưu Kỹ Thuật & Thẩm Định BPTC (Technical Mastery)", "weight": 40, "color": "text-emerald-700 bg-emerald-50 border-emerald-200"}, {"name": "Kiểm Soát Tiến Độ Đa Dự Án & DTTC (SHRM Business)", "weight": 30, "color": "text-red-700 bg-red-50 border-red-200"}, {"name": "Đào Tạo Kỹ Sư & Kèm Cặp OJT (SHRM People Coaching)", "weight": 20, "color": "text-purple-700 bg-purple-50 border-purple-200"}, {"name": "Phối Hợp Đa Phòng Ban & Đạo Đức (SHRM Interpersonal)", "weight": 10, "color": "text-blue-700 bg-blue-50 border-blue-200"}], "criteria": [{"id": "PP_T1", "pillar": "Tham Mưu Kỹ Thuật & Thẩm Định BPTC (Technical Mastery)", "name": "Thẩm Định & Tối Ưu Biện Pháp Thi Công DUL (BPTC Review)", "weight": 25, "benchmark": 4.5, "desc": "Rà soát kỹ lưỡng hồ sơ BPTC, phát hiện các điểm bất hợp lý trong sơ đồ kéo cáp và đề xuất giải pháp thi công tối ưu.", "bars": {"1": "Thẩm định sơ sài, bỏ lọt các lỗi kỹ thuật nghiêm trọng trong hồ sơ BPTC.", "2": "Thẩm định được BPTC đơn giản, còn lúng túng với kết cấu dầm sàn chuyển hoặc khẩu độ lớn.", "3": "Thẩm định chính xác, đưa ra các nhận xét kỹ thuật xác đáng giúp hoàn thiện BPTC.", "4": "Chủ động đề xuất các giải pháp kỹ thuật tối ưu rút ngắn thời gian và chi phí thi công.", "5": "Chuyên gia hàng đầu về thẩm định BPTC DUL; giải pháp thẩm định luôn có giá trị thực tiễn rất cao."}, "method": "Biên bản thẩm định BPTC, Đánh giá của Trưởng phòng"}, {"id": "PP_T2", "pillar": "Tham Mưu Kỹ Thuật & Thẩm Định BPTC (Technical Mastery)", "name": "Cập Nhật Tiêu Chuẩn & Chuyển Giao Công Nghệ Thi Công Mới (Standards & Tech)", "weight": 15, "benchmark": 4.0, "desc": "Nghiên cứu cập nhật các tiêu chuẩn mới (TCVN, ASTM, fib); biên soạn tài liệu hướng dẫn kỹ thuật kéo căng cáp và neo đất.", "bars": {"1": "Không cập nhật tiêu chuẩn mới, áp dụng quy chuẩn lỗi thời vào kiểm tra hiện trường.", "2": "Có đọc tiêu chuẩn nhưng chưa chuyển hóa thành hướng dẫn cụ thể cho kỹ sư.", "3": "Áp dụng nhuần nhuyễn các tiêu chuẩn kỹ thuật hiện hành vào công tác giám sát chất lượng.", "4": "Biên soạn các tài liệu hướng dẫn kỹ thuật chi tiết, dễ hiểu cho đội ngũ kỹ sư áp dụng.", "5": "Tiên phong nghiên cứu và thử nghiệm công nghệ DUL mới; nâng tầm vị thế công nghệ của công ty."}, "method": "Tài liệu đào tạo kỹ thuật do Phó phòng biên soạn"}, {"id": "PP_B1", "pillar": "Kiểm Soát Tiến Độ Đa Dự Án & DTTC (SHRM Business)", "name": "Giám Sát Tiến Độ Đa Công Trường & Cảnh Báo Sai Lệch (Schedule Governance)", "weight": 20, "benchmark": 4.0, "desc": "Theo dõi tiến độ hàng tuần của tất cả các công trường, nhận diện sớm các nguy cơ chậm trễ để cảnh báo Trưởng phòng chỉ đạo kịp thời.", "bars": {"1": "Không nắm được tiến độ các công trường, chỉ biết khi công trường đã bị chậm nhiều tuần.", "2": "Báo cáo tiến độ bị động, chưa phân tích được nguyên nhân cốt lõi gây chậm trễ tiến độ.", "3": "Bám sát tiến độ hàng tuần, phân tích chính xác sai lệch và đề xuất phương án bù tiến độ khả thi.", "4": "Chủ động điều phối hỗ trợ giữa các công trường để giải cứu các mốc tiến độ khẩn cấp.", "5": "Hệ thống kiểm soát tiến độ đa dự án chuẩn mực, đảm bảo 100% dự án về đích đúng hẹn."}, "method": "Báo cáo phân tích tiến độ tuần đa dự án, Tỷ lệ công trình đạt tiến độ"}, {"id": "PP_B2", "pillar": "Kiểm Soát Tiến Độ Đa Dự Án & DTTC (SHRM Business)", "name": "Kiểm Soát Định Mức Hao Hụt & Chi Phí DTTC Toàn Công Ty (Cost & Material Control)", "weight": 10, "benchmark": 4.0, "desc": "Rà soát định mức hao hụt cáp thép, neo và vữa bơm giữa các công trường; đề xuất giải pháp giảm thiểu chi phí phát sinh.", "bars": {"1": "Không quan tâm số liệu hao hụt vật tư của các công trường, phó mặc cho hiện trường.", "2": "Có tổng hợp số liệu hao hụt nhưng chưa có biện pháp chấn chỉnh các công trường có tỷ lệ hao hụt cao.", "3": "Kiểm soát tốt số liệu hao hụt cáp thép đa công trường, kịp thời chấn chỉnh các sai lệch định mức.", "4": "Đề xuất quy trình quản lý vật tư cắt cáp chuẩn hóa, giúp giảm 0.3% tỷ lệ hao hụt toàn công ty.", "5": "Quản trị định mức vật tư xuất sắc; mang lại hiệu quả tiết kiệm hàng trăm triệu đồng mỗi năm."}, "method": "Báo cáo đối soát hao hụt đa dự án, Đề xuất cải tiến định mức"}, {"id": "PP_P1", "pillar": "Đào Tạo Kỹ Sư & Kèm Cặp OJT (SHRM People Coaching)", "name": "Tổ Chức Đào Tạo Nội Bộ & Kèm Cặp Kỹ Sư Kế Cận (People Coaching)", "weight": 20, "benchmark": 4.0, "desc": "Chủ trì các buổi sinh hoạt chuyên môn, đào tạo đọc bản vẽ, tính toán $\\Delta L$ và kèm cặp trực tiếp cán bộ kỹ thuật trẻ.", "bars": {"1": "Không tham gia đào tạo, giấu nghề hoặc không muốn chia sẻ kiến thức với cấp dưới.", "2": "Thỉnh thoảng có hướng dẫn nhưng chưa có giáo trình và phương pháp sư phạm bài bản.", "3": "Thường xuyên tổ chức các buổi đào tạo nội bộ chất lượng, kèm cặp tận tình cho kỹ sư trẻ.", "4": "Xây dựng hệ thống bài giảng thực chiến phong phú, đào tạo nhiều kỹ sư trẻ trở thành nòng cốt.", "5": "Người thầy truyền cảm hứng công nghệ thi công DUL; được toàn thể kỹ sư trẻ kính trọng."}, "method": "Số giờ đào tạo nội bộ, Đánh giá chất lượng khóa học từ học viên"}, {"id": "PP_I1", "pillar": "Phối Hợp Đa Phòng Ban & Đạo Đức (SHRM Interpersonal)", "name": "Phối Hợp Kỹ Thuật Đa Phòng Ban & Liêm Chính (Cross-functional & Ethics)", "weight": 10, "benchmark": 4.0, "desc": "Làm đầu mối kết nối kỹ thuật nhịp nhàng giữa KTTC với phòng Thiết kế, Đấu thầu, Cung ứng và giữ gìn đạo đức nghề nghiệp.", "bars": {"1": "Gây mâu thuẫn giữa phòng thi công với thiết kế và cung ứng, đùn đẩy trách nhiệm khi có lỗi.", "2": "Phối hợp còn chậm trễ, thông tin kỹ thuật phản hồi cho các phòng ban chưa kịp thời.", "3": "Phối hợp nhịp nhàng, chia sẻ thông tin kịp thời, giải quyết vướng mắc kỹ thuật trên tinh thần hợp tác.", "4": "Cầu nối tin cậy giữa văn phòng và hiện trường; luôn đặt lợi ích chung của công ty lên hàng đầu.", "5": "Tấm gương sáng về tinh thần hợp tác liên phòng ban và đạo đức liêm chính trong công việc."}, "method": "Đánh giá 360 độ từ phòng Thiết kế, Đấu thầu, Cung ứng"}]}}, "employees": [{"stt": 1, "empCode": "NV0000029", "fullName": "Trần Văn Huy", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Trưởng phòng Kỹ thuật Thi công", "roleKey": "TP_KTTC", "grade": "G4-VM", "bhxhTrack": "Làn B (VP)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Trụ sở chính", "email": "huytv@minhduccorp.com.vn", "joinDate": "08/2018", "p2": "Bậc 12 (42.5 tr)", "note": "Vững toàn diện kỹ thuật & điều hành thi công DUL toàn quốc", "scores": {"TP_L1": 4.8, "TP_L2": 5.0, "TP_B1": 4.7, "TP_B2": 4.8, "TP_I1": 4.9, "TP_I2": 4.8, "TP_T1": 4.9, "TP_T2": 4.7}, "avgScore": 4.83, "fitScore": 96.5, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 12 (42.5 tr)"}, {"stt": 2, "empCode": "NV0000593", "fullName": "Nguyễn Thị Hằng", "gender": "Nữ", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Trợ lý phòng Kỹ thuật Thi công", "roleKey": "TRO_LY_KTTC", "grade": "G6-VM", "bhxhTrack": "Làn B (VP)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Trụ sở chính", "email": "hangnt@minhduccorp.com.vn", "joinDate": "07/2026", "p2": "Bậc 6 (15.0 tr)", "note": "Quản trị hồ sơ văn thư & chi phí nội bộ xuất sắc", "scores": {"TL_D1": 3.8, "TL_C1": 3.6, "TL_A1": 3.5, "TL_I1": 4.1}, "avgScore": 3.73, "fitScore": 104.2, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 6 (15.0 tr)"}, {"stt": 3, "empCode": "NV0000276", "fullName": "Nguyễn Hồng Tiến", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "tiennh@minhduccorp.com.vn", "joinDate": "08/2024", "p2": "Bậc 6 (16.0 tr)", "note": "Độc lập giám sát hiện trường, nghiệm thu công việc tốt", "scores": {"CBKT_T1": 3.5, "CBKT_T2": 3.4, "CBKT_D1": 3.4, "CBKT_S1": 3.6, "CBKT_I1": 3.3}, "avgScore": 3.46, "fitScore": 115.2, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 6 (16.0 tr)"}, {"stt": 4, "empCode": "NV0000554", "fullName": "Nguyễn Tùng Dương", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "duongnt@minhduccorp.com.vn", "joinDate": "05/2026", "p2": "Bậc 4 (11.5 tr)", "note": "Cán bộ kỹ thuật trẻ, cần đào tạo OJT đọc bản vẽ & nghiệm thu", "scores": {"CBKT_T1": 2.8, "CBKT_T2": 2.7, "CBKT_D1": 2.5, "CBKT_S1": 3.0, "CBKT_I1": 2.6}, "avgScore": 2.73, "fitScore": 90.8, "ratingClass": "Đạt chuẩn", "salaryP2": "Bậc 4 (11.5 tr)"}, {"stt": 5, "empCode": "NV0000082", "fullName": "Nguyễn Duy Phúc", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Chỉ huy trưởng", "roleKey": "CHT", "grade": "G4-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "phucnd@minhduccorp.com.vn", "joinDate": "11/2021", "p2": "Bậc 9 (28.5 tr)", "note": "Điều hành tổ đội tốt, kiểm soát lán trại và hao hụt cáp chặt", "scores": {"CHT_T1": 4.3, "CHT_T2": 4.1, "CHT_C1": 4.2, "CHT_C2": 4.1, "CHT_L1": 4.1, "CHT_L2": 3.9, "CHT_E1": 4.4, "CHT_I1": 4.0}, "avgScore": 4.14, "fitScore": 98.9, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 9 (28.5 tr)"}, {"stt": 6, "empCode": "NV0000091", "fullName": "Nguyễn Thành Phu", "gender": "Nam", "degree": "Cao đẳng", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "phunt@minhduccorp.com.vn", "joinDate": "02/2022", "p2": "Bậc 6 (16.0 tr)", "note": "Độc lập giám sát hiện trường, nghiệm thu công việc tốt", "scores": {"CBKT_T1": 3.5, "CBKT_T2": 3.4, "CBKT_D1": 3.4, "CBKT_S1": 3.6, "CBKT_I1": 3.3}, "avgScore": 3.46, "fitScore": 115.2, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 6 (16.0 tr)"}, {"stt": 7, "empCode": "NV0000273", "fullName": "Trần Minh Phước", "gender": "Nam", "degree": "Khác / Lao động kỹ thuật", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "phuoctm@minhduccorp.com.vn", "joinDate": "08/2024", "p2": "Bậc 6 (16.0 tr)", "note": "Độc lập giám sát hiện trường, nghiệm thu công việc tốt", "scores": {"CBKT_T1": 3.5, "CBKT_T2": 3.4, "CBKT_D1": 3.4, "CBKT_S1": 3.6, "CBKT_I1": 3.3}, "avgScore": 3.46, "fitScore": 115.2, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 6 (16.0 tr)"}, {"stt": 8, "empCode": "NV0000085", "fullName": "Võ Trọng Thân", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Giám đốc Dự án", "roleKey": "GDDA", "grade": "G3", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "thanvt@minhduccorp.com.vn", "joinDate": "11/2021", "p2": "Bậc 11 (38.0 tr)", "note": "Nắm vững kỹ thuật cáp DUL & đàm phán hợp đồng CĐT", "scores": {"GD_B1": 4.7, "GD_B2": 4.6, "GD_L1": 4.8, "GD_L2": 4.9, "GD_I1": 4.8, "GD_I2": 4.4, "GD_T1": 4.8, "GD_T2": 4.7}, "avgScore": 4.71, "fitScore": 95.2, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 11 (38.0 tr)"}, {"stt": 9, "empCode": "NV0000394", "fullName": "Mai Đức Thuận", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Chỉ huy trưởng", "roleKey": "CHT", "grade": "G4-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "thuanmd@minhduccorp.com.vn", "joinDate": "08/2025", "p2": "Bậc 10 (31.5 tr)", "note": "Kinh nghiệm hiện trường phong phú, đôn đốc thu hồi nợ tốt", "scores": {"CHT_T1": 4.4, "CHT_T2": 4.2, "CHT_C1": 4.3, "CHT_C2": 4.2, "CHT_L1": 4.2, "CHT_L2": 4.0, "CHT_E1": 4.5, "CHT_I1": 4.1}, "avgScore": 4.24, "fitScore": 101.2, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 10 (31.5 tr)"}, {"stt": 10, "empCode": "NV0000054", "fullName": "Hoàng Diệu Huy", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Chỉ huy phó", "roleKey": "CHP", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "huyhd@minhduccorp.com.vn", "joinDate": "05/2020", "p2": "Bậc 8 (22.0 tr)", "note": "Nắm vững quy trình kéo căng cáp, nghiệm thu nội bộ chuẩn", "scores": {"CHP_T1": 3.9, "CHP_T2": 3.8, "CHP_C1": 3.5, "CHP_P1": 3.5, "CHP_E1": 4.0}, "avgScore": 3.71, "fitScore": 98.4, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 8 (22.0 tr)"}, {"stt": 11, "empCode": "NV0000023", "fullName": "Bùi Thành Trung", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Giám đốc Dự án", "roleKey": "GDDA", "grade": "G3", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "trungbt@minhduccorp.com.vn", "joinDate": "10/2017", "p2": "Bậc 12 (42.5 tr)", "note": "Chỉ huy đại dự án, quản lý DTTC và bảo vệ dòng tiền tối ưu", "scores": {"GD_B1": 4.8, "GD_B2": 4.9, "GD_L1": 4.9, "GD_L2": 5.0, "GD_I1": 4.8, "GD_I2": 4.6, "GD_T1": 4.8, "GD_T2": 4.9}, "avgScore": 4.84, "fitScore": 97.8, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 12 (42.5 tr)"}, {"stt": 12, "empCode": "NV0000097", "fullName": "Phạm Văn Minh", "gender": "Nam", "degree": "Cao đẳng", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "minhpv@minhduccorp.com.vn", "joinDate": "04/2022", "p2": "Bậc 6 (16.0 tr)", "note": "Độc lập giám sát hiện trường, nghiệm thu công việc tốt", "scores": {"CBKT_T1": 3.5, "CBKT_T2": 3.4, "CBKT_D1": 3.4, "CBKT_S1": 3.6, "CBKT_I1": 3.3}, "avgScore": 3.46, "fitScore": 115.2, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 6 (16.0 tr)"}, {"stt": 13, "empCode": "NV0000036", "fullName": "Nguyễn Hải Hưng", "gender": "Nam", "degree": "Cao đẳng", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật chính", "roleKey": "CBKT_CHINH", "grade": "G4-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "hungnh@minhduccorp.com.vn", "joinDate": "06/2019", "p2": "Bậc 8 (22.0 tr)", "note": "Chuyên gia kỹ thuật kéo căng cáp DUL & xử lý sự cố", "scores": {"CBKTC_T1": 4.2, "CBKTC_T2": 4.1, "CBKTC_A1": 3.9, "CBKTC_B1": 3.8, "CBKTC_I1": 3.8}, "avgScore": 3.98, "fitScore": 94.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 8 (22.0 tr)"}, {"stt": 14, "empCode": "NV0000101", "fullName": "Thái Văn Hoàng", "gender": "Nam", "degree": "Cao đẳng", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "hoangtv@minhduccorp.com.vn", "joinDate": "05/2022", "p2": "Bậc 6 (16.0 tr)", "note": "Độc lập giám sát hiện trường, nghiệm thu công việc tốt", "scores": {"CBKT_T1": 3.5, "CBKT_T2": 3.4, "CBKT_D1": 3.4, "CBKT_S1": 3.6, "CBKT_I1": 3.3}, "avgScore": 3.46, "fitScore": 115.2, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 6 (16.0 tr)"}, {"stt": 15, "empCode": "NV0000128", "fullName": "Bùi Huy Khải", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Chỉ huy phó", "roleKey": "CHP", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "khaibh@minhduccorp.com.vn", "joinDate": "09/2022", "p2": "Bậc 8 (22.0 tr)", "note": "Giám sát kỹ thuật chặt chẽ, kèm cặp kỹ sư mới tốt", "scores": {"CHP_T1": 4.0, "CHP_T2": 3.9, "CHP_C1": 3.7, "CHP_P1": 3.7, "CHP_E1": 4.1}, "avgScore": 3.86, "fitScore": 102.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 8 (22.0 tr)"}, {"stt": 16, "empCode": "NV0000171", "fullName": "Bùi Chí Tâm", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Chỉ huy phó", "roleKey": "CHP", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "tambc@minhduccorp.com.vn", "joinDate": "05/2023", "p2": "Bậc 7 (19.5 tr)", "note": "Tổ chức nghiệm thu nội bộ tốt, kiểm soát hao hụt đạt định mức", "scores": {"CHP_T1": 3.8, "CHP_T2": 3.7, "CHP_C1": 3.4, "CHP_P1": 3.4, "CHP_E1": 3.9}, "avgScore": 3.62, "fitScore": 95.8, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 7 (19.5 tr)"}, {"stt": 17, "empCode": "NV0000187", "fullName": "Trần Mạnh Khang", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "khangtm@minhduccorp.com.vn", "joinDate": "08/2023", "p2": "Bậc 6 (16.0 tr)", "note": "Độc lập giám sát hiện trường, nghiệm thu công việc tốt", "scores": {"CBKT_T1": 3.5, "CBKT_T2": 3.4, "CBKT_D1": 3.4, "CBKT_S1": 3.6, "CBKT_I1": 3.3}, "avgScore": 3.46, "fitScore": 115.2, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 6 (16.0 tr)"}, {"stt": 18, "empCode": "NV0000248", "fullName": "Nguyễn Thành Viên", "gender": "Nam", "degree": "Cao đẳng", "contractType": "Chính thức", "jobTitle": "Chỉ huy phó", "roleKey": "CHP", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "viennt@minhduccorp.com.vn", "joinDate": "05/2024", "p2": "Bậc 8 (22.0 tr)", "note": "Xử lý tình huống hiện trường linh hoạt, kỷ luật an toàn cao", "scores": {"CHP_T1": 3.9, "CHP_T2": 3.8, "CHP_C1": 3.6, "CHP_P1": 3.6, "CHP_E1": 4.0}, "avgScore": 3.76, "fitScore": 99.6, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 8 (22.0 tr)"}, {"stt": 19, "empCode": "NV0000297", "fullName": "Dương Đức Đảm", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "damdd@minhduccorp.com.vn", "joinDate": "10/2024", "p2": "Bậc 6 (16.0 tr)", "note": "Độc lập giám sát hiện trường, nghiệm thu công việc tốt", "scores": {"CBKT_T1": 3.5, "CBKT_T2": 3.4, "CBKT_D1": 3.4, "CBKT_S1": 3.6, "CBKT_I1": 3.3}, "avgScore": 3.46, "fitScore": 115.2, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 6 (16.0 tr)"}, {"stt": 20, "empCode": "NV0000363", "fullName": "Bùi Tấn Tài", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "taibt@minhduccorp.com.vn", "joinDate": "06/2025", "p2": "Bậc 5 (13.5 tr)", "note": "Nắm vững quy trình cơ bản, cần rèn luyện bóc tách khối lượng", "scores": {"CBKT_T1": 3.2, "CBKT_T2": 3.1, "CBKT_D1": 3.0, "CBKT_S1": 3.3, "CBKT_I1": 3.0}, "avgScore": 3.13, "fitScore": 104.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 5 (13.5 tr)"}, {"stt": 21, "empCode": "NV0000395", "fullName": "Lâm Quang Hòa", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "hoalq@minhduccorp.com.vn", "joinDate": "08/2025", "p2": "Bậc 5 (13.5 tr)", "note": "Nắm vững quy trình cơ bản, cần rèn luyện bóc tách khối lượng", "scores": {"CBKT_T1": 3.2, "CBKT_T2": 3.1, "CBKT_D1": 3.0, "CBKT_S1": 3.3, "CBKT_I1": 3.0}, "avgScore": 3.13, "fitScore": 104.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 5 (13.5 tr)"}, {"stt": 22, "empCode": "NV0000385", "fullName": "Hoàng Nhật Minh", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "minhhn@minhduccorp.com.vn", "joinDate": "08/2025", "p2": "Bậc 5 (13.5 tr)", "note": "Nắm vững quy trình cơ bản, cần rèn luyện bóc tách khối lượng", "scores": {"CBKT_T1": 3.2, "CBKT_T2": 3.1, "CBKT_D1": 3.0, "CBKT_S1": 3.3, "CBKT_I1": 3.0}, "avgScore": 3.13, "fitScore": 104.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 5 (13.5 tr)"}, {"stt": 23, "empCode": "NV0000058", "fullName": "Sách Visal", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Chỉ huy phó", "roleKey": "CHP", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "visal@minhduccorp.com.vn", "joinDate": "07/2020", "p2": "Bậc 7 (19.5 tr)", "note": "Điều phối thi công mũi cáp DUL, giao tiếp TVGS tốt", "scores": {"CHP_T1": 3.7, "CHP_T2": 3.6, "CHP_C1": 3.3, "CHP_P1": 3.4, "CHP_E1": 3.8}, "avgScore": 3.54, "fitScore": 93.6, "ratingClass": "Đạt chuẩn", "salaryP2": "Bậc 7 (19.5 tr)"}, {"stt": 24, "empCode": "NV0000415", "fullName": "Phan Văn Hải", "gender": "Nam", "degree": "Trung cấp", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật chính", "roleKey": "CBKT_CHINH", "grade": "G4-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "haipv@minhduccorp.com.vn", "joinDate": "10/2025", "p2": "Bậc 8 (22.0 tr)", "note": "Đo bóc khối lượng và xử lý shop drawing tốt", "scores": {"CBKTC_T1": 4.0, "CBKTC_T2": 3.9, "CBKTC_A1": 3.8, "CBKTC_B1": 3.7, "CBKTC_I1": 3.6}, "avgScore": 3.83, "fitScore": 90.7, "ratingClass": "Đạt chuẩn", "salaryP2": "Bậc 8 (22.0 tr)"}, {"stt": 25, "empCode": "NV0000422", "fullName": "Chau Pâu", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "chaupau@minhduccorp.com.vn", "joinDate": "11/2025", "p2": "Bậc 5 (13.5 tr)", "note": "Nắm vững quy trình cơ bản, cần rèn luyện bóc tách khối lượng", "scores": {"CBKT_T1": 3.2, "CBKT_T2": 3.1, "CBKT_D1": 3.0, "CBKT_S1": 3.3, "CBKT_I1": 3.0}, "avgScore": 3.13, "fitScore": 104.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 5 (13.5 tr)"}, {"stt": 26, "empCode": "NV0000425", "fullName": "Nguyễn Như Thịnh", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "thinhnn@minhduccorp.com.vn", "joinDate": "11/2025", "p2": "Bậc 5 (13.5 tr)", "note": "Nắm vững quy trình cơ bản, cần rèn luyện bóc tách khối lượng", "scores": {"CBKT_T1": 3.2, "CBKT_T2": 3.1, "CBKT_D1": 3.0, "CBKT_S1": 3.3, "CBKT_I1": 3.0}, "avgScore": 3.13, "fitScore": 104.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 5 (13.5 tr)"}, {"stt": 27, "empCode": "NV0000429", "fullName": "Nguyễn Tấn Sơn", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "sonnt@minhduccorp.com.vn", "joinDate": "11/2025", "p2": "Bậc 5 (13.5 tr)", "note": "Nắm vững quy trình cơ bản, cần rèn luyện bóc tách khối lượng", "scores": {"CBKT_T1": 3.2, "CBKT_T2": 3.1, "CBKT_D1": 3.0, "CBKT_S1": 3.3, "CBKT_I1": 3.0}, "avgScore": 3.13, "fitScore": 104.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 5 (13.5 tr)"}, {"stt": 28, "empCode": "NV0000432", "fullName": "Hoàng Văn Thành", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "thanhhv@minhduccorp.com.vn", "joinDate": "11/2025", "p2": "Bậc 5 (13.5 tr)", "note": "Nắm vững quy trình cơ bản, cần rèn luyện bóc tách khối lượng", "scores": {"CBKT_T1": 3.2, "CBKT_T2": 3.1, "CBKT_D1": 3.0, "CBKT_S1": 3.3, "CBKT_I1": 3.0}, "avgScore": 3.13, "fitScore": 104.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 5 (13.5 tr)"}, {"stt": 29, "empCode": "NV0000450", "fullName": "Ngô Tiến Đạt", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G6-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "datnt2@minhduccorp.com.vn", "joinDate": "12/2025", "p2": "Bậc 4 (11.5 tr)", "note": "Cán bộ kỹ thuật trẻ, cần đào tạo OJT đọc bản vẽ & nghiệm thu", "scores": {"CBKT_T1": 2.8, "CBKT_T2": 2.7, "CBKT_D1": 2.5, "CBKT_S1": 3.0, "CBKT_I1": 2.6}, "avgScore": 2.73, "fitScore": 90.8, "ratingClass": "Đạt chuẩn", "salaryP2": "Bậc 4 (11.5 tr)"}, {"stt": 30, "empCode": "NV0000328", "fullName": "Trương Huy Vũ", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "vuth@minhduccorp.com.vn", "joinDate": "03/2025", "p2": "Bậc 5 (13.5 tr)", "note": "Nắm vững quy trình cơ bản, cần rèn luyện bóc tách khối lượng", "scores": {"CBKT_T1": 3.2, "CBKT_T2": 3.1, "CBKT_D1": 3.0, "CBKT_S1": 3.3, "CBKT_I1": 3.0}, "avgScore": 3.13, "fitScore": 104.3, "ratingClass": "Xuất sắc", "salaryP2": "Bậc 5 (13.5 tr)"}, {"stt": 31, "empCode": "NV0000573", "fullName": "Nguyễn Minh Triết", "gender": "Nam", "degree": "Đại học", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "trietnm@minhduccorp.com.vn", "joinDate": "06/2026", "p2": "Bậc 4 (11.5 tr)", "note": "Cán bộ kỹ thuật trẻ, cần đào tạo OJT đọc bản vẽ & nghiệm thu", "scores": {"CBKT_T1": 2.8, "CBKT_T2": 2.7, "CBKT_D1": 2.5, "CBKT_S1": 3.0, "CBKT_I1": 2.6}, "avgScore": 2.73, "fitScore": 90.8, "ratingClass": "Đạt chuẩn", "salaryP2": "Bậc 4 (11.5 tr)"}, {"stt": 32, "empCode": "NV0000574", "fullName": "Nguyễn Công Nam", "gender": "Nam", "degree": "Cao đẳng", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G6-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "namnc@minhduccorp.com.vn", "joinDate": "06/2026", "p2": "Bậc 4 (11.5 tr)", "note": "Cán bộ kỹ thuật trẻ, cần đào tạo OJT đọc bản vẽ & nghiệm thu", "scores": {"CBKT_T1": 2.8, "CBKT_T2": 2.7, "CBKT_D1": 2.5, "CBKT_S1": 3.0, "CBKT_I1": 2.6}, "avgScore": 2.73, "fitScore": 90.8, "ratingClass": "Đạt chuẩn", "salaryP2": "Bậc 4 (11.5 tr)"}, {"stt": 33, "empCode": "NV0000632", "fullName": "Đoàn Anh Triển", "gender": "Nam", "degree": "Trung học phổ thông", "contractType": "Thử việc", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G6-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "trienda@minhduccorp.com.vn", "joinDate": "08/2026", "p2": "Bậc 4 (11.5 tr)", "note": "Cán bộ kỹ thuật trẻ, cần đào tạo OJT đọc bản vẽ & nghiệm thu", "scores": {"CBKT_T1": 2.8, "CBKT_T2": 2.7, "CBKT_D1": 2.5, "CBKT_S1": 3.0, "CBKT_I1": 2.6}, "avgScore": 2.73, "fitScore": 90.8, "ratingClass": "Đạt chuẩn", "salaryP2": "Bậc 4 (11.5 tr)"}, {"stt": 34, "empCode": "NV0000650", "fullName": "Trịnh Văn Trọng", "gender": "Nam", "degree": "Khác / Lao động kỹ thuật", "contractType": "Chính thức", "jobTitle": "Cán bộ Kỹ thuật", "roleKey": "CBKT", "grade": "G5-CT", "bhxhTrack": "Làn A (Công trường)", "dept": "DUL - Phòng Kỹ thuật Thi công", "loc": "Công trường", "email": "", "joinDate": "09/2026", "p2": "Bậc 4 (11.5 tr)", "note": "Cán bộ kỹ thuật trẻ, cần đào tạo OJT đọc bản vẽ & nghiệm thu", "scores": {"CBKT_T1": 2.8, "CBKT_T2": 2.7, "CBKT_D1": 2.5, "CBKT_S1": 3.0, "CBKT_I1": 2.6}, "avgScore": 2.73, "fitScore": 90.8, "ratingClass": "Đạt chuẩn", "salaryP2": "Bậc 4 (11.5 tr)"}]};
+
+    let currentEmpCode = "NV0000029"; // Default: Tran Van Huy (TP_KTTC)
+    let currentEmployee = null;
+    let currentRole = null;
+    let activeRoleTab = "TP_KTTC";
+
+    // Initialize application on DOM loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      initRolePills();
+      initEmployeeDropdown();
+      renderRankingTable();
+      renderRoleDetail(activeRoleTab);
+      loadEmployeeEvaluation(currentEmpCode);
+    });
+
+    // Tab Navigation
+    function switchTab(tabId) {
+      const tabs = ['jd-dict', 'eval', 'ranking', 'compensation'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-btn-' + t);
+        const section = document.getElementById('tab-' + t);
+        if (t === tabId) {
+          section.classList.remove('hidden');
+          btn.classList.add('tab-btn-active');
+          btn.classList.remove('text-slate-600', 'hover:bg-slate-50');
+        } else {
+          section.classList.add('hidden');
+          btn.classList.remove('tab-btn-active');
+          btn.classList.add('text-slate-600', 'hover:bg-slate-50');
+        }
+      });
+      if (tabId === 'eval') {
+        updateEvaluationUI();
+      }
+    }
+
+    // ==========================================
+    // TAB 1: JD & KHUNG NĂNG LỰC 8 VỊ TRÍ
+    // ==========================================
+    function initRolePills() {
+      const container = document.getElementById("rolePillsContainer");
+      container.innerHTML = "";
+      const roleKeys = ["TP_KTTC", "PP_KTTC", "GDDA", "CHT", "CHP", "CBKT_CHINH", "CBKT", "TRO_LY_KTTC"];
+      
+      roleKeys.forEach(k => {
+        const r = MASTER_DATA.roles[k];
+        if (!r) return;
+        const btn = document.createElement("button");
+        btn.id = "role-pill-" + k;
+        btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition border border-slate-200 " + 
+          (k === activeRoleTab ? "role-btn-active" : "bg-slate-50 text-slate-700 hover:bg-slate-100");
+        btn.innerText = r.title;
+        btn.onclick = () => {
+          activeRoleTab = k;
+          document.querySelectorAll("[id^='role-pill-']").forEach(b => {
+            b.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100";
+          });
+          btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition border border-slate-200 role-btn-active";
+          renderRoleDetail(k);
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function renderRoleDetail(roleKey) {
+      const role = MASTER_DATA.roles[roleKey];
+      const container = document.getElementById("roleDetailContent");
+      if (!role) return;
+
+      let kpisHtml = role.kpis.map(k => `
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="text-[11px] text-slate-400 font-bold uppercase">${k.name} (${k.weight})</div>
+          <div class="text-xs font-bold text-slate-800 mt-1">${k.target}</div>
+        </div>
+      `).join("");
+
+      let respHtml = role.responsibilities.map((res, idx) => `
+        <li class="flex items-start gap-2">
+          <span class="w-5 h-5 rounded-full bg-red-100 text-red-800 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">${idx+1}</span>
+          <span>${res}</span>
+        </li>
+      `).join("");
+
+      let pillarsHtml = role.pillars.map(p => `
+        <div class="p-3.5 rounded-xl border ${p.color}">
+          <div class="text-[11px] font-bold uppercase tracking-wider">${p.name}</div>
+          <div class="text-xl font-black mt-1">Trọng số: ${p.weight}%</div>
+        </div>
+      `).join("");
+
+      let criteriaRows = role.criteria.map((c, i) => `
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 bg-[#1F4E79] text-white rounded text-[10px] font-black">${c.id}</span>
+              <span class="font-bold text-slate-900 text-sm">${c.name}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-[11px] font-bold">Trọng số: ${c.weight}%</span>
+              <span class="px-2 py-0.5 bg-red-100 text-red-800 rounded text-[11px] font-black">Chuẩn: Cấp ${c.benchmark.toFixed(1)}</span>
+            </div>
+          </div>
+          
+          <p class="text-xs text-slate-600 italic bg-white p-2.5 rounded-lg border border-slate-100">
+            <strong>Mục tiêu năng lực:</strong> ${c.desc}
+          </p>
+
+          <!-- BARS 5 Levels Table -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-[11px] bg-white rounded-lg border">
+              <thead class="bg-slate-100 text-slate-700 font-bold border-b">
+                <tr>
+                  <th class="p-2 w-24">Cấp Độ</th>
+                  <th class="p-2">Mô Tả Hành Vi Thực Chiến (BARS Description)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-600">
+                <tr class="${c.benchmark === 1 ? 'bg-red-50 font-bold' : ''}">
+                  <td class="p-2 font-bold text-slate-800">Cấp 1 (Novice)</td>
+                  <td class="p-2">${c.bars["1"]}</td>
+                </tr>
+                <tr class="${c.benchmark === 2 ? 'bg-amber-50 font-bold' : ''}">
+                  <td class="p-2 font-bold text-slate-800">Cấp 2 (Developing)</td>
+                  <td class="p-2">${c.bars["2"]}</td>
+                </tr>
+                <tr class="${c.benchmark === 3 ? 'bg-blue-50 font-bold text-blue-900' : ''}">
+                  <td class="p-2 font-bold text-slate-800">Cấp 3 (Competent)</td>
+                  <td class="p-2">${c.bars["3"]}</td>
+                </tr>
+                <tr class="${c.benchmark === 4 ? 'bg-emerald-50 font-bold text-emerald-900' : ''}">
+                  <td class="p-2 font-bold text-slate-800">Cấp 4 (Advanced)</td>
+                  <td class="p-2">${c.bars["4"]}</td>
+                </tr>
+                <tr class="${c.benchmark === 5 ? 'bg-purple-50 font-bold text-purple-900' : ''}">
+                  <td class="p-2 font-bold text-slate-800">Cấp 5 (Expert)</td>
+                  <td class="p-2">${c.bars["5"]}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="text-[11px] text-slate-500">
+            <strong>Phương pháp kiểm chứng:</strong> ${c.method}
+          </div>
+        </div>
+      `).join("");
+
+      container.innerHTML = `
+        <!-- PART A: JOB DESCRIPTION -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6">
+          <div class="border-b pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 bg-red-100 text-red-800 text-xs font-black rounded-full">BẢN MÔ TẢ CÔNG VIỆC (JD)</span>
+                <span class="text-xs text-slate-400 font-bold">Mã: ${role.code}</span>
+              </div>
+              <h2 class="text-2xl font-black text-slate-900 mt-1">${role.title}</h2>
+              <div class="flex flex-wrap gap-2 text-xs font-semibold text-slate-500 mt-1">
+                <span>Ngạch: <strong class="text-slate-800">${role.grade}</strong></span> • 
+                <span>Cấp bậc: <strong class="text-slate-800">${role.level}</strong></span> • 
+                <span>BHXH: <strong class="text-slate-800">${role.bhxh}</strong></span>
+              </div>
+            </div>
+            <button onclick="selectRoleInEvaluation('${roleKey}')" class="px-4 py-2 bg-[#1F4E79] hover:bg-[#153755] text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+              <span>⚡</span> Chấm Điểm Vị Trí Này
+            </button>
+          </div>
+
+          <!-- Reporting & Purpose -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+              <span class="font-bold text-slate-500 uppercase block mb-1">Cơ Cấu Báo Cáo & Quản Lý:</span>
+              <p class="text-slate-800 font-medium leading-relaxed">${role.reporting}</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+              <span class="font-bold text-slate-500 uppercase block mb-1">Mục Đích Vị Trí (Job Purpose):</span>
+              <p class="text-slate-800 font-medium leading-relaxed">${role.purpose}</p>
+            </div>
+          </div>
+
+          <!-- Key Responsibilities -->
+          <div class="text-xs space-y-2">
+            <h4 class="font-bold text-slate-800 uppercase tracking-wider">Nhiệm Vụ & Trách Nhiệm Cốt Lõi (Key Responsibilities):</h4>
+            <ul class="space-y-2 text-slate-700 leading-relaxed">${respHtml}</ul>
+          </div>
+
+          <!-- Authorities & Decision Rights -->
+          <div class="p-4 bg-red-50 rounded-xl border border-red-200 text-xs">
+            <span class="font-bold text-red-900 uppercase block mb-1">Thẩm Quyền & Quyền Hạn Ra Quyết Định:</span>
+            <p class="text-slate-700 leading-relaxed">${role.authorities}</p>
+          </div>
+
+          <!-- KPIs -->
+          <div class="space-y-2">
+            <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Chỉ Số Đo Lường Hiệu Quả (KPIs):</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">${kpisHtml}</div>
+          </div>
+
+          <!-- Qualifications -->
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+            <span class="font-bold text-slate-500 uppercase block mb-1">Tiêu Chuẩn Bổ Nhiệm & Bằng Cấp (Qualifications):</span>
+            <p class="text-slate-800 leading-relaxed">${role.qualifications}</p>
+          </div>
+        </div>
+
+        <!-- PART B: SHRM BASK COMPETENCY FRAMEWORK -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6">
+          <div class="border-b pb-4">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 bg-purple-100 text-purple-800 text-xs font-black rounded-full">CHUẨN SHRM BASK™</span>
+              <span class="text-xs text-slate-400 font-bold">Thang Đo BARS 5 Cấp Độ</span>
+            </div>
+            <h3 class="text-xl font-black text-slate-900 mt-1">Khung Năng Lực Chuẩn Hóa Riêng Cho ${role.title}</h3>
+            <p class="text-xs text-slate-500">Phân rã theo 4 trụ cột SHRM & Kỹ thuật thi công DUL với tiêu chí hành vi đo lường cụ thể</p>
+          </div>
+
+          <!-- 4 Pillars Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">${pillarsHtml}</div>
+
+          <!-- Detailed Criteria List -->
+          <div class="space-y-4">
+            <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Danh Sách Tiêu Chí & Thang Đo Hành Vi BARS:</h4>
+            <div class="space-y-4">${criteriaRows}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectRoleInEvaluation(roleKey) {
+      const emp = MASTER_DATA.employees.find(e => e.roleKey === roleKey);
+      if (emp) {
+        switchTab('eval');
+        document.getElementById("empSelect").value = emp.empCode;
+        onEmployeeSelect(emp.empCode);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alert("Vị trí này hiện đang dành cho quy hoạch nguồn cán bộ kế thừa. Hệ thống sẽ chuyển đến Tab 2 để bạn đánh giá các cán bộ trong danh sách 34 nhân sự.");
+        switchTab('eval');
+      }
+    }
+
+    // ==========================================
+    // TAB 3: CHẤM ĐIỂM & ĐÁNH GIÁ TƯƠNG TÁC
+    // ==========================================
+    function initEmployeeDropdown() {
+      const select = document.getElementById("empSelect");
+      select.innerHTML = "";
+      
+      MASTER_DATA.employees.forEach(e => {
+        const opt = document.createElement("option");
+        opt.value = e.empCode;
+        opt.innerText = `${e.empCode} — ${e.fullName} (${e.jobTitle} • ${e.grade})`;
+        select.appendChild(opt);
+      });
+      select.value = currentEmpCode;
+    }
+
+    function onEmployeeSelect(empCode) {
+      currentEmpCode = empCode;
+      loadEmployeeEvaluation(empCode);
+    }
+
+    function loadEmployeeEvaluation(empCode) {
+      currentEmployee = MASTER_DATA.employees.find(e => e.empCode === empCode);
+      if (!currentEmployee) return;
+      currentRole = MASTER_DATA.roles[currentEmployee.roleKey];
+      if (!currentRole) return;
+
+      // Update candidate banner
+      document.getElementById("evalCandidateHeader").innerHTML = `
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Họ và Tên</div>
+          <div class="font-black text-slate-900 text-sm">${currentEmployee.fullName}</div>
+        </div>
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Mã Cán Bộ</div>
+          <div class="font-bold text-slate-800">${currentEmployee.empCode}</div>
+        </div>
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Chức Danh Hiện Tại</div>
+          <div class="font-bold text-red-700 truncate" title="${currentEmployee.jobTitle}">${currentEmployee.jobTitle}</div>
+        </div>
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Ngạch Lương / Làn</div>
+          <div class="font-bold text-slate-800">${currentEmployee.grade} • ${currentEmployee.bhxhTrack}</div>
+        </div>
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Ngày Vào / Học Vấn</div>
+          <div class="font-bold text-slate-800">${currentEmployee.joinDate} • ${currentEmployee.degree}</div>
+        </div>
+        <div class="bg-slate-50 p-2.5 rounded-lg border">
+          <div class="text-[10px] text-slate-400 font-bold uppercase">Địa Điểm Làm Việc</div>
+          <div class="font-bold text-slate-800">${currentEmployee.loc}</div>
+        </div>
+      `;
+
+      document.getElementById("roleBadgeInScoring").innerText = currentRole.title;
+      renderDynamicCriteriaSliders();
+      updateEvaluationUI();
+    }
+
+    function renderDynamicCriteriaSliders() {
+      const container = document.getElementById("dynamicCriteriaContainer");
+      container.innerHTML = "";
+
+      currentRole.criteria.forEach(c => {
+        const currentScore = currentEmployee.scores[c.id] || 3.0;
+        const diff = currentScore - c.benchmark;
+        let diffColor = diff >= 0 ? "text-emerald-700 bg-emerald-50 border-emerald-200" : "text-amber-700 bg-amber-50 border-amber-200";
+
+        const div = document.createElement("div");
+        div.className = "p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5";
+        div.innerHTML = `
+          <div class="flex justify-between items-start gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 bg-[#1F4E79] text-white rounded text-[10px] font-black">${c.id}</span>
+                <span class="font-bold text-slate-900 text-xs">${c.name}</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-1">${c.desc}</p>
+            </div>
+            <div class="text-right shrink-0">
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold border ${diffColor}">
+                BM: ${c.benchmark.toFixed(1)}
+              </span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 pt-1">
+            <input type="range" min="1.0" max="5.0" step="0.1" value="${currentScore}" 
+              id="slider-${c.id}" 
+              oninput="onScoreSliderChange('${c.id}', this.value)" 
+              class="w-full h-2 bg-slate-200 rounded-lg cursor-pointer">
+            <span id="score-val-${c.id}" class="w-12 text-center text-sm font-black text-red-700 bg-white px-2 py-1 rounded border border-slate-200">
+              ${currentScore.toFixed(1)}
+            </span>
+          </div>
+
+          <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+            <span>Cấp 1: Chưa đạt</span>
+            <span>Cấp 2: Kèm cặp</span>
+            <span>Cấp 3: Chuẩn tác nghiệp</span>
+            <span>Cấp 4: Thành thạo</span>
+            <span>Cấp 5: Chuyên gia</span>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function onScoreSliderChange(criteriaId, value) {
+      const numVal = parseFloat(value);
+      currentEmployee.scores[criteriaId] = numVal;
+      document.getElementById("score-val-" + criteriaId).innerText = numVal.toFixed(1);
+      updateEvaluationUI();
+    }
+
+    function updateEvaluationUI() {
+      if (!currentEmployee || !currentRole) return;
+
+      const criteria = currentRole.criteria;
+      let totalWeightedScore = 0;
+      let totalWeightedBench = 0;
+      let totalWeight = 0;
+
+      criteria.forEach(c => {
+        const score = currentEmployee.scores[c.id] || 3.0;
+        totalWeightedScore += score * c.weight;
+        totalWeightedBench += c.benchmark * c.weight;
+        totalWeight += c.weight;
+      });
+
+      const avgScore = (totalWeightedScore / totalWeight).toFixed(2);
+      const fitScore = Math.round((totalWeightedScore / totalWeightedBench) * 1000) / 10;
+
+      currentEmployee.avgScore = parseFloat(avgScore);
+      currentEmployee.fitScore = fitScore;
+
+      // Rating classification
+      let ratingClass = "Xuất sắc";
+      let ratingColor = "bg-red-700";
+      let p2Salary = "Bậc 11 (38.0 tr)";
+
+      if (fitScore >= 94) {
+        ratingClass = "XUẤT SẮC (Cán bộ nòng cốt)";
+        ratingColor = "bg-red-700";
+        p2Salary = currentEmployee.grade.includes("G3") ? "Bậc 12 (42.5 tr)" : "Bậc 10 (31.5 tr)";
+      } else if (fitScore >= 80) {
+        ratingClass = "ĐẠT CHUẨN BENCHMARK";
+        ratingColor = "bg-emerald-600";
+        p2Salary = currentEmployee.grade.includes("G4") ? "Bậc 8 (22.0 tr)" : "Bậc 6 (16.0 tr)";
+      } else if (fitScore >= 70) {
+        ratingClass = "ĐANG PHÁT TRIỂN (Cần OJT)";
+        ratingColor = "bg-amber-600";
+        p2Salary = "Bậc 4 (11.5 tr)";
+      } else {
+        ratingClass = "THỬ THÁCH / CHƯA ĐẠT";
+        ratingColor = "bg-slate-600";
+        p2Salary = "Bậc 2 (8.5 tr)";
+      }
+
+      currentEmployee.ratingClass = ratingClass;
+      currentEmployee.salaryP2 = p2Salary;
+
+      // Update Top Card Display
+      document.getElementById("fitScoreDisplay").innerText = fitScore.toFixed(1);
+      const badge = document.getElementById("ratingBadge");
+      badge.className = `px-2.5 py-0.5 rounded-full text-white text-[11px] font-bold ${ratingColor}`;
+      badge.innerText = ratingClass;
+      document.getElementById("avgScoreDisplay").innerText = avgScore;
+      document.getElementById("salaryP2Display").innerText = p2Salary;
+
+      // Update Gap Analysis List
+      renderGapAnalysis();
+
+      // Redraw Dynamic SVG Radar Chart
+      drawDynamicRadarChart();
+
+      // Refresh Ranking Table row
+      updateRankingTableRow(currentEmployee.empCode);
+    }
+
+    function renderGapAnalysis() {
+      const container = document.getElementById("gapAnalysisList");
+      container.innerHTML = "";
+
+      const criteria = currentRole.criteria;
+      let gaps = criteria.map(c => {
+        const score = currentEmployee.scores[c.id] || 3.0;
+        return {
+          id: c.id,
+          name: c.name,
+          diff: Math.round((score - c.benchmark) * 10) / 10,
+          score: score,
+          benchmark: c.benchmark
+        };
+      });
+
+      // Sort by gap ascending (biggest negative gaps first)
+      gaps.sort((a, b) => a.diff - b.diff);
+
+      gaps.slice(0, 4).forEach(g => {
+        const isDeficit = g.diff < 0;
+        const color = isDeficit ? "text-amber-800 bg-amber-50 border-amber-200" : "text-emerald-800 bg-emerald-50 border-emerald-200";
+        const icon = isDeficit ? "⚠️ Hổng: " : "⭐ Vượt: ";
+
+        const div = document.createElement("div");
+        div.className = `p-2 rounded-lg border text-[11px] flex justify-between items-center ${color}`;
+        div.innerHTML = `
+          <span class="truncate pr-2"><strong>${g.id}:</strong> ${g.name}</span>
+          <span class="shrink-0 font-black">${icon}${g.diff > 0 ? '+' : ''}${g.diff.toFixed(1)}</span>
+        `;
+        container.appendChild(div);
+      });
+
+      // IDP text
+      const idpBox = document.getElementById("idpRecommendationText");
+      if (currentEmployee.fitScore >= 94) {
+        idpBox.innerHTML = `<strong>Kế hoạch IDP:</strong> Cán bộ có năng lực vượt trội. Đề xuất quy hoạch cán bộ nguồn, giao chủ trì các chuyên đề kỹ thuật phức tạp hoặc làm Giảng viên nội bộ đào tạo cho lớp kỹ sư kế cận.`;
+      } else if (currentEmployee.fitScore >= 80) {
+        idpBox.innerHTML = `<strong>Kế hoạch IDP:</strong> Đạt chuẩn năng lực công việc. Đề xuất tập trung bồi dưỡng chuyên sâu vào các tiêu chí còn chênh lệch âm để chuẩn bị cho kỳ sát hạch nâng ngạch tiếp theo.`;
+      } else {
+        idpBox.innerHTML = `<strong>Kế hoạch IDP:</strong> Bắt buộc tham gia chương trình kèm cặp 1-kèm-1 theo mô hình EDAC với Chỉ huy phó/CBKT chính trong 90 ngày; tái đánh giá năng lực trước khi xem xét nâng bậc lương P2.`;
+      }
+    }
+
+    // Dynamic SVG Radar Chart Generator
+    function drawDynamicRadarChart() {
+      const svg = document.getElementById("radarSvg");
+      svg.innerHTML = "";
+
+      const criteria = currentRole.criteria;
+      const totalPoints = criteria.length;
+      if (totalPoints < 3) return;
+
+      const centerX = 170;
+      const centerY = 160;
+      const radius = 105;
+
+      // Draw concentric background web (5 levels: 1 to 5)
+      for (let level = 1; level <= 5; level++) {
+        const r = (radius / 5) * level;
+        let polyPoints = [];
+        for (let i = 0; i < totalPoints; i++) {
+          const angle = (Math.PI * 2 / totalPoints) * i - (Math.PI / 2);
+          const x = centerX + r * Math.cos(angle);
+          const y = centerY + r * Math.sin(angle);
+          polyPoints.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+        }
+        const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        polygon.setAttribute("points", polyPoints.join(" "));
+        polygon.setAttribute("fill", level % 2 === 0 ? "#F8FAFC" : "#FFFFFF");
+        polygon.setAttribute("stroke", "#E2E8F0");
+        polygon.setAttribute("stroke-width", "1");
+        svg.appendChild(polygon);
+      }
+
+      // Draw axis lines and labels
+      let benchPoints = [];
+      let actualPoints = [];
+
+      criteria.forEach((c, i) => {
+        const angle = (Math.PI * 2 / totalPoints) * i - (Math.PI / 2);
+        const axisX = centerX + radius * Math.cos(angle);
+        const axisY = centerY + radius * Math.sin(angle);
+
+        // Axis line
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", centerX);
+        line.setAttribute("y1", centerY);
+        line.setAttribute("x2", axisX);
+        line.setAttribute("y2", axisY);
+        line.setAttribute("stroke", "#CBD5E1");
+        line.setAttribute("stroke-width", "1");
+        svg.appendChild(line);
+
+        // Label
+        const labelR = radius + 22;
+        const labelX = centerX + labelR * Math.cos(angle);
+        const labelY = centerY + labelR * Math.sin(angle);
+
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", labelX);
+        text.setAttribute("y", labelY + 3);
+        text.setAttribute("font-size", "10");
+        text.setAttribute("font-weight", "bold");
+        text.setAttribute("fill", "#475569");
+        text.setAttribute("text-anchor", "middle");
+        text.textContent = c.id;
+        svg.appendChild(text);
+
+        // Benchmark coordinate
+        const bR = (radius / 5) * c.benchmark;
+        const bx = centerX + bR * Math.cos(angle);
+        const by = centerY + bR * Math.sin(angle);
+        benchPoints.push(`${bx.toFixed(1)},${by.toFixed(1)}`);
+
+        // Actual score coordinate
+        const score = currentEmployee.scores[c.id] || 3.0;
+        const aR = (radius / 5) * score;
+        const ax = centerX + aR * Math.cos(angle);
+        const ay = centerY + aR * Math.sin(angle);
+        actualPoints.push(`${ax.toFixed(1)},${ay.toFixed(1)}`);
+      });
+
+      // Draw Benchmark Polygon (Gray dashed line)
+      const benchPoly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+      benchPoly.setAttribute("points", benchPoints.join(" "));
+      benchPoly.setAttribute("fill", "none");
+      benchPoly.setAttribute("stroke", "#64748B");
+      benchPoly.setAttribute("stroke-width", "2");
+      benchPoly.setAttribute("stroke-dasharray", "4,4");
+      svg.appendChild(benchPoly);
+
+      // Draw Actual Score Polygon (Crimson semi-transparent)
+      const actualPoly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+      actualPoly.setAttribute("points", actualPoints.join(" "));
+      actualPoly.setAttribute("fill", "rgba(167, 48, 43, 0.35)");
+      actualPoly.setAttribute("stroke", "#A7302B");
+      actualPoly.setAttribute("stroke-width", "2.5");
+      svg.appendChild(actualPoly);
+
+      // Draw point markers on actual scores
+      criteria.forEach((c, i) => {
+        const angle = (Math.PI * 2 / totalPoints) * i - (Math.PI / 2);
+        const score = currentEmployee.scores[c.id] || 3.0;
+        const aR = (radius / 5) * score;
+        const ax = centerX + aR * Math.cos(angle);
+        const ay = centerY + aR * Math.sin(angle);
+
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", ax);
+        circle.setAttribute("cy", ay);
+        circle.setAttribute("r", "3.5");
+        circle.setAttribute("fill", "#A7302B");
+        circle.setAttribute("stroke", "#FFFFFF");
+        circle.setAttribute("stroke-width", "1.5");
+        svg.appendChild(circle);
+      });
+    }
+
+    // Presets
+    function applyPreset(type) {
+      currentRole.criteria.forEach(c => {
+        if (type === 'benchmark') {
+          currentEmployee.scores[c.id] = c.benchmark;
+        } else if (type === 'high') {
+          currentEmployee.scores[c.id] = Math.min(5.0, c.benchmark + 0.3);
+        } else if (type === 'low') {
+          currentEmployee.scores[c.id] = Math.max(1.0, c.benchmark - 0.7);
+        }
+        const slider = document.getElementById("slider-" + c.id);
+        if (slider) slider.value = currentEmployee.scores[c.id];
+        const valSpan = document.getElementById("score-val-" + c.id);
+        if (valSpan) valSpan.innerText = currentEmployee.scores[c.id].toFixed(1);
+      });
+      updateEvaluationUI();
+    }
+
+    function resetCurrentScores() {
+      loadEmployeeEvaluation(currentEmpCode);
+    }
+
+    // ==========================================
+    // TAB 4: MA TRẬN XẾP HẠNG 34 NHÂN SỰ
+    // ==========================================
+    function renderRankingTable() {
+      const tbody = document.getElementById("rankingTableBody");
+      tbody.innerHTML = "";
+
+      // Sort by fitScore descending
+      const sorted = [...MASTER_DATA.employees].sort((a, b) => b.fitScore - a.fitScore);
+
+      sorted.forEach((e, idx) => {
+        let badgeColor = e.fitScore >= 94 ? "bg-red-100 text-red-800 border-red-200" : (e.fitScore >= 80 ? "bg-emerald-100 text-emerald-800 border-emerald-200" : "bg-amber-100 text-amber-800 border-amber-200");
+
+        const tr = document.createElement("tr");
+        tr.id = "ranking-row-" + e.empCode;
+        tr.className = "hover:bg-slate-50 transition";
+        tr.innerHTML = `
+          <td class="p-3 font-bold text-slate-400">${idx + 1}</td>
+          <td class="p-3 font-semibold text-slate-800">${e.empCode}</td>
+          <td class="p-3 font-bold text-slate-900">${e.fullName}</td>
+          <td class="p-3 font-semibold text-slate-700">${e.jobTitle}</td>
+          <td class="p-3">${e.grade}</td>
+          <td class="p-3">${e.bhxhTrack}</td>
+          <td class="p-3 text-center font-bold text-slate-800">${e.avgScore.toFixed(2)}</td>
+          <td class="p-3 text-center font-black text-red-700 text-sm">${e.fitScore.toFixed(1)}%</td>
+          <td class="p-3 text-center">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${badgeColor}">
+              ${e.ratingClass}
+            </span>
+          </td>
+          <td class="p-3 font-bold text-slate-800">${e.salaryP2 || e.p2 || '--'}</td>
+          <td class="p-3 text-center">
+            <button onclick="inspectEmployee('${e.empCode}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-[11px] transition">
+              Đánh Giá &rarr;
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateRankingTableRow(empCode) {
+      const tr = document.getElementById("ranking-row-" + empCode);
+      if (!tr) return;
+      const e = MASTER_DATA.employees.find(emp => emp.empCode === empCode);
+      if (!e) return;
+
+      let badgeColor = e.fitScore >= 94 ? "bg-red-100 text-red-800 border-red-200" : (e.fitScore >= 80 ? "bg-emerald-100 text-emerald-800 border-emerald-200" : "bg-amber-100 text-amber-800 border-amber-200");
+
+      tr.children[6].innerText = e.avgScore.toFixed(2);
+      tr.children[7].innerText = e.fitScore.toFixed(1) + "%";
+      tr.children[8].innerHTML = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${badgeColor}">${e.ratingClass}</span>`;
+      tr.children[9].innerText = e.salaryP2;
+    }
+
+    function filterRankingTable() {
+      const query = document.getElementById("rankingSearchInput").value.toLowerCase();
+      const roleFilter = document.getElementById("rankingRoleFilter").value;
+      const rows = document.querySelectorAll("#rankingTableBody tr");
+
+      rows.forEach(r => {
+        const empCode = r.children[1].innerText.toLowerCase();
+        const fullName = r.children[2].innerText.toLowerCase();
+        const emp = MASTER_DATA.employees.find(e => e.empCode.toLowerCase() === empCode);
+
+        const matchText = empCode.includes(query) || fullName.includes(query);
+        const matchRole = roleFilter === "ALL" || (emp && emp.roleKey === roleFilter);
+
+        if (matchText && matchRole) {
+          r.style.display = "";
+        } else {
+          r.style.display = "none";
+        }
+      });
+    }
+
+    function inspectEmployee(empCode) {
+      switchTab('eval');
+      document.getElementById("empSelect").value = empCode;
+      onEmployeeSelect(empCode);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // PRINT MODAL (A4 CORPORATE PRINTOUT)
+    // ==========================================
+    function openPrintCurrent() {
+      if (!currentEmployee || !currentRole) return;
+
+      document.getElementById("printName").innerText = currentEmployee.fullName;
+      document.getElementById("printEmpCode").innerText = currentEmployee.empCode;
+      document.getElementById("printTitle").innerText = currentEmployee.jobTitle;
+      document.getElementById("printGrade").innerText = `${currentEmployee.grade} • ${currentEmployee.bhxhTrack}`;
+      document.getElementById("printDept").innerText = currentEmployee.dept;
+      document.getElementById("printJoinDate").innerText = `${currentEmployee.joinDate} (${currentEmployee.contractType})`;
+
+      document.getElementById("printOverallScore").innerText = currentEmployee.avgScore.toFixed(2);
+      document.getElementById("printFitScore").innerText = currentEmployee.fitScore.toFixed(1) + "%";
+      document.getElementById("printClass").innerText = currentEmployee.ratingClass;
+      document.getElementById("printSalaryP2").innerText = currentEmployee.salaryP2;
+      document.getElementById("printNote").innerText = currentEmployee.note;
+      document.getElementById("signEmpName").innerText = currentEmployee.fullName;
+
+      // Populate Criteria Table for Print
+      const tbody = document.getElementById("printCriteriaTableBody");
+      tbody.innerHTML = "";
+
+      let totalBench = 0;
+      let totalWeight = 0;
+
+      currentRole.criteria.forEach(c => {
+        const score = currentEmployee.scores[c.id] || 3.0;
+        const rate = Math.round((score / c.benchmark) * 100);
+        totalBench += c.benchmark * c.weight;
+        totalWeight += c.weight;
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="p-2.5">
+            <strong>${c.id}:</strong> ${c.name}
+          </td>
+          <td class="p-2.5 text-center">${c.weight}%</td>
+          <td class="p-2.5 text-center font-bold">${score.toFixed(1)}</td>
+          <td class="p-2.5 text-center text-slate-500">${c.benchmark.toFixed(1)}</td>
+          <td class="p-2.5 text-center font-semibold ${rate >= 100 ? 'text-emerald-700' : 'text-amber-700'}">${rate}%</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("printOverallBench").innerText = (totalBench / totalWeight).toFixed(2);
+
+      document.getElementById("printModal").classList.remove("hidden");
+    }
+
+    function closePrintModal() {
+      document.getElementById("printModal").classList.add("hidden");
+    }
+  </script>
+</body>
+</html>
